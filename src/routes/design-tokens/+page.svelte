@@ -136,7 +136,7 @@
 <div class="token-documentation">
 	<h1>Design Tokens</h1>
 	<p>
-		This page displays all available CSS tokens in the Sourcegraph UI design system. Each token is shown with its name, value, and a visual example of how it appears when applied.
+		This page displays all available CSS tokens in the Sourcegraph UI design system. Each token is shown with its name and a visual example of how it appears when applied.
 	</p>
 
 	<section>
@@ -264,14 +264,16 @@
 		box-shadow: var(--sg-sys-shadow-sm);
 		display: flex;
 		align-items: center;
+		justify-content: flex-start;
 	}
 
 	.token-name {
 		font-family: var(--sg-sys-font-family-code);
 		font-size: 0.875rem;
 		word-break: break-all;
-		width: 220px;
+		width: 50%;
 		flex-shrink: 0;
+		padding-right: 1rem;
 	}
 
 	.token-example {
@@ -279,11 +281,12 @@
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
-		flex-grow: 1;
+		flex-grow: 0;
+		width: 50%;
 	}
 
 	.color-swatch {
-		width: 8rem;
+		width: 6rem;
 		height: 2.5rem;
 		border-radius: var(--sg-sys-border-radius);
 		border: 1px solid var(--sg-sys-border-color);
