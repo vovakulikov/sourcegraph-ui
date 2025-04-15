@@ -1,0 +1,240 @@
+/* PrismJS Syntax Highlighting */
+
+/* Base code styling */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #24292e;
+  background: none;
+  font-family: var(--font-mono, 'Roboto Mono', monospace);
+  font-size: 0.9rem;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  tab-size: 4;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: 1rem;
+  margin: 1rem 0;
+  overflow: auto;
+  border-radius: 6px;
+  background-color: #f6f8fa;
+  border: 1px solid #e1e4e8;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  white-space: normal;
+  background-color: rgba(27, 31, 35, 0.05);
+  border: 1px solid #e1e4e8;
+}
+
+/* Language specific adjustments */
+pre.language-typescript code,
+pre.language-svelte code,
+pre.language-javascript code {
+  color: #24292e;
+}
+
+/* Make sure language display doesn't overlap code */
+pre[class*="language-"]::before {
+  content: attr(class);
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  font-size: 0.75rem;
+  color: #6a737d;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Clean up language display */
+pre.language-typescript::before { content: 'typescript'; }
+pre.language-javascript::before { content: 'javascript'; }
+pre.language-js::before { content: 'javascript'; }
+pre.language-ts::before { content: 'typescript'; }
+pre.language-svelte::before { content: 'svelte'; }
+pre.language-html::before { content: 'html'; }
+pre.language-css::before { content: 'css'; }
+pre.language-scss::before { content: 'scss'; }
+pre.language-sh::before { content: 'shell'; }
+pre.language-bash::before { content: 'bash'; }
+pre.language-json::before { content: 'json'; }
+
+pre[class*="language-"] {
+  position: relative;
+  padding-top: 1.5rem;
+}
+
+/* Token colors */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6a737d;
+  font-style: italic;
+}
+
+.token.namespace {
+  opacity: 0.7;
+}
+
+.token.string,
+.token.attr-value {
+  color: #032f62;
+}
+
+.token.punctuation,
+.token.operator {
+  color: #24292e; /* Same as base text */
+}
+
+.token.entity,
+.token.url,
+.token.symbol,
+.token.number,
+.token.boolean,
+.token.variable,
+.token.constant,
+.token.property,
+.token.regex,
+.token.inserted {
+  color: #005cc5;
+}
+
+.token.atrule,
+.token.keyword,
+.token.attr-name,
+.language-autohotkey .token.selector {
+  color: #d73a49;
+}
+
+.token.function,
+.token.deleted,
+.language-autohotkey .token.tag {
+  color: #6f42c1;
+}
+
+.token.tag,
+.token.selector,
+.language-autohotkey .token.keyword {
+  color: #22863a;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+/* Specific language overrides */
+
+/* TypeScript-specific */
+.language-typescript .token.string,
+.language-typescript .token.template-string,
+.language-ts .token.string,
+.language-ts .token.template-string {
+  color: #032f62;
+}
+
+.language-typescript .token.builtin,
+.language-ts .token.builtin {
+  color: #6f42c1;
+}
+
+.language-typescript .token.keyword,
+.language-ts .token.keyword {
+  color: #d73a49;
+}
+
+.language-typescript .token.class-name,
+.language-typescript .token.maybe-class-name,
+.language-ts .token.class-name,
+.language-ts .token.maybe-class-name {
+  color: #6f42c1;
+}
+
+.language-typescript .token.operator,
+.language-ts .token.operator {
+  color: #005cc5;
+}
+
+/* Svelte-specific */
+.language-svelte .token.tag {
+  color: #22863a;
+}
+
+.language-svelte .token.punctuation {
+  color: #24292e;
+}
+
+.language-svelte .token.attr-name {
+  color: #6f42c1;
+}
+
+.language-svelte .token.attr-value {
+  color: #032f62;
+}
+
+.language-svelte .token.script {
+  color: inherit;
+}
+
+.language-svelte .token.style {
+  color: inherit;
+}
+
+.language-svelte .token.block {
+  color: #005cc5;
+}
+
+/* Script and style blocks in Svelte */
+.language-svelte .language-javascript .token.keyword,
+.language-svelte .language-typescript .token.keyword {
+  color: #d73a49;
+}
+
+.language-svelte .language-javascript .token.string,
+.language-svelte .language-typescript .token.string {
+  color: #032f62;
+}
+
+.language-svelte .language-javascript .token.function,
+.language-svelte .language-typescript .token.function {
+  color: #6f42c1;
+}
+
+.language-svelte .language-css .token.property,
+.language-svelte .language-css .token.selector {
+  color: #22863a;
+}
+
+/* Line highlighting */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+
+.line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: rgba(255, 235, 59, 0.1);
+  box-shadow: inset 5px 0 0 rgba(255, 235, 59, 0.5);
+  z-index: 0;
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
