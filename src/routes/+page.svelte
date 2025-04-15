@@ -1,3 +1,32 @@
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+	import { SourcegraphLogo } from '$lib'
+</script>
+
+<div>
+	<SourcegraphLogo width="500" height="72"/>
+	<h1>Welcome to the tech docs and components library hub</h1>
+
+	<footer>
+		<a href="/components">Components</a>
+		<a href="/docs">Docs</a>
+	</footer>
+</div>
+
+<style lang="scss">
+	div {
+		flex-grow: 1;
+
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+	}
+
+	footer {
+		margin-top: 2rem;
+		display: flex;
+		gap: 1rem;
+	}
+</style>

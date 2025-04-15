@@ -40,7 +40,7 @@
 		--sg-comp-icon-stroke-width: 2;
 	}
 
-  .icon {
+  :global(.icon) {
     // Icon should never shrink when it's in a flex container
     flex: none;
 
@@ -56,7 +56,7 @@
     }
   }
 
-  .icon-inline {
+  :global(.icon-inline) {
     --sg-comp-icon-stroke-width: 2;
 
     flex: none;
