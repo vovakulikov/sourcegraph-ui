@@ -11,9 +11,11 @@
 
 <main>
 	<header>
-		<Icon icon={ISgMark} --sg-comp-icon-size="2rem"/>
+		<a href="/">
+			<Icon icon={ISgMark} --sg-comp-icon-size="2rem"/>
+		</a>
 		<nav>
-			<a href="/components">Components</a>
+			<a href="/components/icon">Components</a>
 			<a href="/docs">Docs</a>
 			<a href="/guides">Guidelines</a>
 		</nav>
