@@ -40,8 +40,8 @@
 // Theme agnostic (calculated by system tokens and reference tokens) token layer
 :root {
     // Typography
-    --sg-sys-font-size-small: calc(--sg-sys-font-size - 0.5rem);
-    --sg-sys-font-size-large: calc(--sg-sys-font-size + 0.5rem);
+    --sg-sys-font-size-small: calc(var(--sg-sys-font-size) - 0.5rem);
+    --sg-sys-font-size-large: calc(var(--sg-sys-font-size) + 0.5rem);
 
     // Focus ring shadows
     --sg-sys-focus-shadow: 0 0 0 2px var(--sg-sys-accent-color-light);
