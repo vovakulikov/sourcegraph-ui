@@ -1,0 +1,57 @@
+// This file contains system design tokens, this layer change from theme to
+// theme and actually define the theme itself. It contains a short set of
+// design tokens that are Sourcegraph related. By default we provide light and
+// dark theme together as a system package, but this layout can be used to
+// define more themes.
+
+// Standard light system theme
+:root {
+    // Accent color
+    --sg-sys-accent-text-color: white;
+    --sg-sys-accent-color: var(--sg-ref-blue-700);
+    --sg-sys-accent-color-light: var(--sg-ref-blue-600);
+    --sg-sys-accent-color-dark: var(--sg-ref-blue-800);
+
+    // Typography
+    --sg-sys-text-color: black;
+    --sg-sys-font-size: 1rem;
+    --sg-sys-muted-text-color: var(--sg-ref-gray-600);
+    --sg-sys-font-family: var(--sg-ref-font-family-sans);
+    --sg-sys-font-family-code: var(--sg-ref-font-family-monospace);
+
+    // Backgrounds
+    --sg-sys-backgound: var(--sg-ref-gray-50);
+    --sg-sys-backgound-dark: var(--sg-ref-gray-100);
+
+    // Shadow color
+    --sg-sys-shadow-color: var(--sg-ref-gray-950);
+    --sg-sys-shadow-color-light: color-mix(in srgb, var(--sg-sys-shadow-color) 50%, transparent); // Half transparent --sg-sys-shadow-color
+
+    // Borders
+    --sg-sys-border-color: var(--sg-ref-gray-500);
+    --sg-sys-border-radius: 4px;
+}
+
+// Standard dark system theme
+.theme-dark {
+    // TODO [VK]: Define dark theme color theme
+}
+
+// Theme agnostic (calculated by system tokens and reference tokens) token layer
+:root {
+    // Typography
+    --sg-sys-font-size-small: calc(--sg-sys-font-size - 0.5rem);
+    --sg-sys-font-size-large: calc(--sg-sys-font-size + 0.5rem);
+
+    // Focus ring shadows
+    --sg-sys-focus-shadow: 0 0 0 2px var(--sg-sys-accent-color-light);
+    --sg-sys-focus-shadow-inset: 0 0 0 2px var(--sg-sys-accent-color-dark) inset;
+
+    // Shadows
+    --sg-sys-shadow-sm: 0 1px 2px 0 var(--sg-sys-shadow-color-light);
+    --sg-sys-shadow: 0 1px 3px 0 var(--sg-sys-shadow-color), 0 1px 2px -1px var(--sg-sys-shadow-color-light);
+    --sg-sys-shadow-md: 0 4px 6px -1px var(--sg-sys-shadow-color-light), 0 2px 4px -2px var(--sg-sys-shadow-color-light);
+    --sg-sys-shadow-lg: 0 10px 15px -3px var(--sg-sys-shadow-color-light), 0 4px 6px -4px var(--sg-sys-shadow-color-light);
+    --sg-sys-shadow-xl: 0 20px 25px -5px var(--sg-sys-shadow-color-light), 0 8px 10px -6px var(--sg-sys-shadow-color-light);
+}
+

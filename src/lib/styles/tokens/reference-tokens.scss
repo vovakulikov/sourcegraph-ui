@@ -1,0 +1,127 @@
+// This file contains reference level of our CSS tokens
+// For more details see our RFC about CSS design tokens system
+// https://docs.google.com/document/d/17zJHqSYj-epOMP0vcC-vPTA57O1ZxJqW6QVo5lKBl_Q/edit?usp=sharing
+
+// Color values are based on Harmony palette
+// see https://www.figma.com/community/file/1287828769207775946/harmony-accessible-ui-color-palette
+
+:root {
+  // ------- Typography -------
+  --sg-ref-font-family-sans: 'Inter Variable', sans-serif;
+  --sg-ref-font-family-serif: Georgia, serif;
+  --sg-ref-font-family-monospace: 'Roboto Mono Variable', monospace;
+
+  // -------- RED --------
+  --sg-ref-red-50: #fefafa;
+  --sg-ref-red-100: #fff0ef;
+  --sg-ref-red-200: #ffdbda;
+  --sg-ref-red-300: #ffbebd;
+  --sg-ref-red-400: #ffa09f;
+  --sg-ref-red-500: #fc8083;
+  --sg-ref-red-600: #cd6265;
+  --sg-ref-red-700: #a64e51;
+  --sg-ref-red-800: #773638;
+  --sg-ref-red-900: #4b2021;
+  --sg-ref-red-950: #240c0d;
+
+  // -------- BLUE -------
+  --sg-ref-blue-50: #f8fcfe;
+  --sg-ref-blue-100: #eaf5fe;
+  --sg-ref-blue-200: #cbe8fd;
+  --sg-ref-blue-300: #9fd5fc;
+  --sg-ref-blue-400: #6fc2fa;
+  --sg-ref-blue-500: #2caff9;
+  --sg-ref-blue-600: #0c8aca;
+  --sg-ref-blue-700: #0a6fa3;
+  --sg-ref-blue-800: #054f75;
+  --sg-ref-blue-900: #03314a;
+  --sg-ref-blue-950: #011523;
+
+  // ------- ORANGE -------
+  --sg-ref-orange-50: #fefaf9;
+  --sg-ref-orange-100: #fff1eb;
+  --sg-ref-orange-200: #ffddcf;
+  --sg-ref-orange-300: #fec1a8;
+  --sg-ref-orange-400: #fba581;
+  --sg-ref-orange-500: #f88756;
+  --sg-ref-orange-600: #c9683d;
+  --sg-ref-orange-700: #a25330;
+  --sg-ref-orange-800: #743a20;
+  --sg-ref-orange-900: #4a2211;
+  --sg-ref-orange-950: #230d05;
+
+  // -------- GREY --------
+  --sg-ref-gray-50: #fafbfe;
+  --sg-ref-gray-100: #f0f3ff;
+  --sg-ref-gray-200: #e0e3ef;
+  --sg-ref-gray-300: #cbceda;
+  --sg-ref-gray-400: #b7bac5;
+  --sg-ref-gray-500: #a3a6b1;
+  --sg-ref-gray-600: #81848e;
+  --sg-ref-gray-700: #676973;
+  --sg-ref-gray-800: #484a54;
+  --sg-ref-gray-900: #2c2e37;
+  --sg-ref-gray-950: #12141c;
+}
+
+// Turn on OKLCH only for browser that support it and that support P3
+// color space, otherwise we fallback on RGB value above
+// see https://developer.mozilla.org/en-US/docs/Web/CSS/@media/color-gamut
+@supports (color: oklch(0% 0 0)) {
+  @media (color-gamut: p3) {
+    :root {
+      // -------- RED --------
+      --sg-ref-red-50: oklch(0.988281 0.0046875 20);
+      --sg-ref-red-100: oklch(0.966797 0.0171875 20);
+      --sg-ref-red-200: oklch(0.921875 0.0421875 20);
+      --sg-ref-red-300: oklch(0.861328 0.078125 20);
+      --sg-ref-red-400: oklch(0.800781 0.114063 20);
+      --sg-ref-red-500: oklch(0.742188 0.151562 20);
+      --sg-ref-red-600: oklch(0.626953 0.135937 20);
+      --sg-ref-red-700: oklch(0.535156 0.115625 20);
+      --sg-ref-red-800: oklch(0.419922 0.090625 20);
+      --sg-ref-red-900: oklch(0.306641 0.065625 20);
+      --sg-ref-red-950: oklch(0.193359 0.040625 20);
+
+      // -------- BLUE -------
+      --sg-ref-blue-50: oklch(0.988281 0.0046875 240);
+      --sg-ref-blue-100: oklch(0.964844 0.0171875 240);
+      --sg-ref-blue-200: oklch(0.916016 0.0421875 240);
+      --sg-ref-blue-300: oklch(0.849609 0.078125 240);
+      --sg-ref-blue-400: oklch(0.783203 0.114063 240);
+      --sg-ref-blue-500: oklch(0.71875 0.151562 240);
+      --sg-ref-blue-600: oklch(0.605469 0.135937 240);
+      --sg-ref-blue-700: oklch(0.517578 0.115625 240);
+      --sg-ref-blue-800: oklch(0.40625 0.090625 240);
+      --sg-ref-blue-900: oklch(0.296875 0.065625 240);
+      --sg-ref-blue-950: oklch(0.1875 0.040625 240);
+
+      // ------- ORANGE -------
+      --sg-ref-orange-50: oklch(0.988281 0.0046875 43.3333);
+      --sg-ref-orange-100: oklch(0.966797 0.0171875 43.3333);
+      --sg-ref-orange-200: oklch(0.921875 0.0421875 43.3333);
+      --sg-ref-orange-300: oklch(0.859375 0.078125 43.3333);
+      --sg-ref-orange-400: oklch(0.798828 0.114063 43.3333);
+      --sg-ref-orange-500: oklch(0.738281 0.151562 43.3333);
+      --sg-ref-orange-600: oklch(0.623047 0.135937 43.3333);
+      --sg-ref-orange-700: oklch(0.53125 0.115625 43.3333);
+      --sg-ref-orange-800: oklch(0.417969 0.090625 43.3333);
+      --sg-ref-orange-900: oklch(0.304688 0.065625 43.3333);
+      --sg-ref-orange-950: oklch(0.191406 0.040625 43.3333);
+
+      // -------- GREY --------
+      --sg-ref-gray-50: oklch(0.988281 0.0046875 275);
+      --sg-ref-gray-100: oklch(0.964844 0.016 275);
+      --sg-ref-gray-200: oklch(0.917969 0.016 275);
+      --sg-ref-gray-300: oklch(0.853516 0.016 275);
+      --sg-ref-gray-400: oklch(0.789063 0.016 275);
+      --sg-ref-gray-500: oklch(0.726563 0.016 275);
+      --sg-ref-gray-600: oklch(0.613281 0.016 275);
+      --sg-ref-gray-700: oklch(0.523438 0.016 275);
+      --sg-ref-gray-800: oklch(0.412109 0.016 275);
+      --sg-ref-gray-900: oklch(0.302734 0.016 275);
+      --sg-ref-gray-950: oklch(0.193359 0.016 275);
+    }
+  }
+}
+

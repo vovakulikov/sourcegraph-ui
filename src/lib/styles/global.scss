@@ -1,0 +1,37 @@
+// NOTE: This file contains global styles that will apply for all elements
+// on the page. Make sure that these styles are generic enough to not break
+// any web app page.
+
+@import './tokens/reference-tokens';
+@import './tokens/system-tokes';
+
+body {
+  font-family: var(--sg-sys-font-family), serif;
+  font-size: var(--sg-sys-font-size);
+  background-color: var(--sg-sys-backgound-dark);
+}
+
+// 1. Turn off standard focus ring style for all element
+// Each custom form element should implement focus ring styles
+// by their own (we provide all necessary tokens for that)
+:focus {
+  outline: none;
+}
+
+// 2. Turn on custom focus ring for some standard HTML element
+// for which we don't have any custom abstraction and use as plain
+// HTML elements
+a {
+  color: var(--sg-sys-accent-color);
+
+  &:focus-visible {
+    // Inset is required here since we have a lot of links
+    // that don't have any spacing between their border and
+    // overflowed parent visible border (so any outside shadow
+    // is visually cut/cropped)
+    outline: none;
+    box-shadow: var(--sg-sys-focus-shadow);
+    border-radius: var(--sg-sys-border-radius);
+  }
+}
+
