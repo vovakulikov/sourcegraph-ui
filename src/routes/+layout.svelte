@@ -18,6 +18,7 @@
 			<a href="/components/icon">Components</a>
 			<a href="/docs">Docs</a>
 			<a href="/guides">Guidelines</a>
+			<a href="/design-tokens">Design Tokens</a>
 		</nav>
 	</header>
 	<div class="content">
