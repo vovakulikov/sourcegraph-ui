@@ -1,4 +1,12 @@
 <script lang="ts">
+	// Format color tokens to display in grid
+	const formatColorName = (token: string) => {
+		const parts = token.replace('--sg-ref-', '').split('-');
+		const color = parts[0];
+		const number = parts[1] || '';
+		return number ? `${color.charAt(0).toUpperCase() + color.slice(1)}-${number}` : color;
+	};
+
 	// Group tokens by category
 	const referenceTokenGroups = [
 		{
@@ -19,7 +27,6 @@
 		{
 			title: 'Red Color Tokens',
 			tokens: [
-				'--sg-ref-red-50',
 				'--sg-ref-red-100',
 				'--sg-ref-red-200',
 				'--sg-ref-red-300',
@@ -29,13 +36,14 @@
 				'--sg-ref-red-700',
 				'--sg-ref-red-800',
 				'--sg-ref-red-900',
-				'--sg-ref-red-950',
+				'--sg-ref-red-1000',
+				'--sg-ref-red-1100',
+				'--sg-ref-red-1200',
 			]
 		},
 		{
 			title: 'Blue Color Tokens',
 			tokens: [
-				'--sg-ref-blue-50',
 				'--sg-ref-blue-100',
 				'--sg-ref-blue-200',
 				'--sg-ref-blue-300',
@@ -45,13 +53,31 @@
 				'--sg-ref-blue-700',
 				'--sg-ref-blue-800',
 				'--sg-ref-blue-900',
-				'--sg-ref-blue-950',
+				'--sg-ref-blue-1000',
+				'--sg-ref-blue-1100',
+				'--sg-ref-blue-1200',
+			]
+		},
+		{
+			title: 'Green Color Tokens',
+			tokens: [
+				'--sg-ref-green-100',
+				'--sg-ref-green-200',
+				'--sg-ref-green-300',
+				'--sg-ref-green-400',
+				'--sg-ref-green-500',
+				'--sg-ref-green-600',
+				'--sg-ref-green-700',
+				'--sg-ref-green-800',
+				'--sg-ref-green-900',
+				'--sg-ref-green-1000',
+				'--sg-ref-green-1100',
+				'--sg-ref-green-1200',
 			]
 		},
 		{
 			title: 'Orange Color Tokens',
 			tokens: [
-				'--sg-ref-orange-50',
 				'--sg-ref-orange-100',
 				'--sg-ref-orange-200',
 				'--sg-ref-orange-300',
@@ -61,13 +87,82 @@
 				'--sg-ref-orange-700',
 				'--sg-ref-orange-800',
 				'--sg-ref-orange-900',
-				'--sg-ref-orange-950',
+				'--sg-ref-orange-1000',
+				'--sg-ref-orange-1100',
+				'--sg-ref-orange-1200',
+			]
+		},
+		{
+			title: 'Pink Color Tokens',
+			tokens: [
+				'--sg-ref-pink-100',
+				'--sg-ref-pink-200',
+				'--sg-ref-pink-300',
+				'--sg-ref-pink-400',
+				'--sg-ref-pink-500',
+				'--sg-ref-pink-600',
+				'--sg-ref-pink-700',
+				'--sg-ref-pink-800',
+				'--sg-ref-pink-900',
+				'--sg-ref-pink-1000',
+				'--sg-ref-pink-1100',
+				'--sg-ref-pink-1200',
+			]
+		},
+		{
+			title: 'Teal Color Tokens',
+			tokens: [
+				'--sg-ref-teal-100',
+				'--sg-ref-teal-200',
+				'--sg-ref-teal-300',
+				'--sg-ref-teal-400',
+				'--sg-ref-teal-500',
+				'--sg-ref-teal-600',
+				'--sg-ref-teal-700',
+				'--sg-ref-teal-800',
+				'--sg-ref-teal-900',
+				'--sg-ref-teal-1000',
+				'--sg-ref-teal-1100',
+				'--sg-ref-teal-1200',
+			]
+		},
+		{
+			title: 'Vermilion Color Tokens',
+			tokens: [
+				'--sg-ref-vermilion-100',
+				'--sg-ref-vermilion-200',
+				'--sg-ref-vermilion-300',
+				'--sg-ref-vermilion-400',
+				'--sg-ref-vermilion-500',
+				'--sg-ref-vermilion-600',
+				'--sg-ref-vermilion-700',
+				'--sg-ref-vermilion-800',
+				'--sg-ref-vermilion-900',
+				'--sg-ref-vermilion-1000',
+				'--sg-ref-vermilion-1100',
+				'--sg-ref-vermilion-1200',
+			]
+		},
+		{
+			title: 'Violet Color Tokens',
+			tokens: [
+				'--sg-ref-violet-100',
+				'--sg-ref-violet-200',
+				'--sg-ref-violet-300',
+				'--sg-ref-violet-400',
+				'--sg-ref-violet-500',
+				'--sg-ref-violet-600',
+				'--sg-ref-violet-700',
+				'--sg-ref-violet-800',
+				'--sg-ref-violet-900',
+				'--sg-ref-violet-1000',
+				'--sg-ref-violet-1100',
+				'--sg-ref-violet-1200',
 			]
 		},
 		{
 			title: 'Gray Color Tokens',
 			tokens: [
-				'--sg-ref-gray-50',
 				'--sg-ref-gray-100',
 				'--sg-ref-gray-200',
 				'--sg-ref-gray-300',
@@ -77,7 +172,9 @@
 				'--sg-ref-gray-700',
 				'--sg-ref-gray-800',
 				'--sg-ref-gray-900',
-				'--sg-ref-gray-950',
+				'--sg-ref-gray-1000',
+				'--sg-ref-gray-1100',
+				'--sg-ref-gray-1200',
 			]
 		},
 	];
@@ -227,16 +324,28 @@
 							<p class="font-example" style="font-family: var(--sg-ref-font-family-monospace); font-size: 24px;">0123456789</p>
 						</div>
 					</div>
+				{:else if group.title.includes('Color Tokens')}
+					<div class="color-grid">
+						{#each group.tokens as token}
+							<div class="token-card">
+								<div class="token-name">{formatColorName(token)}</div>
+								
+								<!-- Color swatch for color tokens -->
+								<div class="token-example">
+									<div class="color-swatch" style="background-color: var({token});">
+										#{token.split('-').pop()}
+									</div>
+								</div>
+							</div>
+						{/each}
+					</div>
 				{:else}
 					<div class="token-list">
 						{#each group.tokens as token}
-							<div class="token-card">
+							<div class="token-card token-card-horizontal">
 								<div class="token-name">{token}</div>
 								
-								{#if token.includes('color') || token.includes('red') || token.includes('blue') || token.includes('orange') || token.includes('gray')}
-									<!-- Color swatch for color tokens -->
-									<div class="token-example color-swatch" style="background-color: var({token});"></div>
-								{:else if token.includes('font-family')}
+								{#if token.includes('font-family')}
 									<!-- Font family example -->
 									<div class="token-example">
 										<span style="font-family: var({token});">The quick brown fox jumps over the lazy dog</span>
@@ -257,53 +366,92 @@
 		{#each systemTokenGroups as group}
 			<div class="token-group">
 				<h3>{group.title}</h3>
-				<div class="token-list">
-					{#each group.tokens as token}
-						<div class="token-card">
-							<div class="token-name">{token}</div>
-							
-							{#if token.includes('color') || token.includes('backgound')}
+				{#if group.title === 'Accent Colors'}
+					<div class="color-grid">
+						{#each group.tokens as token}
+							<div class="token-card">
+								<div class="token-name">{formatColorName(token)}</div>
+								
 								<!-- Color swatch for color tokens -->
-								<div class="token-example color-swatch" style="background-color: var({token});"></div>
-							{:else if token.includes('font-family')}
-								<!-- Font family example -->
 								<div class="token-example">
-									<span style="font-family: var({token});">The quick brown fox jumps over the lazy dog</span>
+									<div class="color-swatch" style="background-color: var({token});">
+										#{token.split('-').pop()}
+									</div>
+									<div class="color-info">
+										rgb(R, G, B, 100%)<br>
+										cmyk(0.0,0.0)<br>
+										OKLCH
+									</div>
 								</div>
-							{:else if token.includes('font-size') || token.includes('font-size-')}
-								<!-- Font size example -->
+							</div>
+						{/each}
+					</div>
+				{:else if group.title === 'Backgrounds'}
+					<div class="color-grid">
+						{#each group.tokens as token}
+							<div class="token-card">
+								<div class="token-name">{formatColorName(token)}</div>
+								
+								<!-- Color swatch for color tokens -->
 								<div class="token-example">
-									<span style="font-size: var({token});">Text sample</span>
+									<div class="color-swatch" style="background-color: var({token});">
+										#{token.split('-').pop()}
+									</div>
+									<div class="color-info">
+										rgb(R, G, B, 100%)<br>
+										cmyk(0.0,0.0)<br>
+										OKLCH
+									</div>
 								</div>
-							{:else if token.includes('border-radius')}
-								<!-- Border radius example -->
-								<div class="token-example">
-									<div class="radius-box" style="border-radius: var({token});"></div>
-								</div>
-							{:else if token.includes('border-color')}
-								<!-- Border color example -->
-								<div class="token-example">
-									<div class="border-box" style="border-color: var({token});"></div>
-								</div>
-							{:else if token.includes('space')}
-								<!-- Space example -->
-								<div class="token-example">
-									<div class="space-box" style="width: var({token}); height: var({token});"></div>
-								</div>
-							{:else if token.includes('shadow') || token.includes('shadow-')}
-								<!-- Shadow example -->
-								<div class="token-example">
-									<div class="shadow-box" style="box-shadow: var({token});"></div>
-								</div>
-							{:else if token.includes('focus')}
-								<!-- Focus example -->
-								<div class="token-example">
-									<button class="focus-demo" style="box-shadow: var({token});">Focus</button>
-								</div>
-							{/if}
-						</div>
-					{/each}
-				</div>
+							</div>
+						{/each}
+					</div>
+				{:else}
+					<div class="token-list">
+						{#each group.tokens as token}
+							<div class="token-card token-card-horizontal">
+								<div class="token-name">{token}</div>
+								
+								{#if token.includes('font-family')}
+									<!-- Font family example -->
+									<div class="token-example">
+										<span style="font-family: var({token});">The quick brown fox jumps over the lazy dog</span>
+									</div>
+								{:else if token.includes('font-size') || token.includes('font-size-')}
+									<!-- Font size example -->
+									<div class="token-example">
+										<span style="font-size: var({token});">Text sample</span>
+									</div>
+								{:else if token.includes('border-radius')}
+									<!-- Border radius example -->
+									<div class="token-example">
+										<div class="radius-box" style="border-radius: var({token});"></div>
+									</div>
+								{:else if token.includes('border-color')}
+									<!-- Border color example -->
+									<div class="token-example">
+										<div class="border-box" style="border-color: var({token});"></div>
+									</div>
+								{:else if token.includes('space')}
+									<!-- Space example -->
+									<div class="token-example">
+										<div class="space-box" style="width: var({token}); height: var({token});"></div>
+									</div>
+								{:else if token.includes('shadow') || token.includes('shadow-')}
+									<!-- Shadow example -->
+									<div class="token-example">
+										<div class="shadow-box" style="box-shadow: var({token});"></div>
+									</div>
+								{:else if token.includes('focus')}
+									<!-- Focus example -->
+									<div class="token-example">
+										<button class="focus-demo" style="box-shadow: var({token});">Focus</button>
+									</div>
+								{/if}
+							</div>
+						{/each}
+					</div>
+				{/if}
 			</div>
 		{/each}
 	</section>
@@ -374,40 +522,76 @@
 		gap: 1rem;
 	}
 
+	.color-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+
 	.token-card {
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-sys-border-radius);
 		padding: 1rem;
-		background-color: white;
+		background-color: var(--sg-sys-background-light);
 		box-shadow: var(--sg-shadow-100);
 		display: flex;
-		align-items: center;
+		flex-direction: column;
+		align-items: stretch;
 		justify-content: flex-start;
+		overflow: hidden;
+		max-width: 100%;
 	}
 
-	.token-name {
-		font-family: var(--sg-sys-font-family-code);
-		font-size: 0.875rem;
-		word-break: break-all;
+	.token-card-horizontal {
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.token-card-horizontal .token-name {
 		width: 50%;
-		flex-shrink: 0;
+		text-align: left;
+		margin-bottom: 0;
 		padding-right: 1rem;
 	}
 
+	.token-name {
+		font-family: var(--sg-sys-font-family-sans);
+		font-size: 0.875rem;
+		word-break: break-all;
+		width: 100%;
+		flex-shrink: 0;
+		margin-bottom: 0.5rem;
+		text-align: center;
+		font-weight: 400;
+	}
+
 	.token-example {
-		min-height: 2.5rem;
 		display: flex;
+		flex-direction: column;
 		align-items: center;
-		justify-content: flex-start;
-		flex-grow: 0;
-		width: 50%;
+		justify-content: center;
+		flex-grow: 1;
+		width: 100%;
 	}
 
 	.color-swatch {
-		width: 6rem;
-		height: 2.5rem;
+		width: 100%;
+		height: 100px;
 		border-radius: var(--sg-sys-border-radius);
-		border: 1px solid var(--sg-sys-border-color);
+		margin-bottom: 0.5rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: white;
+		font-weight: bold;
+		text-shadow: 0 0 3px rgba(0,0,0,0.5);
+	}
+	
+	.color-info {
+		font-size: 0.75rem;
+		text-align: center;
+		line-height: 1.5;
 	}
 
 	.radius-box {
