@@ -31,6 +31,18 @@
 			"svelte": "./dist/index.js"
 		}
 	},
+	"dependencies": {
+		"@codemirror/lang-html": "^6.4.9",
+		"@codemirror/lang-javascript": "^6.2.3",
+		"@codemirror/state": "^6.5.2",
+		"@codemirror/view": "^6.36.5",
+		"@rollup/browser": "^4.40.0",
+		"codemirror": "^6.0.1",
+		"clsx": "^2.1.1",
+		"lodash-es": "^4.17.21",
+		"@urql/core": "^5.1.1",
+		"sass": "^1.86.3"
+	},
 	"peerDependencies": {
 		"svelte": "^5.0.0"
 	},
@@ -43,6 +55,8 @@
 		"@sveltejs/kit": "^2.16.0",
 		"@sveltejs/package": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
+		"@types/node": "^20.11.31",
+		"@types/sass": "^1.45.0",
 		"mdsvex": "^0.12.3",
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.3",
@@ -62,14 +76,5 @@
 		"onlyBuiltDependencies": [
 			"esbuild"
 		]
-	},
-	"dependencies": {
-<<<<<<< HEAD
-		"clsx": "^2.1.1",
-		"lodash-es": "^4.17.21"
-=======
-		"@urql/core": "^5.1.1",
-		"clsx": "^2.1.1"
->>>>>>> a705045 (wip for vova)
 	}
 }

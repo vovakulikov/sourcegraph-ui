@@ -1,6 +1,58 @@
-<script>
-  import { Icon, Badge, Alert, ErrorAlert, Checkbox, LoadingSpinner, Select } from '$lib'
-</script>
+## Development environment
+
+The web app uses external dependencies and generated files that need to be installed/generated first.
+To do this run the following commands from the repo root:
+
+```sh
+pnpm install && sg generate
+```
+
+After this we can start the development server for a great development experience. The development
+server provides [hot module reloading](https://stackoverflow.com/questions/24581873/what-exactly-is-hot-module-replacement-in-webpack) for short feedback loops.
+
+There are multiple ways to start the development server depending on your needs.
+
+### Running a local SG instance
+
+If you also plan to make backend changes then you'll have to run a Sourcegraph instance locally.
+
+You can start a full Sourcegraph instance locally with `sg start`.
+
+If you do not need access to every feature/service that Souregraph has to offer (e.g. precise code navigation)
+then running `sg start minimal-sveltekit` will start a reduced instance that is faster to (re)start.
+
+In both cases the web app can be accessed via https://sourcegraph.test:3443 in the browser.
+
+### Proxying to a production instance
+
+If you only need to make client side (frontend) changes then it's usually not necessary to start a local Sourcegraph
+instance. Often it's even useful to be able to use S2 or dotcom as a backend, to get access to the very same data and
+configuration.
+
+For this we have two commands that need to be run in `client/web-sveltekit`:
+
+```sh
+cd client/web-sveltekit
+pnpm dev
+```
+
+This starts the development server and proxies any API requests to https://sourcegraph.sourcegraph.com.
+
+> [!NOTE]
+> To make it easier to login you should add password authentication to your SAMS account.
+
+Similarly the following command will proxy to https://sourcegraph.com:
+
+```sh
+cd client/web-svelkite
+pnpm dev:dotcom
+```
+
+In both cases the web app can be accessed via https://localhost:5173
+
+## Creating a new page
+
+SvelteKit uses file based routing. This means the path of a file on the file system
 
 ## Writing tests
 
@@ -98,485 +150,6 @@ doesn't have to be imported manually.
 
 When the development server is running, the icon will be automatically added to
 `auto-imports.d.ts` so TypeScript knows about it.
-
-### Badges
-
-<style>
-  /* Sourcegraph's color system for badges - direct hex values */
-  :global(.badge) {
-    display: inline-block;
-    padding: 0.125rem 0.375rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: 4px;
-    line-height: 1rem;
-  }
-  
-  :global(.primary) {
-    background-color: #0b70db !important;
-    color: white !important;
-  }
-  
-  :global(.secondary) {
-    background-color: #e6ebf2 !important;
-    color: #343a4d !important;
-  }
-  
-  :global(.success) {
-    background-color: #2ea043 !important;
-    color: white !important;
-  }
-  
-  :global(.danger) {
-    background-color: #dc3545 !important;
-    color: white !important;
-  }
-  
-  :global(.warning) {
-    background-color: #ffc107 !important;
-    color: black !important;
-  }
-  
-  :global(.info) {
-    background-color: #72dbe8 !important;
-    color: black !important;
-  }
-  
-  :global(.merged) {
-    background-color: #a305e1 !important;
-    color: white !important;
-  }
-  
-  :global(.outline-secondary) {
-    background-color: transparent !important;
-    color: #5e6e8c !important;
-    border: 1px solid #e6ebf2 !important;
-  }
-  
-  :global(.link) {
-    background-color: #f9fafb !important;
-    color: #0b70db !important;
-    font-family: monospace !important;
-    font-weight: normal !important;
-  }
-  
-  :global(.small) {
-    font-size: 0.75rem !important;
-    padding: 0 0.25rem !important;
-    border-radius: 2px !important;
-  }
-  
-  :global(.pill) {
-    padding-right: 0.6em !important;
-    padding-left: 0.6em !important;
-    border-radius: 10rem !important;
-  }
-  
-  /* Alert styles */
-  :global(.alert-container [role="alert"]) {
-    margin-bottom: 1rem;
-    border-radius: 4px !important;
-    overflow: auto;
-    position: relative;
-    padding: 0.5rem !important;
-  }
-  
-  :global(.alert-container .danger) {
-    border-color: #dc3545 !important;
-    background-color: rgba(220, 53, 69, 0.1) !important;
-  }
-  
-  :global(.alert-container .info) {
-    border-color: #0b70db !important;
-    background-color: rgba(11, 112, 219, 0.1) !important;
-  }
-  
-  :global(.alert-container .warning) {
-    border-color: #ffc107 !important;
-    background-color: rgba(255, 193, 7, 0.1) !important;
-  }
-  
-  :global(.alert-container .success) {
-    border-color: #2ea043 !important;
-    background-color: rgba(46, 160, 67, 0.1) !important;
-  }
-  
-  :global(.alert-container .slim) {
-    padding: 0.25rem 0.5rem !important;
-  }
-  
-  /* Checkbox examples styles */
-  :global(.checkbox-examples) {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
-  
-  :global(.checkbox-examples .checkbox-row) {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  :global(.checkbox-examples label) {
-    cursor: pointer;
-    user-select: none;
-  }
-  
-  /* Select component styles */
-  :global(.demo-select-container) {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  :global(.demo-select-row) {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-  
-  :global(.demo-select-row label) {
-    font-weight: 500;
-  }
-</style>
-
-Badges are compact visual indicators used to highlight statuses, counts, or categorize items.
-They're ideal for drawing attention to important information or providing contextual labels.
-
-#### Badge Variants
-
-<div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
-  <Badge>Default</Badge>
-  <Badge variant="primary">primary</Badge>
-  <Badge variant="secondary">secondary</Badge>
-  <Badge variant="success">success</Badge>
-  <Badge variant="danger">danger</Badge>
-  <Badge variant="warning">warning</Badge>
-  <Badge variant="info">info</Badge>
-  <Badge variant="merged">merged</Badge>
-  <Badge variant="outlineSecondary">outlineSecondary</Badge>
-  <Badge variant="link">link</Badge>
-</div>
-
-#### Sizes and Styles
-
-<div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;">
-  <Badge variant="primary">Standard</Badge>
-  <Badge variant="primary" small>Small</Badge>
-  <Badge variant="primary" pill>Pill</Badge>
-  <Badge variant="success" small pill>Small Pill</Badge>
-</div>
-
-The Badge component supports various variants, sizes, and styling options:
-
-```svelte
-<script lang="ts">
-  import { Badge } from '$lib'
-</script>
-
-<!-- Basic usage -->
-<Badge>Default</Badge>
-
-<!-- Variants -->
-<Badge variant="primary">primary</Badge>
-<Badge variant="secondary">secondary</Badge>
-<Badge variant="success">success</Badge>
-<Badge variant="danger">danger</Badge>
-<Badge variant="warning">warning</Badge>
-<Badge variant="info">info</Badge>
-<Badge variant="merged">merged</Badge>
-<Badge variant="outlineSecondary">outlineSecondary</Badge>
-<Badge variant="link">link</Badge>
-
-<!-- Sizes -->
-<Badge variant="primary">Standard</Badge>
-<Badge variant="primary" small>Small</Badge>
-
-<!-- Pill style -->
-<Badge variant="primary" pill>Pill</Badge>
-<Badge variant="success" small pill>Small Pill</Badge>
-```
-
-For detailed examples and API documentation, visit the [Badge component page](/components/badge).
-
-### Alerts
-
-<div class="alert-container">
-  Alerts display important messages to users. Use them to communicate status, provide feedback, or highlight important information.
-
-  #### Alert Variants
-
-  <Alert variant="info">This is an info alert with important information.</Alert>
-  <Alert variant="warning">This is a warning alert that requires attention.</Alert>
-  <Alert variant="danger">This is a danger alert about a critical issue.</Alert>
-  <Alert variant="success">This is a success alert confirming a completed action.</Alert>
-
-  #### Alert Sizes
-
-  <Alert variant="info">Normal-sized alert with default padding</Alert>
-  <Alert variant="info" size="slim">Slim alert with reduced padding</Alert>
-</div>
-
-```svelte
-<script>
-  import { Alert } from '$lib'
-</script>
-
-<!-- Alert variants -->
-<Alert variant="info">Info alert</Alert>
-<Alert variant="warning">Warning alert</Alert>
-<Alert variant="danger">Danger alert</Alert>
-<Alert variant="success">Success alert</Alert>
-
-<!-- Alert sizes -->
-<Alert variant="info">Normal size</Alert>
-<Alert variant="info" size="slim">Slim size</Alert>
-
-<!-- Custom styling -->
-<Alert 
-  variant="info" 
-  styleOverrides={{
-    backgroundColor: '#f0f8ff',
-    textColor: '#003366',
-    textCentered: true
-  }}
->
-  Custom styled alert
-</Alert>
-```
-
-For detailed examples and API documentation, visit the [Alert component page](/components/alert).
-
-### Error Alerts
-
-<div class="alert-container">
-  <ErrorAlert error="This is a simple error message" />
-  <ErrorAlert title="Operation Failed" error="Unable to process your request due to a system error." />
-</div>
-
-ErrorAlert is a specialized alert component designed for displaying error messages. It works with various error types, including GraphQL errors.
-
-```svelte
-<script>
-  import { ErrorAlert } from '$lib'
-</script>
-
-<!-- Basic usage -->
-<ErrorAlert error="This is a simple error message" />
-
-<!-- With title -->
-<ErrorAlert 
-  title="Operation Failed" 
-  error="Unable to process your request due to a system error." 
-/>
-
-<!-- With Error object -->
-<ErrorAlert error={new Error("Something went wrong")} />
-
-<!-- With GraphQL errors -->
-<ErrorAlert 
-  title="GraphQL Errors" 
-  error={{
-    graphQLErrors: [
-      { message: "Field 'user' is not defined" },
-      { message: "Network timeout occurred" }
-    ]
-  }}
-/>
-```
-
-For detailed examples and API documentation, visit the [ErrorAlert component page](/components/errorAlert).
-
-### Checkboxes
-
-Checkboxes allow users to select one or more items from a set, or to toggle a single option on/off.
-They follow accessibility best practices and adapt to the design system's theme.
-
-<div class="checkbox-examples">
-  <div class="checkbox-row">
-    <Checkbox id="checkbox-example-1" />
-    <label for="checkbox-example-1">Unchecked checkbox</label>
-  </div>
-  
-  <div class="checkbox-row">
-    <Checkbox id="checkbox-example-2" checked />
-    <label for="checkbox-example-2">Checked checkbox</label>
-  </div>
-  
-  <div class="checkbox-row">
-    <Checkbox id="checkbox-example-3" disabled />
-    <label for="checkbox-example-3">Disabled checkbox</label>
-  </div>
-  
-  <div class="checkbox-row">
-    <Checkbox id="checkbox-example-4" disabled checked />
-    <label for="checkbox-example-4">Disabled checked checkbox</label>
-  </div>
-</div>
-
-The Checkbox component accepts all standard HTML input attributes:
-
-```svelte
-<script>
-  import { Checkbox } from '$lib'
-</script>
-
-<!-- Basic usage -->
-<Checkbox id="my-checkbox" />
-<label for="my-checkbox">Click me</label>
-
-<!-- Controlled state -->
-<Checkbox checked={isChecked} on:change={handleChange} />
-
-<!-- Disabled state -->
-<Checkbox disabled />
-<Checkbox disabled checked />
-
-<!-- With form attributes -->
-<Checkbox name="terms" value="agree" required />
-```
-
-Checkboxes can be used within forms to collect user input, or as standalone interactive elements for toggling options. Pair them with labels for better accessibility and user experience.
-
-For detailed examples and API documentation, visit the [Checkbox component page](/components/checkbox).
-
-### Loading Spinner
-
-Loading spinners are used to indicate that content is being loaded or a process is running. They help provide visual feedback to users during asynchronous operations.
-
-<div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 1rem;">
-  <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-    <div style="height: 50px; width: 50px;">
-      <LoadingSpinner />
-    </div>
-    <span>Default</span>
-  </div>
-  
-  <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-    <div style="height: 50px; width: 50px;">
-      <LoadingSpinner style="--size: 2rem;" />
-    </div>
-    <span>Large</span>
-  </div>
-  
-  <div>
-    <span>Inline: </span>
-    <LoadingSpinner inline />
-    <span> loading...</span>
-  </div>
-</div>
-
-The LoadingSpinner component is simple to use and can be customized to fit different contexts:
-
-```svelte
-<script>
-  import { LoadingSpinner } from '$lib'
-</script>
-
-<!-- Default centered spinner -->
-<LoadingSpinner />
-
-<!-- Inline spinner for text content -->
-<span>Loading data <LoadingSpinner inline /> please wait</span>
-
-<!-- Custom sized spinner -->
-<LoadingSpinner style="--size: 2rem;" />
-
-<!-- Without automatic centering -->
-<LoadingSpinner center={false} />
-```
-
-The spinner automatically adapts to the current theme and can be customized using CSS variables.
-
-For detailed examples and API documentation, visit the [LoadingSpinner component page](/components/loadingSpinner).
-
-### Select
-
-Select dropdowns allow users to choose from a list of predefined options. The Select component supports validation states and error messages.
-
-<div class="demo-select-container">
-  <div class="demo-select-row">
-    <label for="basic-select">Basic select:</label>
-    <Select 
-      id="basic-select" 
-      options={[
-        { value: '', label: 'Select an option' },
-        { value: 'option1', label: 'Option 1' },
-        { value: 'option2', label: 'Option 2' },
-        { value: 'option3', label: 'Option 3' }
-      ]} 
-    />
-  </div>
-  
-  <div class="demo-select-row">
-    <label for="selected-select">With selected value:</label>
-    <Select 
-      id="selected-select" 
-      options={[
-        { value: '', label: 'Choose a color' },
-        { value: 'red', label: 'Red' },
-        { value: 'green', label: 'Green' },
-        { value: 'blue', label: 'Blue' }
-      ]}
-      value="blue"
-    />
-  </div>
-  
-  <div class="demo-select-row">
-    <label for="error-select">With error:</label>
-    <Select 
-      id="error-select" 
-      options={[
-        { value: '', label: 'Select an option' },
-        { value: 'option1', label: 'Option 1' }
-      ]}
-      error="Please select a valid option"
-    />
-  </div>
-</div>
-
-The Select component is easy to implement and can be customized to fit your form requirements:
-
-```svelte
-<script>
-  import { Select } from '$lib'
-  
-  const options = [
-    { value: '', label: 'Select an option' },
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' }
-  ];
-</script>
-
-<!-- Basic usage -->
-<Select options={options} />
-
-<!-- With selected value -->
-<Select options={options} value="option1" />
-
-<!-- Required field -->
-<Select options={options} required />
-
-<!-- With error message -->
-<Select 
-  options={options} 
-  error="Please select an option" 
-/>
-
-<!-- Valid state -->
-<Select options={options} value="option1" valid />
-
-<!-- Disabled state -->
-<Select options={options} disabled />
-```
-
-For detailed examples and API documentation, visit the [Select component page](/components/select).
 
 ## Data fetching
 ### GraphQL

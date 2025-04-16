@@ -1,0 +1,1 @@
+export { componentRegistryPlugin } from './component-registry'

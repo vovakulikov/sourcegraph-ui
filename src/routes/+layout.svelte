@@ -19,6 +19,7 @@
 			<a href="/docs">Docs</a>
 			<a href="/guides">Guidelines</a>
 			<a href="/design-tokens">Design Tokens</a>
+			<a href="/playground">Playground</a>
 		</nav>
 	</header>
 	<div class="content">

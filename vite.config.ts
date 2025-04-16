@@ -4,10 +4,12 @@ import UnpluginAutoImport from 'unplugin-auto-import/vite'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
+import { componentRegistryPlugin } from './src/lib/plugins'
 
 export default defineConfig({
 	plugins: [
 		sveltekit(),
+		componentRegistryPlugin(),
 		UnpluginAutoImport({
 			dts: './src/auto-imports.d.ts',
 			resolvers: [
@@ -24,5 +26,18 @@ export default defineConfig({
 				symbol: FileSystemIconLoader('./assets/symbol-icons'),
 			},
 		}),
-	]
+	],
+	optimizeDeps: {
+		exclude: ['@rollup/browser']
+	},
+	server: {
+		middleware: () => [
+			(req, res, next) => {
+				if (req.url?.endsWith('.wasm')) {
+					res.setHeader('Content-Type', 'application/wasm');
+				}
+				next();
+			}
+		]
+	}
 });
