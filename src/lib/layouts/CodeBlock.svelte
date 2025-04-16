@@ -11,16 +11,12 @@
 
 <style lang="scss">
 	.code-block {
-		margin: 0;
-		padding: 0.5rem;
-		background-color: var(--sg-sys-code-bg, #f8f8f8);
-		border-radius: 0.25rem;
-		overflow-x: auto;
-		font-family: monospace;
-		font-size: 0.9rem;
+    white-space: pre;
+		padding: 0.75rem;
 		line-height: 1.5;
-		white-space: pre;
 		tab-size: 2;
+    background-color: var(--sg-sys-background-light);
+    font-family: var(--sg-sys-font-family-code);
 	}
 
 	code {

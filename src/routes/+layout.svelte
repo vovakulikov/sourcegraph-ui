@@ -51,5 +51,6 @@
 		.content {
 			display: flex;
 			flex-grow: 1;
+			overflow: hidden;
 		}
 </style>
