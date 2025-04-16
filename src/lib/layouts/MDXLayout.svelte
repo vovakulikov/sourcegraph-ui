@@ -3,7 +3,7 @@
 	import type { Snippet } from 'svelte';
 	import { onMount } from 'svelte';
 	// Import Prism for syntax highlighting
-	import '../styles/prism-syntax.css';
+	import './prism-syntax.css';
 
 	let { children }: { children: Snippet } = $props();
 	let contentEl: HTMLElement;
