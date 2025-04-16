@@ -5,12 +5,13 @@
 	import './global.scss'
 
 	import { Icon } from '$lib'
+	import { page } from '$app/stores'
 
 	let { children } = $props()
 </script>
 
 <main>
-	<header>
+	<header class={{ 'header': true, 'header--transparent': $page.route.id === '/' }}>
 		<a href="/">
 			<Icon icon={ISgMark} --sg-comp-icon-size="1.5rem"/>
 		</a>
@@ -33,17 +34,24 @@
 			flex-direction: column;
 			height: 100%;
       background-color: var(--sg-sys-backgound);
+			position: relative;
 		}
 
-		header {
+		.header {
 			display: flex;
 			align-items: center;
 			gap: 1rem;
 			padding: 0.75rem 1rem;
-			background-color: var(--sg-ref-gray-1200);
 			color: var(--sg-ref-gray-100);
-			border-bottom: 1px solid var(--sg-ref-gray-300);
-			box-shadow: var(--sg-shadow-100);
+			position: relative;
+			z-index: 2;
+      box-shadow: var(--sg-shadow-100);
+      background-color: var(--sg-ref-gray-1200);
+
+			&--transparent {
+        box-shadow: none;
+        background-color: color-mix(in srgb, var(--sg-ref-gray-1200) 50%, transparent);
+			}
 		}
 
 		nav {

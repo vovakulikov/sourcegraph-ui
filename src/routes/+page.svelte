@@ -29,7 +29,7 @@
 	}
 
 	.content {
-		position: relative;
+		//position: relative;
 		z-index: 1;
 		flex-grow: 1;
 		display: flex;
