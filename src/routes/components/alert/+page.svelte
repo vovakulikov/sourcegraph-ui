@@ -177,17 +177,6 @@
 </p>
 
 <style lang="scss">
-	/* Fix alert styling in examples */
-	:global([role='alert']) {
-		overflow: auto;
-		position: relative;
-		padding: 0.5rem !important;
-		margin-bottom: 0.5rem;
-		border-radius: 4px !important;
-		border-width: 1px !important;
-		border-style: solid !important;
-	}
-
 	table {
 		width: 100%;
 		border-collapse: collapse;

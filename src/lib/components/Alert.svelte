@@ -65,6 +65,7 @@
 		--alert-icon-block-width: 2.5rem;
 		--alert-content-padding: var(--sg-space-200);
 		--alert-background-color: white;
+		--alert-icon-color: var(--alert-border-color);
 
 		overflow: auto;
 		position: relative;
