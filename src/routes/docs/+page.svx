@@ -1,3 +1,7 @@
+<script>
+  import { Icon, Badge, Alert, ErrorAlert, Checkbox, LoadingSpinner } from '$lib'
+</script>
+
 ## Writing tests
 
 We use vitest for unit tests and playwright for integration tests. Both of these
@@ -97,10 +101,6 @@ When the development server is running, the icon will be automatically added to
 
 ### Badges
 
-<script>
-  import { Badge } from '$lib'
-</script>
-
 <style>
   /* Sourcegraph's color system for badges - direct hex values */
   :global(.badge) {
@@ -174,6 +174,58 @@ When the development server is running, the icon will be automatically added to
     padding-left: 0.6em !important;
     border-radius: 10rem !important;
   }
+  
+  /* Alert styles */
+  :global(.alert-container [role="alert"]) {
+    margin-bottom: 1rem;
+    border-radius: 4px !important;
+    overflow: auto;
+    position: relative;
+    padding: 0.5rem !important;
+  }
+  
+  :global(.alert-container .danger) {
+    border-color: #dc3545 !important;
+    background-color: rgba(220, 53, 69, 0.1) !important;
+  }
+  
+  :global(.alert-container .info) {
+    border-color: #0b70db !important;
+    background-color: rgba(11, 112, 219, 0.1) !important;
+  }
+  
+  :global(.alert-container .warning) {
+    border-color: #ffc107 !important;
+    background-color: rgba(255, 193, 7, 0.1) !important;
+  }
+  
+  :global(.alert-container .success) {
+    border-color: #2ea043 !important;
+    background-color: rgba(46, 160, 67, 0.1) !important;
+  }
+  
+  :global(.alert-container .slim) {
+    padding: 0.25rem 0.5rem !important;
+  }
+  
+  /* Checkbox examples styles */
+  :global(.checkbox-examples) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  :global(.checkbox-examples .checkbox-row) {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  :global(.checkbox-examples label) {
+    cursor: pointer;
+    user-select: none;
+  }
 </style>
 
 Badges are compact visual indicators used to highlight statuses, counts, or categorize items.
@@ -234,6 +286,197 @@ The Badge component supports various variants, sizes, and styling options:
 ```
 
 For detailed examples and API documentation, visit the [Badge component page](/components/badge).
+
+### Alerts
+
+<div class="alert-container">
+  Alerts display important messages to users. Use them to communicate status, provide feedback, or highlight important information.
+
+  #### Alert Variants
+
+  <Alert variant="info">This is an info alert with important information.</Alert>
+  <Alert variant="warning">This is a warning alert that requires attention.</Alert>
+  <Alert variant="danger">This is a danger alert about a critical issue.</Alert>
+  <Alert variant="success">This is a success alert confirming a completed action.</Alert>
+
+  #### Alert Sizes
+
+  <Alert variant="info">Normal-sized alert with default padding</Alert>
+  <Alert variant="info" size="slim">Slim alert with reduced padding</Alert>
+</div>
+
+```svelte
+<script>
+  import { Alert } from '$lib'
+</script>
+
+<!-- Alert variants -->
+<Alert variant="info">Info alert</Alert>
+<Alert variant="warning">Warning alert</Alert>
+<Alert variant="danger">Danger alert</Alert>
+<Alert variant="success">Success alert</Alert>
+
+<!-- Alert sizes -->
+<Alert variant="info">Normal size</Alert>
+<Alert variant="info" size="slim">Slim size</Alert>
+
+<!-- Custom styling -->
+<Alert 
+  variant="info" 
+  styleOverrides={{
+    backgroundColor: '#f0f8ff',
+    textColor: '#003366',
+    textCentered: true
+  }}
+>
+  Custom styled alert
+</Alert>
+```
+
+For detailed examples and API documentation, visit the [Alert component page](/components/alert).
+
+### Error Alerts
+
+<div class="alert-container">
+  <ErrorAlert error="This is a simple error message" />
+  <ErrorAlert title="Operation Failed" error="Unable to process your request due to a system error." />
+</div>
+
+ErrorAlert is a specialized alert component designed for displaying error messages. It works with various error types, including GraphQL errors.
+
+```svelte
+<script>
+  import { ErrorAlert } from '$lib'
+</script>
+
+<!-- Basic usage -->
+<ErrorAlert error="This is a simple error message" />
+
+<!-- With title -->
+<ErrorAlert 
+  title="Operation Failed" 
+  error="Unable to process your request due to a system error." 
+/>
+
+<!-- With Error object -->
+<ErrorAlert error={new Error("Something went wrong")} />
+
+<!-- With GraphQL errors -->
+<ErrorAlert 
+  title="GraphQL Errors" 
+  error={{
+    graphQLErrors: [
+      { message: "Field 'user' is not defined" },
+      { message: "Network timeout occurred" }
+    ]
+  }}
+/>
+```
+
+For detailed examples and API documentation, visit the [ErrorAlert component page](/components/errorAlert).
+
+### Checkboxes
+
+Checkboxes allow users to select one or more items from a set, or to toggle a single option on/off.
+They follow accessibility best practices and adapt to the design system's theme.
+
+<div class="checkbox-examples">
+  <div class="checkbox-row">
+    <Checkbox id="checkbox-example-1" />
+    <label for="checkbox-example-1">Unchecked checkbox</label>
+  </div>
+  
+  <div class="checkbox-row">
+    <Checkbox id="checkbox-example-2" checked />
+    <label for="checkbox-example-2">Checked checkbox</label>
+  </div>
+  
+  <div class="checkbox-row">
+    <Checkbox id="checkbox-example-3" disabled />
+    <label for="checkbox-example-3">Disabled checkbox</label>
+  </div>
+  
+  <div class="checkbox-row">
+    <Checkbox id="checkbox-example-4" disabled checked />
+    <label for="checkbox-example-4">Disabled checked checkbox</label>
+  </div>
+</div>
+
+The Checkbox component accepts all standard HTML input attributes:
+
+```svelte
+<script>
+  import { Checkbox } from '$lib'
+</script>
+
+<!-- Basic usage -->
+<Checkbox id="my-checkbox" />
+<label for="my-checkbox">Click me</label>
+
+<!-- Controlled state -->
+<Checkbox checked={isChecked} on:change={handleChange} />
+
+<!-- Disabled state -->
+<Checkbox disabled />
+<Checkbox disabled checked />
+
+<!-- With form attributes -->
+<Checkbox name="terms" value="agree" required />
+```
+
+Checkboxes can be used within forms to collect user input, or as standalone interactive elements for toggling options. Pair them with labels for better accessibility and user experience.
+
+For detailed examples and API documentation, visit the [Checkbox component page](/components/checkbox).
+
+### Loading Spinner
+
+Loading spinners are used to indicate that content is being loaded or a process is running. They help provide visual feedback to users during asynchronous operations.
+
+<div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 1rem;">
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+    <div style="height: 50px; width: 50px;">
+      <LoadingSpinner />
+    </div>
+    <span>Default</span>
+  </div>
+  
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+    <div style="height: 50px; width: 50px;">
+      <LoadingSpinner style="--size: 2rem;" />
+    </div>
+    <span>Large</span>
+  </div>
+  
+  <div>
+    <span>Inline: </span>
+    <LoadingSpinner inline />
+    <span> loading...</span>
+  </div>
+</div>
+
+The LoadingSpinner component is simple to use and can be customized to fit different contexts:
+
+```svelte
+<script>
+  import { LoadingSpinner } from '$lib'
+</script>
+
+<!-- Default centered spinner -->
+<LoadingSpinner />
+
+<!-- Inline spinner for text content -->
+<span>Loading data <LoadingSpinner inline /> please wait</span>
+
+<!-- Custom sized spinner -->
+<LoadingSpinner style="--size: 2rem;" />
+
+<!-- Without automatic centering -->
+<LoadingSpinner center={false} />
+```
+
+The spinner automatically adapts to the current theme and can be customized using CSS variables.
+
+For detailed examples and API documentation, visit the [LoadingSpinner component page](/components/loadingSpinner).
 
 ## Data fetching
 ### GraphQL

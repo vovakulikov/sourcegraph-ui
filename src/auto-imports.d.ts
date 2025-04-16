@@ -6,6 +6,7 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const ILucideArrowRight: typeof import('~icons/lucide/arrow-right')['default']
   const ILucideCheck: typeof import('~icons/lucide/check')['default']
   const ILucideHeart: typeof import('~icons/lucide/heart')['default']
   const ILucideX: typeof import('~icons/lucide/x')['default']
