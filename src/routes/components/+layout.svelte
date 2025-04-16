@@ -4,6 +4,8 @@
 		{ name: 'Badge', url: '/badge' },
 		{ name: 'Button', url: '/button' },
 		{ name: 'Alert', url: '/alert' },
+		{ name: 'ErrorAlert', url: '/error-alert' },
+		{ name: 'Textarea', url: '/textarea' },
 		{ name: 'ErrorAlert', url: '/errorAlert' },
 		{ name: 'Checkbox', url: '/checkbox' },
 		{ name: 'LoadingSpinner', url: '/loadingSpinner' },

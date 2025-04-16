@@ -3,10 +3,17 @@
   A component for displaying code examples with syntax highlighting.
 -->
 <script lang="ts">
-	export let code = '';
-	export let language = 'html';
+
+	interface CodeBlockProps {
+		code: string
+		language?: string
+	}
+
+	let { code, language = 'svelte' }: CodeBlockProps = $props()
 </script>
 
+
+<!--<SyntaxHighlighter language={language} code={code} />-->
 <pre class="code-block" data-language={language}><code>{code}</code></pre>
 
 <style lang="scss">

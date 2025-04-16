@@ -55,9 +55,9 @@
 				text-decoration: none;
 				font-weight: 500;
 				padding: var(--sg-space-100) var(--sg-space-200);
-				transition: all 0.1s ease-in-out;
 				border-radius: var(--sg-border-radius-100);
 			}
+
 			a:hover {
 				background-color: var(--sg-ref-gray-1000);
 			}
