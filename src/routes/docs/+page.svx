@@ -1,5 +1,5 @@
 <script>
-  import { Icon, Badge, Alert, ErrorAlert } from '$lib'
+  import { Icon, Badge, Alert, ErrorAlert, Checkbox } from '$lib'
 </script>
 
 ## Writing tests
@@ -207,6 +207,25 @@ When the development server is running, the icon will be automatically added to
   :global(.alert-container .slim) {
     padding: 0.25rem 0.5rem !important;
   }
+  
+  /* Checkbox examples styles */
+  :global(.checkbox-examples) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  :global(.checkbox-examples .checkbox-row) {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  :global(.checkbox-examples label) {
+    cursor: pointer;
+    user-select: none;
+  }
 </style>
 
 Badges are compact visual indicators used to highlight statuses, counts, or categorize items.
@@ -355,6 +374,59 @@ ErrorAlert is a specialized alert component designed for displaying error messag
 ```
 
 For detailed examples and API documentation, visit the [ErrorAlert component page](/components/errorAlert).
+
+### Checkboxes
+
+Checkboxes allow users to select one or more items from a set, or to toggle a single option on/off.
+They follow accessibility best practices and adapt to the design system's theme.
+
+<div class="checkbox-examples">
+  <div class="checkbox-row">
+    <Checkbox id="checkbox-example-1" />
+    <label for="checkbox-example-1">Unchecked checkbox</label>
+  </div>
+  
+  <div class="checkbox-row">
+    <Checkbox id="checkbox-example-2" checked />
+    <label for="checkbox-example-2">Checked checkbox</label>
+  </div>
+  
+  <div class="checkbox-row">
+    <Checkbox id="checkbox-example-3" disabled />
+    <label for="checkbox-example-3">Disabled checkbox</label>
+  </div>
+  
+  <div class="checkbox-row">
+    <Checkbox id="checkbox-example-4" disabled checked />
+    <label for="checkbox-example-4">Disabled checked checkbox</label>
+  </div>
+</div>
+
+The Checkbox component accepts all standard HTML input attributes:
+
+```svelte
+<script>
+  import { Checkbox } from '$lib'
+</script>
+
+<!-- Basic usage -->
+<Checkbox id="my-checkbox" />
+<label for="my-checkbox">Click me</label>
+
+<!-- Controlled state -->
+<Checkbox checked={isChecked} on:change={handleChange} />
+
+<!-- Disabled state -->
+<Checkbox disabled />
+<Checkbox disabled checked />
+
+<!-- With form attributes -->
+<Checkbox name="terms" value="agree" required />
+```
+
+Checkboxes can be used within forms to collect user input, or as standalone interactive elements for toggling options. Pair them with labels for better accessibility and user experience.
+
+For detailed examples and API documentation, visit the [Checkbox component page](/components/checkbox).
 
 ## Data fetching
 ### GraphQL

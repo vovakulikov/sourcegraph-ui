@@ -4,7 +4,8 @@
 		{ name: 'Badge', url: '/badge' },
 		{ name: 'Button', url: '/button' },
 		{ name: 'Alert', url: '/alert' },
-		{ name: 'ErrorAlert', url: '/errorAlert' }
+		{ name: 'ErrorAlert', url: '/errorAlert' },
+		{ name: 'Checkbox', url: '/checkbox' }
 	];
 
 	let { children } = $props();

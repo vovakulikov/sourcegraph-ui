@@ -4,3 +4,4 @@ export { default as Alert } from './Alert.svelte';
 export { default as ErrorAlert } from './ErrorAlert.svelte';
 export { default as ComponentSandbox } from './ComponentSandbox.svelte';
 export { default as CodeBlock } from './CodeBlock.svelte';
+export { default as Checkbox } from './Checkbox.svelte';
