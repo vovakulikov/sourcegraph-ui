@@ -65,7 +65,9 @@ or run e.g. `bazel test //client/web-sveltekit:e2e_test` to see the new integrit
 Error in download_and_extract: java.io.IOException: Error downloading [https://playwright.azureedge.net/builds/chromium/1129/chromium-mac-arm64.zip] to /private/var/tmp/_bazel_michael/680fb57cd51801cfe03bf19f9d7a0d3e/external/chromium-darwin-arm64/temp15834460500730224298/chromium-mac-arm64.zip: Checksum was sha256-WdF50K2a15LlHbga7y17zBZOb130NMCBiI+760VovQ4= but wanted sha256-5wj+iZyUU7WSAyA8Unriu9swRag3JyAxUUgGgVM+fTw=
 ```
 
-## Icons
+## Components
+
+### Icons
 
 We use [unplugin-icons](https://github.com/unplugin/unplugin-icons) together
 with [unplugin-auto-import](https://github.com/unplugin/unplugin-auto-import)
@@ -84,7 +86,7 @@ doesn't have to be imported manually.
 
 ```svelte
 <script lang="ts">
-  import { Icon } from '$lib/Icon.svelte'
+  import { Icon } from '$lib'
 </script>
 
 <Icon icon={ILucideCornerDownLeft} />
@@ -92,6 +94,146 @@ doesn't have to be imported manually.
 
 When the development server is running, the icon will be automatically added to
 `auto-imports.d.ts` so TypeScript knows about it.
+
+### Badges
+
+<script>
+  import { Badge } from '$lib'
+</script>
+
+<style>
+  /* Sourcegraph's color system for badges - direct hex values */
+  :global(.badge) {
+    display: inline-block;
+    padding: 0.125rem 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 4px;
+    line-height: 1rem;
+  }
+  
+  :global(.primary) {
+    background-color: #0b70db !important;
+    color: white !important;
+  }
+  
+  :global(.secondary) {
+    background-color: #e6ebf2 !important;
+    color: #343a4d !important;
+  }
+  
+  :global(.success) {
+    background-color: #2ea043 !important;
+    color: white !important;
+  }
+  
+  :global(.danger) {
+    background-color: #dc3545 !important;
+    color: white !important;
+  }
+  
+  :global(.warning) {
+    background-color: #ffc107 !important;
+    color: black !important;
+  }
+  
+  :global(.info) {
+    background-color: #72dbe8 !important;
+    color: black !important;
+  }
+  
+  :global(.merged) {
+    background-color: #a305e1 !important;
+    color: white !important;
+  }
+  
+  :global(.outline-secondary) {
+    background-color: transparent !important;
+    color: #5e6e8c !important;
+    border: 1px solid #e6ebf2 !important;
+  }
+  
+  :global(.link) {
+    background-color: #f9fafb !important;
+    color: #0b70db !important;
+    font-family: monospace !important;
+    font-weight: normal !important;
+  }
+  
+  :global(.small) {
+    font-size: 0.75rem !important;
+    padding: 0 0.25rem !important;
+    border-radius: 2px !important;
+  }
+  
+  :global(.pill) {
+    padding-right: 0.6em !important;
+    padding-left: 0.6em !important;
+    border-radius: 10rem !important;
+  }
+</style>
+
+Badges are compact visual indicators used to highlight statuses, counts, or categorize items.
+They're ideal for drawing attention to important information or providing contextual labels.
+
+#### Badge Variants
+
+<div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+  <Badge>Default</Badge>
+  <Badge variant="primary">primary</Badge>
+  <Badge variant="secondary">secondary</Badge>
+  <Badge variant="success">success</Badge>
+  <Badge variant="danger">danger</Badge>
+  <Badge variant="warning">warning</Badge>
+  <Badge variant="info">info</Badge>
+  <Badge variant="merged">merged</Badge>
+  <Badge variant="outlineSecondary">outlineSecondary</Badge>
+  <Badge variant="link">link</Badge>
+</div>
+
+#### Sizes and Styles
+
+<div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;">
+  <Badge variant="primary">Standard</Badge>
+  <Badge variant="primary" small>Small</Badge>
+  <Badge variant="primary" pill>Pill</Badge>
+  <Badge variant="success" small pill>Small Pill</Badge>
+</div>
+
+The Badge component supports various variants, sizes, and styling options:
+
+```svelte
+<script lang="ts">
+  import { Badge } from '$lib'
+</script>
+
+<!-- Basic usage -->
+<Badge>Default</Badge>
+
+<!-- Variants -->
+<Badge variant="primary">primary</Badge>
+<Badge variant="secondary">secondary</Badge>
+<Badge variant="success">success</Badge>
+<Badge variant="danger">danger</Badge>
+<Badge variant="warning">warning</Badge>
+<Badge variant="info">info</Badge>
+<Badge variant="merged">merged</Badge>
+<Badge variant="outlineSecondary">outlineSecondary</Badge>
+<Badge variant="link">link</Badge>
+
+<!-- Sizes -->
+<Badge variant="primary">Standard</Badge>
+<Badge variant="primary" small>Small</Badge>
+
+<!-- Pill style -->
+<Badge variant="primary" pill>Pill</Badge>
+<Badge variant="success" small pill>Small Pill</Badge>
+```
+
+For detailed examples and API documentation, visit the [Badge component page](/components/badge).
 
 ## Data fetching
 ### GraphQL
