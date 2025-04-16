@@ -2,7 +2,7 @@
 	const COMPONENTS_PAGES = [
 		{ name: 'Icon', url: '/icon' },
 		{ name: 'Badge', url: '/badge' },
-		{ name: 'Button', url: '/button' }
+		{ name: 'Button', url: '/button' },
 		{ name: 'Alert', url: '/alert' },
 		{ name: 'ErrorAlert', url: '/errorAlert' }
 	];
