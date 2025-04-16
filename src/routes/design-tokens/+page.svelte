@@ -186,12 +186,20 @@
 				{#if group.special === 'brand-fonts'}
 					<div class="font-showcase">
 						<div class="font-section">
-							<h4>PolySans (Brand)</h4>
+							<h4>PolySans Variable (Brand)</h4>
 							<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-size: 32px;">The quick brown fox jumps over the lazy dog</p>
 							<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-size: 24px;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
 							<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-size: 24px;">abcdefghijklmnopqrstuvwxyz</p>
 							<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-size: 24px;">0123456789</p>
 							<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-style: italic; font-size: 24px;">This text is in italic style</p>
+							<div class="weight-examples">
+								<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-weight: 100; font-size: 20px;">Weight 100 (Thin)</p>
+								<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-weight: 300; font-size: 20px;">Weight 300 (Light)</p>
+								<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-weight: 400; font-size: 20px;">Weight 400 (Regular)</p>
+								<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-weight: 600; font-size: 20px;">Weight 600 (Semi-Bold)</p>
+								<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-weight: 700; font-size: 20px;">Weight 700 (Bold)</p>
+								<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-weight: 900; font-size: 20px;">Weight 900 (Black)</p>
+							</div>
 						</div>
 
 						<div class="font-section">
@@ -348,6 +356,12 @@
 	.font-example {
 		margin: 0.5rem 0;
 		line-height: 1.5;
+	}
+
+	.weight-examples {
+		margin-top: 1.5rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--sg-sys-border-color);
 	}
 
 	.token-group {

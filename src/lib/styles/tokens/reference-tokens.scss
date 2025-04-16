@@ -5,18 +5,25 @@
 // Color values are based on Harmony palette
 // see https://www.figma.com/community/file/1287828769207775946/harmony-accessible-ui-color-palette
 
+/* Variable font implementation for PolySans */
 @font-face {
   font-family: 'PolySans';
-  src: url('/src/lib/fonts/PolySans-Neutral.woff') format('woff');
-  font-weight: normal;
+  src: url('/src/lib/fonts/PolySans-variable.woff2') format('woff2 supports variations'),
+       url('/src/lib/fonts/PolySans-variable.woff2') format('woff2-variations'),
+       url('/src/lib/fonts/PolySans-Neutral.woff') format('woff'); /* Fallback for older browsers */
+  font-weight: 100 900; /* Full range for variable font */
+  font-stretch: 75% 125%; /* Using standard range */
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'PolySans';
-  src: url('/src/lib/fonts/PolySans-NeutralItalic.woff') format('woff');
-  font-weight: normal;
+  src: url('/src/lib/fonts/PolySansItalic-variable.woff2') format('woff2 supports variations'),
+       url('/src/lib/fonts/PolySansItalic-variable.woff2') format('woff2-variations'),
+       url('/src/lib/fonts/PolySans-NeutralItalic.woff') format('woff'); /* Fallback for older browsers */
+  font-weight: 100 900; /* Full range for variable font */
+  font-stretch: 75% 125%; /* Using standard range */
   font-style: italic;
   font-display: swap;
 }
