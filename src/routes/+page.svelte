@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { SourcegraphLogo } from '$lib'
-	import PerlinWave from './perlin-wave.svelte';
+	import SimplexNoise from '$lib/layouts/simplex-noise-wave.svelte';
 </script>
 
 
 <div class='content'>
 	<div class='background'>
-		<PerlinWave />
+		<SimplexNoise/>
 	</div>
 
-	<SourcegraphLogo width="500" height="72"/>
-	<h1>Welcome to the tech docs and  components <br/> library hub</h1>
+	<SourcegraphLogo width="500" height="72" variant="dark" />
+	<h2>Welcome to the tech docs and  components <br/> library hub</h2>
 
 	<footer>
 		<a href="/components/icon">Components</a>
@@ -32,7 +32,6 @@
 		position: relative;
 		z-index: 1;
 		flex-grow: 1;
-
 		display: flex;
 		flex-direction: column;
 		gap: 0.75rem;
@@ -41,13 +40,18 @@
 		width: 100%;
 	}
 
-	h1 {
+	h2 {
 		text-align: center;
+		color: var(--sg-sys-accent-text-color);
 	}
 
 	footer {
 		margin-top: 2rem;
 		display: flex;
 		gap: 1rem;
+
+		a {
+			color: var(--sg-sys-accent-text-color);
+		}
 	}
 </style>
