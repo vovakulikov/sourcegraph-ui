@@ -1,5 +1,5 @@
 <script>
-  import { Icon, Badge, Alert } from '$lib'
+  import { Icon, Badge, Alert, ErrorAlert } from '$lib'
 </script>
 
 ## Writing tests
@@ -315,6 +315,46 @@ For detailed examples and API documentation, visit the [Badge component page](/c
 ```
 
 For detailed examples and API documentation, visit the [Alert component page](/components/alert).
+
+### Error Alerts
+
+<div class="alert-container">
+  <ErrorAlert error="This is a simple error message" />
+  <ErrorAlert title="Operation Failed" error="Unable to process your request due to a system error." />
+</div>
+
+ErrorAlert is a specialized alert component designed for displaying error messages. It works with various error types, including GraphQL errors.
+
+```svelte
+<script>
+  import { ErrorAlert } from '$lib'
+</script>
+
+<!-- Basic usage -->
+<ErrorAlert error="This is a simple error message" />
+
+<!-- With title -->
+<ErrorAlert 
+  title="Operation Failed" 
+  error="Unable to process your request due to a system error." 
+/>
+
+<!-- With Error object -->
+<ErrorAlert error={new Error("Something went wrong")} />
+
+<!-- With GraphQL errors -->
+<ErrorAlert 
+  title="GraphQL Errors" 
+  error={{
+    graphQLErrors: [
+      { message: "Field 'user' is not defined" },
+      { message: "Network timeout occurred" }
+    ]
+  }}
+/>
+```
+
+For detailed examples and API documentation, visit the [ErrorAlert component page](/components/errorAlert).
 
 ## Data fetching
 ### GraphQL
