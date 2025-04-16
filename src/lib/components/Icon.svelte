@@ -59,6 +59,7 @@
   :global(.icon-inline) {
     --sg-comp-icon-stroke-width: 2;
 
+		display: inline-block;
     flex: none;
     width: var(--sg-comp-icon-inline-size);
     height:  var(--sg-comp-icon-inline-size);

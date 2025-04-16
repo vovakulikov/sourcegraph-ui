@@ -1,7 +1,8 @@
 <script lang="ts">
 	const COMPONENTS_PAGES = [
 		{ name: 'Icon', url: '/icon' },
-		{ name: 'Badge', url: '/badge' }
+		{ name: 'Badge', url: '/badge' },
+		{ name: 'Button', url: '/button' }
 	];
 
 	let { children } = $props();
@@ -21,12 +22,15 @@
 	</aside>
 
 	<div class="content">
-		{@render children()}
+		<div class="inner-wrapper">
+			{@render children()}
+		</div>
 	</div>
 </div>
 
 <style lang="scss">
 	.root {
+		width: 100%;
 		height: 100%;
 		display: flex;
 		overflow: hidden;
@@ -46,7 +50,7 @@
 
 	.content {
 		height: 100%;
-		max-width: 700px;
+		width: 100%;
 		flex-grow: 1;
 		padding: 1rem;
 		overflow: auto;
@@ -58,6 +62,10 @@
 
 		:global(p) {
 			margin-bottom: 1rem;
+		}
+
+		.inner-wrapper {
+      max-width: 700px;
 		}
 	}
 </style>
