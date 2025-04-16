@@ -5,11 +5,61 @@
 // Color values are based on Harmony palette
 // see https://www.figma.com/community/file/1287828769207775946/harmony-accessible-ui-color-palette
 
+@font-face {
+  font-family: 'PolySans';
+  src: url('/src/lib/fonts/PolySans-Neutral.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PolySans';
+  src: url('/src/lib/fonts/PolySans-NeutralItalic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PolySans-NeutralMono';
+  src: url('/src/lib/fonts/PolySans-NeutralMono.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PolySans-SlimMono';
+  src: url('/src/lib/fonts/PolySans-SlimMono.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PerfectlyNineties';
+  src: url('/src/lib/fonts/PerfectlyNineties-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PerfectlyNineties';
+  src: url('/src/lib/fonts/PerfectlyNineties-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   // ------- Typography -------
   --sg-ref-font-family-sans: 'Inter Variable', sans-serif;
-  --sg-ref-font-family-serif: Georgia, serif;
-  --sg-ref-font-family-monospace: 'Roboto Mono Variable', monospace;
+  --sg-ref-font-family-serif: 'PerfectlyNineties', serif;
+  --sg-ref-font-family-monospace: 'PolySans-SlimMono', monospace;
+  --sg-ref-font-family-brand: 'PolySans', sans-serif;
+  --sg-ref-font-family-brand-mono: 'PolySans-NeutralMono', monospace;
 
   // -------- RED --------
   --sg-ref-red-50: #fefafa;

@@ -7,7 +7,14 @@
 				'--sg-ref-font-family-sans',
 				'--sg-ref-font-family-serif',
 				'--sg-ref-font-family-monospace',
+				'--sg-ref-font-family-brand',
+				'--sg-ref-font-family-brand-mono',
 			]
+		},
+		{
+			title: 'Brand Font Showcase',
+			special: 'brand-fonts',
+			tokens: []
 		},
 		{
 			title: 'Red Color Tokens',
@@ -98,6 +105,36 @@
 			]
 		},
 		{
+			title: 'Font Sizes',
+			tokens: [
+				'--sg-font-size-100',
+				'--sg-font-size-200',
+				'--sg-font-size-300',
+				'--sg-font-size-400',
+				'--sg-font-size-500',
+				'--sg-font-size-600',
+				'--sg-font-size-700',
+				'--sg-font-size-800',
+				'--sg-font-size-900',
+				'--sg-font-size-1000',
+			]
+		},
+		{
+			title: 'Spacing',
+			tokens: [
+				'--sg-space-100',
+				'--sg-space-200',
+				'--sg-space-300',
+				'--sg-space-400',
+				'--sg-space-500',
+				'--sg-space-600',
+				'--sg-space-700',
+				'--sg-space-800',
+				'--sg-space-900',
+				'--sg-space-1000',
+			]
+		},
+		{
 			title: 'Backgrounds',
 			tokens: [
 				'--sg-sys-backgound',
@@ -109,11 +146,11 @@
 			tokens: [
 				'--sg-sys-shadow-color',
 				'--sg-sys-shadow-color-light',
-				'--sg-sys-shadow-sm',
-				'--sg-sys-shadow',
-				'--sg-sys-shadow-md',
-				'--sg-sys-shadow-lg',
-				'--sg-sys-shadow-xl',
+				'--sg-shadow-100',
+				'--sg-shadow-200',
+				'--sg-shadow-300',
+				'--sg-shadow-400',
+				'--sg-shadow-500',
 			]
 		},
 		{
@@ -146,23 +183,61 @@
 		{#each referenceTokenGroups as group}
 			<div class="token-group">
 				<h3>{group.title}</h3>
-				<div class="token-list">
-					{#each group.tokens as token}
-						<div class="token-card">
-							<div class="token-name">{token}</div>
-							
-							{#if token.includes('color') || token.includes('red') || token.includes('blue') || token.includes('orange') || token.includes('gray')}
-								<!-- Color swatch for color tokens -->
-								<div class="token-example color-swatch" style="background-color: var({token});"></div>
-							{:else if token.includes('font-family')}
-								<!-- Font family example -->
-								<div class="token-example">
-									<span style="font-family: var({token});">The quick brown fox jumps over the lazy dog</span>
-								</div>
-							{/if}
+				{#if group.special === 'brand-fonts'}
+					<div class="font-showcase">
+						<div class="font-section">
+							<h4>PolySans (Brand)</h4>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-size: 32px;">The quick brown fox jumps over the lazy dog</p>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-size: 24px;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-size: 24px;">abcdefghijklmnopqrstuvwxyz</p>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-size: 24px;">0123456789</p>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-brand); font-style: italic; font-size: 24px;">This text is in italic style</p>
 						</div>
-					{/each}
-				</div>
+
+						<div class="font-section">
+							<h4>PerfectlyNineties (Serif)</h4>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-serif); font-size: 32px;">The quick brown fox jumps over the lazy dog</p>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-serif); font-size: 24px;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-serif); font-size: 24px;">abcdefghijklmnopqrstuvwxyz</p>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-serif); font-size: 24px;">0123456789</p>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-serif); font-style: italic; font-size: 24px;">This text is in italic style</p>
+						</div>
+						
+						<div class="font-section">
+							<h4>PolySans NeutralMono</h4>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-brand-mono); font-size: 32px;">The quick brown fox jumps over the lazy dog</p>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-brand-mono); font-size: 24px;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-brand-mono); font-size: 24px;">abcdefghijklmnopqrstuvwxyz</p>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-brand-mono); font-size: 24px;">0123456789</p>
+						</div>
+						
+						<div class="font-section">
+							<h4>PolySans SlimMono (Default Monospace)</h4>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-monospace); font-size: 32px;">The quick brown fox jumps over the lazy dog</p>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-monospace); font-size: 24px;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-monospace); font-size: 24px;">abcdefghijklmnopqrstuvwxyz</p>
+							<p class="font-example" style="font-family: var(--sg-ref-font-family-monospace); font-size: 24px;">0123456789</p>
+						</div>
+					</div>
+				{:else}
+					<div class="token-list">
+						{#each group.tokens as token}
+							<div class="token-card">
+								<div class="token-name">{token}</div>
+								
+								{#if token.includes('color') || token.includes('red') || token.includes('blue') || token.includes('orange') || token.includes('gray')}
+									<!-- Color swatch for color tokens -->
+									<div class="token-example color-swatch" style="background-color: var({token});"></div>
+								{:else if token.includes('font-family')}
+									<!-- Font family example -->
+									<div class="token-example">
+										<span style="font-family: var({token});">The quick brown fox jumps over the lazy dog</span>
+									</div>
+								{/if}
+							</div>
+						{/each}
+					</div>
+				{/if}
 			</div>
 		{/each}
 	</section>
@@ -187,7 +262,7 @@
 								<div class="token-example">
 									<span style="font-family: var({token});">The quick brown fox jumps over the lazy dog</span>
 								</div>
-							{:else if token.includes('font-size')}
+							{:else if token.includes('font-size') || token.includes('font-size-')}
 								<!-- Font size example -->
 								<div class="token-example">
 									<span style="font-size: var({token});">Text sample</span>
@@ -202,7 +277,12 @@
 								<div class="token-example">
 									<div class="border-box" style="border-color: var({token});"></div>
 								</div>
-							{:else if token.includes('shadow')}
+							{:else if token.includes('space')}
+								<!-- Space example -->
+								<div class="token-example">
+									<div class="space-box" style="width: var({token}); height: var({token});"></div>
+								</div>
+							{:else if token.includes('shadow') || token.includes('shadow-')}
 								<!-- Shadow example -->
 								<div class="token-example">
 									<div class="shadow-box" style="box-shadow: var({token});"></div>
@@ -246,6 +326,30 @@
 		margin: 1.5rem 0 1rem;
 	}
 
+	h4 {
+		font-size: 1.1rem;
+		margin: 1rem 0 0.5rem;
+	}
+
+	.font-showcase {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.font-section {
+		padding: 1.5rem;
+		border: 1px solid var(--sg-sys-border-color);
+		border-radius: var(--sg-sys-border-radius);
+		background-color: white;
+		box-shadow: var(--sg-shadow-100);
+	}
+
+	.font-example {
+		margin: 0.5rem 0;
+		line-height: 1.5;
+	}
+
 	.token-group {
 		margin-bottom: 2rem;
 	}
@@ -261,7 +365,7 @@
 		border-radius: var(--sg-sys-border-radius);
 		padding: 1rem;
 		background-color: white;
-		box-shadow: var(--sg-sys-shadow-sm);
+		box-shadow: var(--sg-shadow-100);
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
@@ -309,6 +413,11 @@
 		width: 6rem;
 		height: 2.5rem;
 		background-color: white;
+		border-radius: var(--sg-sys-border-radius);
+	}
+
+	.space-box {
+		background-color: var(--sg-sys-accent-color);
 		border-radius: var(--sg-sys-border-radius);
 	}
 

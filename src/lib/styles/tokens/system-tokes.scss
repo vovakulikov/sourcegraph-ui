@@ -39,19 +39,40 @@
 
 // Theme agnostic (calculated by system tokens and reference tokens) token layer
 :root {
-    // Typography
-    --sg-sys-font-size-small: calc(var(--sg-sys-font-size) - 0.5rem);
-    --sg-sys-font-size-large: calc(var(--sg-sys-font-size) + 0.5rem);
+
+    // Font scale (with base font-size of 16px)
+    --sg-font-size-100: calc(var(--sg-sys-font-size) * 0.625);  /* 10px */
+    --sg-font-size-200: calc(var(--sg-sys-font-size) * 0.6875); /* 11px */
+    --sg-font-size-300: calc(var(--sg-sys-font-size) * 0.8125); /* 13px */
+    --sg-font-size-400: calc(var(--sg-sys-font-size) * 0.875);  /* 14px */
+    --sg-font-size-500: calc(var(--sg-sys-font-size) * 1);      /* 16px */
+    --sg-font-size-600: calc(var(--sg-sys-font-size) * 1.125);  /* 18px */
+    --sg-font-size-700: calc(var(--sg-sys-font-size) * 1.1875); /* 19px */
+    --sg-font-size-800: calc(var(--sg-sys-font-size) * 1.3125); /* 21px */
+    --sg-font-size-900: calc(var(--sg-sys-font-size) * 1.375);  /* 22px */
+    --sg-font-size-1000: calc(var(--sg-sys-font-size) * 1.5);   /* 24px */
+
+    // Space Scale
+    --sg-space-100: 0.25rem;    /* 4px */
+    --sg-space-200: 0.5rem;     /* 8px */
+    --sg-space-300: 0.75rem;    /* 12px */
+    --sg-space-400: 1rem;       /* 16px */
+    --sg-space-500: 1.5rem;     /* 24px */
+    --sg-space-600: 2rem;       /* 32px */
+    --sg-space-700: 2.5rem;     /* 40px */
+    --sg-space-800: 3rem;       /* 48px */
+    --sg-space-900: 3.5rem;     /* 56px */
+    --sg-space-1000: 4rem;      /* 64px */
 
     // Focus ring shadows
     --sg-sys-focus-shadow: 0 0 0 2px var(--sg-sys-accent-color-light);
     --sg-sys-focus-shadow-inset: 0 0 0 2px var(--sg-sys-accent-color-dark) inset;
 
     // Shadows
-    --sg-sys-shadow-sm: 0 1px 2px 0 var(--sg-sys-shadow-color-light);
-    --sg-sys-shadow: 0 1px 3px 0 var(--sg-sys-shadow-color), 0 1px 2px -1px var(--sg-sys-shadow-color-light);
-    --sg-sys-shadow-md: 0 4px 6px -1px var(--sg-sys-shadow-color-light), 0 2px 4px -2px var(--sg-sys-shadow-color-light);
-    --sg-sys-shadow-lg: 0 10px 15px -3px var(--sg-sys-shadow-color-light), 0 4px 6px -4px var(--sg-sys-shadow-color-light);
-    --sg-sys-shadow-xl: 0 20px 25px -5px var(--sg-sys-shadow-color-light), 0 8px 10px -6px var(--sg-sys-shadow-color-light);
+    --sg-shadow-100: 0 1px 2px 0 var(--sg-sys-shadow-color-light);
+    --sg-shadow-200: 0 1px 3px 0 var(--sg-sys-shadow-color), 0 1px 2px -1px var(--sg-sys-shadow-color-light);
+    --sg-shadow-300: 0 4px 6px -1px var(--sg-sys-shadow-color-light), 0 2px 4px -2px var(--sg-sys-shadow-color-light);
+    --sg-shadow-400: 0 10px 15px -3px var(--sg-sys-shadow-color-light), 0 4px 6px -4px var(--sg-sys-shadow-color-light);
+    --sg-shadow-500: 0 20px 25px -5px var(--sg-sys-shadow-color-light), 0 8px 10px -6px var(--sg-sys-shadow-color-light);
 }
 
