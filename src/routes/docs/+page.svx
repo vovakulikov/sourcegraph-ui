@@ -1,5 +1,5 @@
 <script>
-  import { Icon, Badge, Alert, ErrorAlert, Checkbox } from '$lib'
+  import { Icon, Badge, Alert, ErrorAlert, Checkbox, LoadingSpinner } from '$lib'
 </script>
 
 ## Writing tests
@@ -427,6 +427,56 @@ The Checkbox component accepts all standard HTML input attributes:
 Checkboxes can be used within forms to collect user input, or as standalone interactive elements for toggling options. Pair them with labels for better accessibility and user experience.
 
 For detailed examples and API documentation, visit the [Checkbox component page](/components/checkbox).
+
+### Loading Spinner
+
+Loading spinners are used to indicate that content is being loaded or a process is running. They help provide visual feedback to users during asynchronous operations.
+
+<div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 1rem;">
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+    <div style="height: 50px; width: 50px;">
+      <LoadingSpinner />
+    </div>
+    <span>Default</span>
+  </div>
+  
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+    <div style="height: 50px; width: 50px;">
+      <LoadingSpinner style="--size: 2rem;" />
+    </div>
+    <span>Large</span>
+  </div>
+  
+  <div>
+    <span>Inline: </span>
+    <LoadingSpinner inline />
+    <span> loading...</span>
+  </div>
+</div>
+
+The LoadingSpinner component is simple to use and can be customized to fit different contexts:
+
+```svelte
+<script>
+  import { LoadingSpinner } from '$lib'
+</script>
+
+<!-- Default centered spinner -->
+<LoadingSpinner />
+
+<!-- Inline spinner for text content -->
+<span>Loading data <LoadingSpinner inline /> please wait</span>
+
+<!-- Custom sized spinner -->
+<LoadingSpinner style="--size: 2rem;" />
+
+<!-- Without automatic centering -->
+<LoadingSpinner center={false} />
+```
+
+The spinner automatically adapts to the current theme and can be customized using CSS variables.
+
+For detailed examples and API documentation, visit the [LoadingSpinner component page](/components/loadingSpinner).
 
 ## Data fetching
 ### GraphQL
