@@ -18,7 +18,7 @@
 	{#snippet code()}
 			<CodeBlock code={`
 <script>
-	import Icon from '$lib/components/Icon.svelte';
+	import { Icon } from 'sourcegraph-ui';
 <\/script>
 
 <Icon icon={ILucideHeart} />`.trim()} />
@@ -40,9 +40,9 @@
 	{#snippet code()}
 		<CodeBlock code={`
 <script>
-	import Icon from '$lib/components/Icon.svelte';
+	import { Icon } from 'sourcegraph-ui';
 <\/script>
 
-<Icon icon={ILucideHeart} />`.trim()} />
+<Icon icon={ISgMark} />`.trim()} />
 	{/snippet}
 </ComponentSandbox>

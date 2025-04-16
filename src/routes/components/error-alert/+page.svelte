@@ -29,7 +29,9 @@
 	{/snippet}
 	{#snippet code()}
 		<CodeBlock
-			code={`import { ErrorAlert } from '$lib';
+			code={`<script>
+  import { ErrorAlert } from 'sourcegraph-ui';
+</script>
 
 <ErrorAlert error="This is a simple error message" />`}
 		/>
@@ -48,7 +50,9 @@
 	{/snippet}
 	{#snippet code()}
 		<CodeBlock
-			code={`import { ErrorAlert } from '$lib';
+			code={`<script>
+  import { ErrorAlert } from 'sourcegraph-ui';
+</script>
 
 <ErrorAlert
   title="Operation Failed"
@@ -64,10 +68,12 @@
 	{/snippet}
 	{#snippet code()}
 		<CodeBlock
-			code={`import { ErrorAlert } from '$lib';
+			code={`<script>
+  import { ErrorAlert } from 'sourcegraph-ui';
 
-// Create an Error object
-const error = new Error("Something went wrong with the application.");
+  // Create an Error object
+  const error = new Error("Something went wrong with the application.");
+</script>
 
 <ErrorAlert error={error} />`}
 		/>
@@ -92,16 +98,18 @@ const error = new Error("Something went wrong with the application.");
 	{/snippet}
 	{#snippet code()}
 		<CodeBlock
-			code={`import { ErrorAlert } from '$lib';
+			code={`<script>
+  import { ErrorAlert } from 'sourcegraph-ui';
 
-// Create an object with GraphQL errors
-const error = {
-  graphQLErrors: [
-    { message: "Field 'user' is not defined" },
-    { message: "Network timeout occurred" },
-    { message: "Authentication required" }
-  ]
-};
+  // Create an object with GraphQL errors
+  const error = {
+    graphQLErrors: [
+      { message: "Field 'user' is not defined" },
+      { message: "Network timeout occurred" },
+      { message: "Authentication required" }
+    ]
+  };
+</script>
 
 <ErrorAlert
   title="Multiple Issues Detected"

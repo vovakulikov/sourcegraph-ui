@@ -34,7 +34,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { Select } from '$lib';
+  import { Select } from 'sourcegraph-ui';
 
   const options = [
     { value: '', label: 'Select an option' },
@@ -59,7 +59,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { Select } from '$lib';
+  import { Select } from 'sourcegraph-ui';
 
   const fruitOptions = [
     { value: '', label: 'Choose a fruit' },
@@ -84,7 +84,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { Select } from '$lib';
+  import { Select } from 'sourcegraph-ui';
   
   const options = [
     { value: '', label: 'Select an option' },
@@ -122,7 +122,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { Select } from '$lib';
+  import { Select } from 'sourcegraph-ui';
 
   const fruitOptions = [
     { value: '', label: 'Choose a fruit' },
@@ -157,7 +157,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { Select } from '$lib';
+  import { Select } from 'sourcegraph-ui';
 
   const options = [
     { value: '', label: 'Select an option' },

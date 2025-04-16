@@ -18,7 +18,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { Checkbox } from '$lib';
+  import { Checkbox } from 'sourcegraph-ui';
 </script>
 
 <Checkbox />`}
@@ -39,7 +39,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { Checkbox } from '$lib';
+  import { Checkbox } from 'sourcegraph-ui';
 </script>
 
 <Checkbox id="agree-checkbox" />
@@ -67,7 +67,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { Checkbox } from '$lib';
+  import { Checkbox } from 'sourcegraph-ui';
 </script>
 
 <Checkbox checked />
@@ -95,7 +95,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { Checkbox } from '$lib';
+  import { Checkbox } from 'sourcegraph-ui';
 </script>
 
 <Checkbox disabled />

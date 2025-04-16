@@ -21,7 +21,7 @@
 	{#snippet code()}
 		<CodeBlock code={`
 <script>
-	import { Button } from '$lib';
+	import { Button } from 'sourcegraph-ui';
 <\/script>
 
 <Button variant="primary">Get Started</Button>`.trim()} />
@@ -38,7 +38,7 @@
 	{#snippet code()}
 		<CodeBlock code={`
 <script>
-	import { Button } from '$lib';
+	import { Button } from 'sourcegraph-ui';
 <\/script>
 
 <Button variant="secondary">Get Started</Button>`.trim()} />

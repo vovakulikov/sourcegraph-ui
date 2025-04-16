@@ -5,6 +5,7 @@
 	import { EditorState } from '@codemirror/state';
 	import { javascript } from '@codemirror/lang-javascript';
 	import { html } from '@codemirror/lang-html';
+	import { page } from '$app/stores';
 
 	let editorContainer: HTMLElement;
 	let previewFrame: HTMLIFrameElement;
@@ -12,68 +13,47 @@
 	let isLoading = false;
 	let compileTimeout: ReturnType<typeof setTimeout>;
 	const DEBOUNCE_DELAY = 500; // 500ms debounce delay
-	let initialCode = `<\script>
+	
+	// Default code if no code parameter is provided
+	let defaultCode = `<\script>
   // Svelte 5 syntax with runes for reactive state management
   let count = $state(0);
-  import { SourcegraphLogo } from 'sourcegraph-ui'
+  import { Button } from 'sourcegraph-ui'
   
   function increment() {
     count += 1;
   }
 </\script>
 
-<h3>Svelte 5 Counter Example</h3>
-<SourcegraphLogo />
-
-<div class="counter-container">
-  <p>Current count: <span class="count">{count}</span></p>
-  <button on:click={increment}>Increment</button>
+<div>
+  <p>Current count: {count}</p>
+  <Button variant="primary" onclick={increment}>Increment</Button>
 </div>
-
-<\style>
-  h3 {
-    color: #333;
-    font-family: sans-serif;
-    margin-bottom: 1rem;
-  }
-  
-  .counter-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1.5rem;
-    background-color: #f9fafb;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .count {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #3b82f6;
-  }
-  
-  button {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background-color: #3b82f6;
-    color: white;
-    border: none;
-    border-radius: 0.25rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  button:hover {
-    background-color: #2563eb;
-  }
-  
-  button:active {
-    transform: translateY(1px);
-  }
-</\style>
 `;
+	
+	// Get code from URL parameter if provided
+	let initialCode = '';
+	
+	// Error state for decoding failures
+	let decodingError = '';
+	
+	$: {
+		if ($page.url.searchParams.has('code')) {
+			try {
+				// Decode base64 parameter with proper URI decoding
+				const encodedCode = $page.url.searchParams.get('code') || '';
+				initialCode = decodeURIComponent(escape(atob(decodeURIComponent(encodedCode))));
+				decodingError = ''; // Clear any previous error
+			} catch (error: unknown) {
+				decodingError = `Failed to decode code parameter: ${error instanceof Error ? error.message : 'Unknown error'}`;
+				console.error('Failed to decode code parameter:', error);
+				initialCode = defaultCode;
+			}
+		} else {
+			initialCode = defaultCode;
+			decodingError = ''; // Clear any previous error
+		}
+	}
 
 	// Create an instance of the web worker
 	let compilationWorker: Worker;
@@ -232,9 +212,22 @@
 			compilationWorker.terminate();
 		};
 	});
+	
+	// Update editor content when initialCode changes
+	$: if (editor && initialCode) {
+		editor.dispatch({
+			changes: { from: 0, to: editor.state.doc.length, insert: initialCode }
+		});
+		debouncedCompile(initialCode);
+	}
 </script>
 
 <div class="playground">
+	{#if decodingError}
+	<div class="error-banner">
+		{decodingError}
+	</div>
+	{/if}
 	<div class="playground-container">
 		<div class="editor-container" bind:this={editorContainer}>
 			<div class="editor-header">
@@ -259,6 +252,15 @@
 </div>
 
 <style lang="scss">
+	.error-banner {
+		padding: 0.75rem 1rem;
+		background-color: #fee2e2;
+		color: #b91c1c;
+		border-bottom: 1px solid #fca5a5;
+		font-size: 0.875rem;
+		font-weight: 500;
+	}
+
 	:global(body) {
 		margin: 0;
 		padding: 0;

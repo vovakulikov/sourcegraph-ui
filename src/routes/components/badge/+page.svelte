@@ -23,7 +23,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { Badge } from '$lib';
+  import { Badge } from 'sourcegraph-ui';
 </script>
 
 <Badge>Default</Badge>`}
@@ -51,7 +51,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { Badge } from '$lib';
+  import { Badge } from 'sourcegraph-ui';
 </script>
 
 <Badge variant="primary">primary</Badge>
@@ -77,7 +77,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { Badge } from '$lib';
+  import { Badge } from 'sourcegraph-ui';
 </script>
 
 <Badge variant="primary">Standard</Badge>
@@ -100,7 +100,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { Badge } from '$lib';
+  import { Badge } from 'sourcegraph-ui';
 </script>
 
 <Badge variant="primary" pill>Pill Badge</Badge>
@@ -123,7 +123,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { Badge } from '$lib';
+  import { Badge } from 'sourcegraph-ui';
 </script>
 
 <Badge variant="primary" style="background-color: purple;">Custom Style</Badge>
@@ -150,7 +150,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { Badge } from '$lib';
+  import { Badge } from 'sourcegraph-ui';
 
   // Simple function to use for the custom badge example
   function customBadgeRenderer({className}) {

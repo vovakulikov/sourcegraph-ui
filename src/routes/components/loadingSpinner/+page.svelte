@@ -19,7 +19,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { LoadingSpinner } from '$lib';
+  import { LoadingSpinner } from 'sourcegraph-ui';
 </script>
 
 <LoadingSpinner />`}
@@ -38,7 +38,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { LoadingSpinner } from '$lib';
+  import { LoadingSpinner } from 'sourcegraph-ui';
 </script>
 
 <span>Loading data </span>
@@ -60,7 +60,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { LoadingSpinner } from '$lib';
+  import { LoadingSpinner } from 'sourcegraph-ui';
 </script>
 
 <div style="height: 80px;">
@@ -82,7 +82,7 @@
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
-  import { LoadingSpinner } from '$lib';
+  import { LoadingSpinner } from 'sourcegraph-ui';
 </script>
 
 <LoadingSpinner style="--size: 2.5rem;" />`}

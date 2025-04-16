@@ -17,7 +17,9 @@
 	{/snippet}
 	{#snippet code()}
 		<CodeBlock
-			code={`import { Alert } from '$lib';
+			code={`<script>
+  import { Alert } from 'sourcegraph-ui';
+</script>
 
 <Alert>This is a default alert with no variant specified.</Alert>`}
 		/>
@@ -38,7 +40,9 @@
 	{/snippet}
 	{#snippet code()}
 		<CodeBlock
-			code={`import { Alert } from '$lib';
+			code={`<script>
+  import { Alert } from 'sourcegraph-ui';
+</script>
 
 <Alert variant="info">This is an info alert with important information.</Alert>
 <Alert variant="warning">This is a warning alert that requires attention.</Alert>
@@ -60,7 +64,9 @@
 	{/snippet}
 	{#snippet code()}
 		<CodeBlock
-			code={`import { Alert } from '$lib';
+			code={`<script>
+  import { Alert } from 'sourcegraph-ui';
+</script>
 
 <Alert variant="info">This is a normal alert with default padding.</Alert>
 <Alert variant="info" size="slim">This is a slim alert with reduced padding.</Alert>`}
@@ -84,9 +90,11 @@
 	{/snippet}
 	{#snippet code()}
 		<CodeBlock
-			code={`import { Alert } from '$lib';
+			code={`<script>
+  import { Alert } from 'sourcegraph-ui';
+</script>
 
-// Custom background and text colors
+<!-- Custom background and text colors -->
 <Alert
   variant="info"
   styleOverrides={{ backgroundColor: '#f0f8ff', textColor: '#003366' }}
@@ -94,7 +102,7 @@
   This alert has custom background and text colors.
 </Alert>
 
-// Centered text
+<!-- Centered text -->
 <Alert
   variant="warning"
   styleOverrides={{ textCentered: true }}
