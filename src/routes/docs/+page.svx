@@ -1,3 +1,7 @@
+<script>
+  import { Icon, Badge, Alert } from '$lib'
+</script>
+
 ## Writing tests
 
 We use vitest for unit tests and playwright for integration tests. Both of these
@@ -97,10 +101,6 @@ When the development server is running, the icon will be automatically added to
 
 ### Badges
 
-<script>
-  import { Badge } from '$lib'
-</script>
-
 <style>
   /* Sourcegraph's color system for badges - direct hex values */
   :global(.badge) {
@@ -174,6 +174,39 @@ When the development server is running, the icon will be automatically added to
     padding-left: 0.6em !important;
     border-radius: 10rem !important;
   }
+  
+  /* Alert styles */
+  :global(.alert-container [role="alert"]) {
+    margin-bottom: 1rem;
+    border-radius: 4px !important;
+    overflow: auto;
+    position: relative;
+    padding: 0.5rem !important;
+  }
+  
+  :global(.alert-container .danger) {
+    border-color: #dc3545 !important;
+    background-color: rgba(220, 53, 69, 0.1) !important;
+  }
+  
+  :global(.alert-container .info) {
+    border-color: #0b70db !important;
+    background-color: rgba(11, 112, 219, 0.1) !important;
+  }
+  
+  :global(.alert-container .warning) {
+    border-color: #ffc107 !important;
+    background-color: rgba(255, 193, 7, 0.1) !important;
+  }
+  
+  :global(.alert-container .success) {
+    border-color: #2ea043 !important;
+    background-color: rgba(46, 160, 67, 0.1) !important;
+  }
+  
+  :global(.alert-container .slim) {
+    padding: 0.25rem 0.5rem !important;
+  }
 </style>
 
 Badges are compact visual indicators used to highlight statuses, counts, or categorize items.
@@ -234,6 +267,54 @@ The Badge component supports various variants, sizes, and styling options:
 ```
 
 For detailed examples and API documentation, visit the [Badge component page](/components/badge).
+
+### Alerts
+
+<div class="alert-container">
+  Alerts display important messages to users. Use them to communicate status, provide feedback, or highlight important information.
+
+  #### Alert Variants
+
+  <Alert variant="info">This is an info alert with important information.</Alert>
+  <Alert variant="warning">This is a warning alert that requires attention.</Alert>
+  <Alert variant="danger">This is a danger alert about a critical issue.</Alert>
+  <Alert variant="success">This is a success alert confirming a completed action.</Alert>
+
+  #### Alert Sizes
+
+  <Alert variant="info">Normal-sized alert with default padding</Alert>
+  <Alert variant="info" size="slim">Slim alert with reduced padding</Alert>
+</div>
+
+```svelte
+<script>
+  import { Alert } from '$lib'
+</script>
+
+<!-- Alert variants -->
+<Alert variant="info">Info alert</Alert>
+<Alert variant="warning">Warning alert</Alert>
+<Alert variant="danger">Danger alert</Alert>
+<Alert variant="success">Success alert</Alert>
+
+<!-- Alert sizes -->
+<Alert variant="info">Normal size</Alert>
+<Alert variant="info" size="slim">Slim size</Alert>
+
+<!-- Custom styling -->
+<Alert 
+  variant="info" 
+  styleOverrides={{
+    backgroundColor: '#f0f8ff',
+    textColor: '#003366',
+    textCentered: true
+  }}
+>
+  Custom styled alert
+</Alert>
+```
+
+For detailed examples and API documentation, visit the [Alert component page](/components/alert).
 
 ## Data fetching
 ### GraphQL

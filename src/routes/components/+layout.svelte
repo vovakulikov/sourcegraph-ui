@@ -3,6 +3,7 @@
 		{ name: 'Icon', url: '/icon' },
 		{ name: 'Badge', url: '/badge' },
 		{ name: 'Button', url: '/button' }
+		{ name: 'Alert', url: '/alert' }
 	];
 
 	let { children } = $props();
