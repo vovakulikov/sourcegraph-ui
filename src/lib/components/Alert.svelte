@@ -36,6 +36,30 @@
 </div>
 
 <style lang="scss">
+	.danger {
+		border-color: #dc3545 !important;
+		background-color: rgba(220, 53, 69, 0.1) !important;
+	}
+
+	.info {
+		border-color: #0b70db !important;
+		background-color: rgba(11, 112, 219, 0.1) !important;
+	}
+
+	.warning {
+		border-color: #ffc107 !important;
+		background-color: rgba(255, 193, 7, 0.1) !important;
+	}
+
+	.success {
+		border-color: #2ea043 !important;
+		background-color: rgba(46, 160, 67, 0.1) !important;
+	}
+
+	.slim {
+		padding: 0.25rem 0.5rem !important;
+	}
+
 	div {
 		--alert-icon-display: block;
 		--alert-icon-block-width: 2.5rem;

@@ -2,109 +2,12 @@
 	import { Badge, BADGE_VARIANTS } from '$lib';
 	import CodeBlock from '$lib/layouts/CodeBlock.svelte';
 	import ComponentSandbox from '$lib/layouts/ComponentSandbox.svelte';
-	
+
 	// Simple function to use for the custom badge example
-	function customBadgeRenderer({className}: {className: string}) {
+	function customBadgeRenderer({ className }: { className: string }) {
 		return `<a href="#badge-docs" class="${className}">Link Badge</a>`;
 	}
 </script>
-
-<style lang="scss">
-  /* Sourcegraph's color system for badges - direct hex values */
-  :global(.badge) {
-    display: inline-block;
-    padding: 0.125rem 0.375rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: 4px;
-    line-height: 1rem;
-  }
-  
-  :global(.primary) {
-    background-color: #0b70db !important;
-    color: white !important;
-  }
-  
-  :global(.secondary) {
-    background-color: #e6ebf2 !important;
-    color: #343a4d !important;
-  }
-  
-  :global(.success) {
-    background-color: #2ea043 !important;
-    color: white !important;
-  }
-  
-  :global(.danger) {
-    background-color: #dc3545 !important;
-    color: white !important;
-  }
-  
-  :global(.warning) {
-    background-color: #ffc107 !important;
-    color: black !important;
-  }
-  
-  :global(.info) {
-    background-color: #72dbe8 !important;
-    color: black !important;
-  }
-  
-  :global(.merged) {
-    background-color: #a305e1 !important;
-    color: white !important;
-  }
-  
-  :global(.outline-secondary) {
-    background-color: transparent !important;
-    color: #5e6e8c !important;
-    border: 1px solid #e6ebf2 !important;
-  }
-  
-  :global(.link) {
-    background-color: #f9fafb !important;
-    color: #0b70db !important;
-    font-family: monospace !important;
-    font-weight: normal !important;
-  }
-  
-  :global(.small) {
-    font-size: 0.75rem !important;
-    padding: 0 0.25rem !important;
-    border-radius: 2px !important;
-  }
-  
-  :global(.pill) {
-    padding-right: 0.6em !important;
-    padding-left: 0.6em !important;
-    border-radius: 10rem !important;
-  }
-  
-  /* Table styles for API documentation */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1rem 0;
-  }
-
-  th, td {
-    padding: 0.75rem;
-    text-align: left;
-    border-bottom: 1px solid var(--sg-sys-border-color);
-  }
-
-  th {
-    background-color: var(--sg-sys-background-light);
-    font-weight: 600;
-  }
-  
-  :global(.custom-class) {
-    border: 2px dashed black;
-  }
-</style>
 
 <h2>Badge</h2>
 
@@ -113,10 +16,7 @@
 	They're ideal for drawing attention to important information or providing contextual labels.
 </p>
 
-<ComponentSandbox
-	title="Basic Usage"
-	description="Default badge with no specified variant."
->
+<ComponentSandbox title="Basic Usage" description="Default badge with no specified variant.">
 	{#snippet preview()}
 		<Badge>Default</Badge>
 	{/snippet}
@@ -167,10 +67,7 @@
 	{/snippet}
 </ComponentSandbox>
 
-<ComponentSandbox
-	title="Size"
-	description="Badges can be rendered in standard or small sizes."
->
+<ComponentSandbox title="Size" description="Badges can be rendered in standard or small sizes.">
 	{#snippet preview()}
 		<div style="display: flex; gap: 0.5rem; align-items: center;">
 			<Badge variant="primary">Standard</Badge>
@@ -254,7 +151,7 @@
 		<CodeBlock
 			code={`<script>
   import { Badge } from '$lib';
-  
+
   // Simple function to use for the custom badge example
   function customBadgeRenderer({className}) {
     return \`<a href="#badge-docs" class="\${className}">Link Badge</a>\`;
@@ -324,3 +221,28 @@
 		</tr>
 	</tbody>
 </table>
+
+<style lang="scss">
+	/* Table styles for API documentation */
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 1rem 0;
+	}
+
+	th,
+	td {
+		padding: 0.75rem;
+		text-align: left;
+		border-bottom: 1px solid var(--sg-sys-border-color);
+	}
+
+	th {
+		background-color: var(--sg-sys-background-light);
+		font-weight: 600;
+	}
+
+	:global(.custom-class) {
+		border: 2px dashed black;
+	}
+</style>

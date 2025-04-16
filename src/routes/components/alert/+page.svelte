@@ -4,70 +4,14 @@
 	import ComponentSandbox from '$lib/layouts/ComponentSandbox.svelte';
 </script>
 
-<style lang="scss">
-  /* Fix alert styling in examples */
-  :global([role="alert"]) {
-    overflow: auto;
-    position: relative;
-    padding: 0.5rem !important;
-    margin-bottom: 0.5rem;
-    border-radius: 4px !important;
-    border-width: 1px !important;
-    border-style: solid !important;
-  }
-  
-  :global(.danger) {
-    border-color: #dc3545 !important;
-    background-color: rgba(220, 53, 69, 0.1) !important;
-  }
-  
-  :global(.info) {
-    border-color: #0b70db !important;
-    background-color: rgba(11, 112, 219, 0.1) !important;
-  }
-  
-  :global(.warning) {
-    border-color: #ffc107 !important;
-    background-color: rgba(255, 193, 7, 0.1) !important;
-  }
-  
-  :global(.success) {
-    border-color: #2ea043 !important;
-    background-color: rgba(46, 160, 67, 0.1) !important;
-  }
-  
-  :global(.slim) {
-    padding: 0.25rem 0.5rem !important;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1rem 0;
-  }
-
-  th, td {
-    padding: 0.75rem;
-    text-align: left;
-    border-bottom: 1px solid var(--sg-sys-border-color);
-  }
-
-  th {
-    background-color: var(--sg-sys-background-light);
-    font-weight: 600;
-  }
-</style>
-
 <h2>Alert</h2>
 
 <p>
-	Alerts display important messages to users. Use them to communicate status, provide feedback, or highlight important information.
+	Alerts display important messages to users. Use them to communicate status, provide feedback, or
+	highlight important information.
 </p>
 
-<ComponentSandbox
-	title="Basic Usage"
-	description="Basic alert with default styling."
->
+<ComponentSandbox title="Basic Usage" description="Basic alert with default styling.">
 	{#snippet preview()}
 		<Alert>This is a default alert with no variant specified.</Alert>
 	{/snippet}
@@ -130,16 +74,10 @@
 >
 	{#snippet preview()}
 		<div style="display: flex; flex-direction: column; gap: 0.5rem;">
-			<Alert 
-				variant="info" 
-				styleOverrides={{ backgroundColor: '#f0f8ff', textColor: '#003366' }}
-			>
+			<Alert variant="info" styleOverrides={{ backgroundColor: '#f0f8ff', textColor: '#003366' }}>
 				This alert has custom background and text colors.
 			</Alert>
-			<Alert 
-				variant="warning" 
-				styleOverrides={{ textCentered: true }}
-			>
+			<Alert variant="warning" styleOverrides={{ textCentered: true }}>
 				This alert has centered text.
 			</Alert>
 		</div>
@@ -149,16 +87,16 @@
 			code={`import { Alert } from '$lib';
 
 // Custom background and text colors
-<Alert 
-  variant="info" 
+<Alert
+  variant="info"
   styleOverrides={{ backgroundColor: '#f0f8ff', textColor: '#003366' }}
 >
   This alert has custom background and text colors.
 </Alert>
 
 // Centered text
-<Alert 
-  variant="warning" 
+<Alert
+  variant="warning"
   styleOverrides={{ textCentered: true }}
 >
   This alert has centered text.
@@ -234,6 +172,37 @@
 <h3>Accessibility</h3>
 
 <p>
-	The Alert component uses the <code>role="alert"</code> attribute to ensure proper accessibility. 
-	Screen readers will announce the alert content when it appears on the page.
+	The Alert component uses the <code>role="alert"</code> attribute to ensure proper accessibility. Screen
+	readers will announce the alert content when it appears on the page.
 </p>
+
+<style lang="scss">
+	/* Fix alert styling in examples */
+	:global([role='alert']) {
+		overflow: auto;
+		position: relative;
+		padding: 0.5rem !important;
+		margin-bottom: 0.5rem;
+		border-radius: 4px !important;
+		border-width: 1px !important;
+		border-style: solid !important;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 1rem 0;
+	}
+
+	th,
+	td {
+		padding: 0.75rem;
+		text-align: left;
+		border-bottom: 1px solid var(--sg-sys-border-color);
+	}
+
+	th {
+		background-color: var(--sg-sys-background-light);
+		font-weight: 600;
+	}
+</style>
