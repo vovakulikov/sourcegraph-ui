@@ -28,14 +28,15 @@
 	.root {
 		height: 100%;
 		display: flex;
+		overflow: hidden;
 	}
 
 	aside {
 		width: 300px;
 		height: 100%;
+    overflow: auto;
 		border-right: 2px solid var(--sg-sys-border-color);
 	}
-
 
   ul {
     list-style: none;
@@ -44,7 +45,18 @@
 
   .content {
 		height: 100%;
+		max-width: 700px;
 		flex-grow: 1;
 		padding: 1rem;
+    overflow: auto;
+
+    // Global styles override for component demo pages
+    :global(h2) {
+      margin-bottom: 2rem;
+    }
+
+    :global(p) {
+      margin-bottom: 1rem;
+    }
 	}
 </style>

@@ -20,6 +20,7 @@
     --sg-sys-font-family-code: var(--sg-ref-font-family-monospace);
 
     // Backgrounds
+    --sg-sys-background-light: var(--sg-ref-gray-50);
     --sg-sys-backgound: var(--sg-ref-gray-200);
     --sg-sys-backgound-dark: var(--sg-ref-gray-400);
 
@@ -40,7 +41,7 @@
 // Theme agnostic (calculated by system tokens and reference tokens) token layer
 :root {
     // Typography
-    --sg-sys-font-size-small: calc(var(--sg-sys-font-size) - 0.5rem);
+    --sg-sys-font-size-small: calc(var(--sg-sys-font-size) - 0.15rem);
     --sg-sys-font-size-large: calc(var(--sg-sys-font-size) + 0.5rem);
 
     // Focus ring shadows
