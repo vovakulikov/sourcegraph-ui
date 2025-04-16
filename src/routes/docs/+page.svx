@@ -1,5 +1,5 @@
 <script>
-  import { Icon, Badge, Alert, ErrorAlert, Checkbox, LoadingSpinner } from '$lib'
+  import { Icon, Badge, Alert, ErrorAlert, Checkbox, LoadingSpinner, Select } from '$lib'
 </script>
 
 ## Writing tests
@@ -225,6 +225,24 @@ When the development server is running, the icon will be automatically added to
   :global(.checkbox-examples label) {
     cursor: pointer;
     user-select: none;
+  }
+  
+  /* Select component styles */
+  :global(.demo-select-container) {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  :global(.demo-select-row) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  :global(.demo-select-row label) {
+    font-weight: 500;
   }
 </style>
 
@@ -477,6 +495,88 @@ The LoadingSpinner component is simple to use and can be customized to fit diffe
 The spinner automatically adapts to the current theme and can be customized using CSS variables.
 
 For detailed examples and API documentation, visit the [LoadingSpinner component page](/components/loadingSpinner).
+
+### Select
+
+Select dropdowns allow users to choose from a list of predefined options. The Select component supports validation states and error messages.
+
+<div class="demo-select-container">
+  <div class="demo-select-row">
+    <label for="basic-select">Basic select:</label>
+    <Select 
+      id="basic-select" 
+      options={[
+        { value: '', label: 'Select an option' },
+        { value: 'option1', label: 'Option 1' },
+        { value: 'option2', label: 'Option 2' },
+        { value: 'option3', label: 'Option 3' }
+      ]} 
+    />
+  </div>
+  
+  <div class="demo-select-row">
+    <label for="selected-select">With selected value:</label>
+    <Select 
+      id="selected-select" 
+      options={[
+        { value: '', label: 'Choose a color' },
+        { value: 'red', label: 'Red' },
+        { value: 'green', label: 'Green' },
+        { value: 'blue', label: 'Blue' }
+      ]}
+      value="blue"
+    />
+  </div>
+  
+  <div class="demo-select-row">
+    <label for="error-select">With error:</label>
+    <Select 
+      id="error-select" 
+      options={[
+        { value: '', label: 'Select an option' },
+        { value: 'option1', label: 'Option 1' }
+      ]}
+      error="Please select a valid option"
+    />
+  </div>
+</div>
+
+The Select component is easy to implement and can be customized to fit your form requirements:
+
+```svelte
+<script>
+  import { Select } from '$lib'
+  
+  const options = [
+    { value: '', label: 'Select an option' },
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' }
+  ];
+</script>
+
+<!-- Basic usage -->
+<Select options={options} />
+
+<!-- With selected value -->
+<Select options={options} value="option1" />
+
+<!-- Required field -->
+<Select options={options} required />
+
+<!-- With error message -->
+<Select 
+  options={options} 
+  error="Please select an option" 
+/>
+
+<!-- Valid state -->
+<Select options={options} value="option1" valid />
+
+<!-- Disabled state -->
+<Select options={options} disabled />
+```
+
+For detailed examples and API documentation, visit the [Select component page](/components/select).
 
 ## Data fetching
 ### GraphQL

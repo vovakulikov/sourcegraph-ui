@@ -9,3 +9,4 @@ export { default as SourcegraphLogo } from './components/sourcegraph-logo/Source
 export { default as Button } from './components/button/Button.svelte'
 export { default as Checkbox } from './components/Checkbox.svelte'
 export { default as LoadingSpinner } from './components/LoadingSpinner.svelte'
+export { default as Select } from './components/Select.svelte'

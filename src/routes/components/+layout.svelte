@@ -6,7 +6,8 @@
 		{ name: 'Alert', url: '/alert' },
 		{ name: 'ErrorAlert', url: '/errorAlert' },
 		{ name: 'Checkbox', url: '/checkbox' },
-		{ name: 'LoadingSpinner', url: '/loadingSpinner' }
+		{ name: 'LoadingSpinner', url: '/loadingSpinner' },
+		{ name: 'Select', url: '/select' }
 	];
 
 	let { children } = $props();
