@@ -38,7 +38,7 @@
 <style lang="scss">
 	.code-block-container {
 		position: relative;
-		margin: 1rem 0;
+		margin: 0.5rem 0;
 		overflow: hidden;
 		border: none;
 	}
@@ -47,7 +47,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 0.625rem 1rem;
+		padding: 0.4rem 1rem;
 		background-color: var(--sg-sys-background-darker, #2d2d2d);
 		border-bottom: 1px solid var(--sg-sys-border-dark, #444444);
 		color: var(--sg-sys-text-color-inverted, #f9fafb);
@@ -78,8 +78,8 @@
 
 	.code-block {
 		white-space: pre;
-		padding: 1rem;
-		line-height: 1.5;
+		padding: 0.75rem 1rem;
+		line-height: 1.4;
 		tab-size: 2;
 		background-color: var(--sg-sys-background-dark, #1e1e1e);
 		color: var(--sg-sys-text-color-inverted, #f9fafb);
