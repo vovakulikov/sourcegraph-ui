@@ -93,4 +93,10 @@
 		padding-inline-start: 3rem;
 		list-style: disc;
 	}
+
+	h4 {
+		margin-top: 0;
+		margin-bottom: 0.5rem;
+		line-height: 1.2;
+	}
 </style>

@@ -48,9 +48,9 @@
 
 	.select-icon {
 		position: absolute;
-		top: 50%;
+		height: 40px; /* Match the select height */
+		top: 0;
 		right: 0.75rem;
-		transform: translateY(-50%);
 		pointer-events: none;
 		color: var(--sg-sys-text-color);
 		display: flex;
@@ -61,6 +61,7 @@
 	select {
 		display: block;
 		width: 100%;
+		height: 40px; /* Explicit height for consistency */
 		padding: 0.375rem 3rem 0.375rem 0.75rem; /* Increased right padding for chevron */
 		font-size: 1rem;
 		font-weight: 400;
