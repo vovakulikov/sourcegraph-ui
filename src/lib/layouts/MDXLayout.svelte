@@ -145,6 +145,7 @@
 		grid-template-columns: minmax(200px, 1fr) minmax(0, 3fr);
 		gap: 2rem;
 		align-items: start;
+		overflow: auto;
 	}
 
 	/* Table of Contents */
