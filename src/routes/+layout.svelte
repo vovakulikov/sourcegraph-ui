@@ -23,7 +23,7 @@
 			<a href="/playground">Playground</a>
 		</nav>
 	</header>
-	<div class="content">
+	<div class={{ 'content': true, 'content--home': $page.route.id === '/' }}>
 		{@render children()}
 	</div>
 </main>
@@ -51,6 +51,7 @@
 			&--transparent {
         box-shadow: none;
         background-color: color-mix(in srgb, var(--sg-ref-gray-1200) 50%, transparent);
+        backdrop-filter: blur(12px);
 			}
 		}
 
@@ -75,5 +76,9 @@
 			display: flex;
 			flex-grow: 1;
 			overflow: hidden;
+
+			&--home {
+				overflow: unset;
+			}
 		}
 </style>

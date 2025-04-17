@@ -10,7 +10,7 @@
 	</div>
 
 	<SourcegraphLogo width="500" height="72" variant="dark" />
-	<h2>Welcome to the tech docs and  components <br/> library hub</h2>
+	<h1>Welcome to the tech docs and  components <br/> library hub</h1>
 
 	<footer>
 		<a href="/components/icon">Components</a>
@@ -40,9 +40,10 @@
 		width: 100%;
 	}
 
-	h2 {
+	h1 {
 		text-align: center;
 		color: var(--sg-sys-accent-text-color);
+		font-family: var(--sg-ref-font-family-serif);
 	}
 
 	footer {

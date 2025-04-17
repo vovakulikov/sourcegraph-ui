@@ -93,27 +93,46 @@
 				float noiseVal = snoise(vec3(normUv * frequency + flow, speed * t));
 				float val = 0.5 * noiseVal + 0.5;
 				
-				// Make edges sharper with step function
-				val = smoothstep(0.35, 0.65, val);
+				// Make edges much sharper with step function
+				val = smoothstep(0.45, 0.55, val);  // Narrower transition for crisper edges
+				
+				// Add some noise to the value to create texture
+				float noiseTexture = rand(normUv * 10.0) * 0.1;
+				val = val + noiseTexture;
 				
 				vec3 colDark  = vec3(0.0, 0.0, 0.0);
-				vec3 colMid   = vec3(0.2, 0.0, 0.4);
-				vec3 colLight = vec3(0.6, 0.1, 1.0);
+				vec3 colMid   = vec3(0.4, 0.15, 0.0);
+				vec3 colLight = vec3(0.8, 0.3, 0.0);
+				
+				// Enhance contrast
+				val = pow(val, 1.2);  // Increase contrast with power function
 				
 				float midMix = smoothstep(0.0, 0.5, val);
 				vec3 color = mix(colDark, colMid, midMix);
 				float lightMix = smoothstep(0.15, 1.0, val);
 				color = mix(color, colLight, lightMix);
 				
-				// Apply posterization for reduced color depth
-				color = posterize(color, 8.0);
+				// Apply harsh posterization for reduced color depth (old photo effect)
+				color = posterize(color, 5.0);  // Reduced from 8.0 to 5.0 for fewer color steps
 				
-				// Add film grain
-				float grain = rand(uv + iTime) * 0.15;
-				color = color * (0.9 + grain);
+				// Enhanced film grain effect in all directions
+				float grain1 = rand(uv + iTime) * 0.35; // Stronger grain
+				float grain2 = rand(uv * 2.5 - iTime * 0.1) * 0.25; // Second grain layer
 				
-				// Add vignette effect
-				float vig = vignette(uv, 0.4);
+				// Combine multiple noise patterns for more complex grain
+				vec2 grainUv = uv * vec2(iResolution.x / 900.0, iResolution.y / 700.0);
+				float speckle = step(0.997, rand(grainUv + iTime * 0.01)) * 0.5; // Occasional speckles
+				
+				color = color * (0.75 + grain1); // Apply first grain layer
+				color += (grain2 - 0.125) * 0.1; // Add/subtract second grain layer
+				color += speckle; // Add occasional bright speckles
+				
+				// Add color shift/distortion (slight sepia tone)
+				color.r = min(1.0, color.r * 1.05);
+				color.b = color.b * 0.95;
+				
+				// Add stronger vignette effect
+				float vig = vignette(uv, 0.6);
 				color *= vig;
 				
 				gl_FragColor = vec4(color, 1.0);
