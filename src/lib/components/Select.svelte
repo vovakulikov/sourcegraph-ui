@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { FormEventHandler, HTMLSelectAttributes } from 'svelte/elements';
+	import ChevronDown from 'phosphor-svelte/lib/CaretDown';
 
 	let {
 		value = $bindable(''),
@@ -29,6 +30,10 @@
 		{/each}
 	</select>
 
+	<div class="select-icon">
+		<ChevronDown size={18} />
+	</div>
+
 	{#if error}
 		<small class="error">{error}</small>
 	{/if}
@@ -41,34 +46,49 @@
 		position: relative;
 	}
 
+	.select-icon {
+		position: absolute;
+		top: 50%;
+		right: 0.75rem;
+		transform: translateY(-50%);
+		pointer-events: none;
+		color: var(--sg-sys-text-color);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
 	select {
 		display: block;
 		width: 100%;
-		padding: 0.375rem 0.75rem;
+		padding: 0.375rem 3rem 0.375rem 0.75rem; /* Increased right padding for chevron */
 		font-size: 1rem;
 		font-weight: 400;
 		line-height: 1.5;
 		color: var(--sg-sys-text-color);
-		background-color: var(--sg-sys-backgound);
+		background-color: white; /* Solid white background */
 		background-clip: padding-box;
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-border-radius-100);
-		transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-		
+		transition:
+			border-color 0.15s ease-in-out,
+			box-shadow 0.15s ease-in-out;
+		appearance: none; /* Remove default browser styling */
+
 		&:focus {
 			border-color: var(--sg-sys-accent-color-light);
 			outline: 0;
 			box-shadow: var(--sg-sys-focus-shadow);
 		}
-		
+
 		&.is-invalid {
 			border-color: var(--sg-ref-red-600);
 		}
-		
+
 		&.is-valid {
 			border-color: var(--sg-ref-green-600);
 		}
-		
+
 		&:disabled {
 			background-color: var(--sg-sys-background-light);
 			opacity: 0.65;
