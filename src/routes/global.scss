@@ -3,4 +3,8 @@
 // Non component related
 html, body {
   height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--sg-sys-background);
+  color: var(--sg-sys-text-color);
 }

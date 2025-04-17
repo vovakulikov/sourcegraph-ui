@@ -6,51 +6,12 @@
 
 	import { Icon } from '$lib'
 	import { page } from '$app/stores'
-	import { onMount } from 'svelte';
+	
 
 	import { Select } from '$lib'
+	import { getTheme, setTheme, themeOptions, type ThemeType } from '$lib/stores/theme.svelte'
 
-	let { children } = $props()
-
-	// Theme selection functionality
-	type ThemeType = 'light' | 'dark' | 'high-contrast';
-	let currentTheme: ThemeType = 'light';
-	
-	const setTheme = (theme: ThemeType) => {
-		currentTheme = theme;
-		
-		// Remove all theme classes
-		document.documentElement.classList.remove('theme-dark');
-		document.documentElement.classList.remove('theme-high-contrast');
-		
-		// Set appropriate theme
-		document.documentElement.setAttribute('data-theme', currentTheme);
-		if (currentTheme === 'dark') {
-			document.documentElement.classList.add('theme-dark');
-		} else if (currentTheme === 'high-contrast') {
-			document.documentElement.classList.add('theme-high-contrast');
-		}
-	};
-
-	onMount(() => {
-		// Check for saved theme preference
-		const savedTheme = localStorage.getItem('theme') as ThemeType | null;
-		if (savedTheme) {
-			currentTheme = savedTheme;
-			setTheme(currentTheme);
-		}
-	});
-
-	// Watch for theme changes to save preference
-	$effect(() => {
-		localStorage.setItem('theme', currentTheme);
-	})
-
-	const themeOptions = [
-		{ value: 'light', label: 'Light Theme' },
-		{ value: 'dark', label: 'Dark Theme' },
-		{ value: 'high-contrast', label: 'High Contrast Theme' },
-	];
+let { children } = $props()
 </script>
 
 <main>
@@ -68,8 +29,12 @@
 			<Select
 				options={themeOptions}
 				id="theme-select"
-				bind:value={currentTheme}
-				onchange={() => setTheme(currentTheme)}
+				value={getTheme()}
+				onchange={(e) => {
+					if (e.target instanceof HTMLSelectElement) {
+						setTheme(e.target.value as ThemeType);
+					}
+				}}
 			/>
 		</div>
 	</header>
@@ -83,7 +48,7 @@
 			display: flex;
 			flex-direction: column;
 			height: 100%;
-      background-color: var(--sg-sys-backgound);
+      background-color: var(--sg-sys-background);
 			position: relative;
 		}
 
