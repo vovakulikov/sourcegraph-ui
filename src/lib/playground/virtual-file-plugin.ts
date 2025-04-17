@@ -114,7 +114,11 @@ export function unifiedVirtualFilePlugin(
         if (file) return file.source;
       }
 
-
+      if (id === 'virtual:file/lib/components/index.ts') {
+        return `export { default as Badge } from "./Badge.svelte"
+        export { default as Button } from "./button/Button.svelte"
+        `
+      }
       
       // 3. Handle all virtual file loads from registry
       if (id.startsWith('virtual:file/')) {
@@ -122,8 +126,6 @@ export function unifiedVirtualFilePlugin(
         
         // Try to find the file by full path
         let file = registry.filesByPath[filePath];
-        
-
         
         // If still not found and path contains directories, try path without leading components
         if (!file && filePath.includes('/')) {
