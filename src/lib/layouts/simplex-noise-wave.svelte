@@ -75,13 +75,48 @@
 
 		const iResolution = gl.getUniformLocation(program, 'iResolution');
 		const iTime = gl.getUniformLocation(program, 'iTime');
+		const isDarkMode = gl.getUniformLocation(program, 'isDarkMode');
 
 		let start = Date.now();
+		// Function to check if dark mode is active
+		function isDarkThemeActive() {
+			if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				return true;
+			}
+			// Check for theme class or data attribute if your app uses those
+			const htmlElement = document.documentElement;
+			if (htmlElement.getAttribute('data-theme') === 'dark' || 
+				htmlElement.classList.contains('dark')) {
+				return true;
+			}
+			return false;
+		}
+
+		// Set up theme change listener
+		const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+		darkModeMediaQuery.addEventListener('change', () => {
+			// Theme was changed, update will happen on next render
+		});
+
+		// Document-level theme change listener (for manual theme switches)
+		const observer = new MutationObserver(() => {
+			// Theme change detected, update will happen on next render
+		});
+		observer.observe(document.documentElement, { 
+			attributes: true, 
+			attributeFilter: ['data-theme', 'class'] 
+		});
+
 		function render() {
 			let t = (Date.now() - start) * 0.001;
 			gl.viewport(0, 0, canvas.width, canvas.height);
 			gl.uniform2f(iResolution, canvas.width, canvas.height);
 			gl.uniform1f(iTime, t);
+			
+			// Pass theme state to shader (1.0 for dark mode, 0.0 for light mode)
+			const darkMode = isDarkThemeActive() ? 1.0 : 0.0;
+			gl.uniform1f(isDarkMode, darkMode);
+			
 			gl.drawArrays(gl.TRIANGLES, 0, 6);
 			requestAnimationFrame(render);
 		}
@@ -97,6 +132,6 @@
         width: 100%;
         height: 100%;
         z-index: -1;
-        background-color: #000;
+        background-color: var(--sg-sys-bg-canvas, #000);
     }
 </style>
