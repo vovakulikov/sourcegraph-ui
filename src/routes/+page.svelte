@@ -44,6 +44,7 @@
 		text-align: center;
 		color: var(--sg-sys-accent-text-color);
 		font-family: var(--sg-ref-font-family-serif);
+		font-size: calc(var(--sg-sys-font-size) * 2.625); /* Custom 42px size */
 	}
 
 	footer {
