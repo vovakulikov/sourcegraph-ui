@@ -259,6 +259,9 @@
 	onMount(() => {
 		updateTokenValues();
 		document.documentElement.setAttribute('data-theme', currentTheme);
+		if (currentTheme === 'dark') {
+			document.documentElement.classList.add('theme-dark');
+		}
 	});
 
 	const updateTokenValues = () => {
@@ -291,6 +294,11 @@
 	const toggleTheme = () => {
 		currentTheme = currentTheme === 'light' ? 'dark' : 'light';
 		document.documentElement.setAttribute('data-theme', currentTheme);
+		if (currentTheme === 'dark') {
+			document.documentElement.classList.add('theme-dark');
+		} else {
+			document.documentElement.classList.remove('theme-dark');
+		}
 		
 		// Update values after theme change
 		setTimeout(updateTokenValues, 100);
@@ -361,7 +369,7 @@
 			{currentTheme === 'light' ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
 		</button>
 	</div>
-	<p>
+	<p class="intro-text">
 		This page displays all available CSS tokens in the Sourcegraph UI design system. Each token is shown with its name and a visual example of how it appears when applied.
 	</p>
 
@@ -389,7 +397,7 @@
 	<!-- Reference Tokens -->
 	<section>
 		<h2>Reference Tokens</h2>
-		<p>Reference tokens are the foundational values that don't change between themes.</p>
+		<p class="section-description">Reference tokens are the foundational values that don't change between themes.</p>
 
 		{#each filteredReferenceGroups as group}
 			<div class="token-group">
@@ -498,7 +506,7 @@
 	<!-- System Tokens -->
 	<section>
 		<h2>System Tokens</h2>
-		<p>System tokens define the theme itself and change between light and dark modes.</p>
+		<p class="section-description">System tokens define the theme itself and change between light and dark modes.</p>
 
 		{#each filteredSystemGroups as group}
 			<div class="token-group">
@@ -622,82 +630,141 @@
 </div>
 
 <style lang="scss">
+	:global(body), :global(html) {
+		background-color: var(--sg-sys-background);
+		margin: 0;
+		padding: 0;
+		min-height: 100vh;
+		width: 100%;
+		overflow-x: hidden;
+	}
+
+	:global(main) {
+		background-color: var(--sg-sys-background);
+	}
+
+	:global(body > nav), :global(#app > nav) {
+		background-color: #121212;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	:global(.theme-dark) :global(body > nav), :global(.theme-dark) :global(#app > nav) {
+		background-color: #121212;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	:global(body:not(.theme-dark)) :global(body > nav), :global(body:not(.theme-dark)) :global(#app > nav) {
+		background-color: #121212;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	:global(nav a) {
+		color: var(--sg-sys-text-color);
+		text-decoration: none;
+	}
+
+	:global(nav a:hover) {
+		color: var(--sg-sys-accent-color-light);
+	}
+
 	.token-documentation {
-		padding: 2rem;
+		padding: var(--sg-space-600);
 		width: 100%;
 		max-width: 1200px;
 		margin: 0 auto;
+		line-height: 1.6;
+		color: var(--sg-sys-text-color);
+		background-color: var(--sg-sys-background);
 	}
 
 	h1 {
-		font-size: 2rem;
-		margin-bottom: 1rem;
+		font-size: var(--sg-font-size-1000);
+		margin-bottom: var(--sg-space-500);
+		font-weight: 600;
+		letter-spacing: -0.02em;
 	}
 
 	h2 {
-		font-size: 1.5rem;
-		margin: 2rem 0 1rem;
-		padding-bottom: 0.5rem;
+		font-size: var(--sg-font-size-800);
+		margin: var(--sg-space-600) 0 var(--sg-space-500);
+		padding-bottom: var(--sg-space-300);
 		border-bottom: 1px solid var(--sg-sys-border-color);
+		letter-spacing: -0.01em;
+		font-weight: 500;
 	}
 
 	h3 {
-		font-size: 1.25rem;
-		margin: 1.5rem 0 1rem;
+		font-size: var(--sg-font-size-700);
+		margin: var(--sg-space-600) 0 var(--sg-space-400);
+		font-weight: 500;
 	}
 
 	h4 {
-		font-size: 1.1rem;
-		margin: 1rem 0 0.5rem;
+		font-size: var(--sg-font-size-600);
+		margin: var(--sg-space-500) 0 var(--sg-space-300);
+		font-weight: 500;
 	}
 
 	.font-showcase {
 		display: flex;
 		flex-direction: column;
-		gap: 2rem;
+		gap: var(--sg-space-500);
+		margin-top: var(--sg-space-400);
 	}
 
 	.font-section {
-		padding: 1.5rem;
+		padding: var(--sg-space-500);
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-sys-border-radius);
-		background-color: white;
+		background-color: var(--sg-sys-background);
 		box-shadow: var(--sg-shadow-100);
+		:global(.theme-dark) & {
+			background-color: var(--sg-sys-background);
+			border-color: var(--sg-ref-gray-700);
+		}
 	}
 
 	.font-example {
-		margin: 0.5rem 0;
+		margin: var(--sg-space-300) 0;
 		line-height: 1.5;
 	}
 
 	.weight-examples {
-		margin-top: 1.5rem;
-		padding-top: 1rem;
+		margin-top: var(--sg-space-500);
+		padding-top: var(--sg-space-400);
 		border-top: 1px solid var(--sg-sys-border-color);
 	}
 
 	.token-group {
-		margin-bottom: 2rem;
+		margin-bottom: var(--sg-space-600);
+		padding-bottom: var(--sg-space-400);
+		border-bottom: 1px dashed var(--sg-sys-border-color);
+	}
+
+	.token-group:last-child {
+		border-bottom: none;
 	}
 
 	.token-list {
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
+		gap: var(--sg-space-400);
+		margin-top: var(--sg-space-400);
 	}
 
 	.color-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-		gap: 1rem;
-		margin-top: 1rem;
+		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+		gap: var(--sg-space-400);
+		margin-top: var(--sg-space-400);
 	}
 
 	.token-card {
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-sys-border-radius);
-		padding: 1rem;
+		padding: var(--sg-space-500);
 		background-color: var(--sg-sys-background-light);
+		color: var(--sg-sys-text-color);
 		box-shadow: var(--sg-shadow-100);
 		display: flex;
 		flex-direction: column;
@@ -706,6 +773,22 @@
 		overflow: hidden;
 		max-width: 100%;
 		cursor: pointer;
+		transition: all 0.2s ease;
+		/* Dark theme .theme-dark specific styling */
+		:global(.theme-dark) & {
+			background-color: var(--sg-sys-background);
+			border-color: var(--sg-ref-gray-700);
+		}
+	}
+
+	.token-card:hover {
+		box-shadow: var(--sg-shadow-200);
+		transform: translateY(-2px);
+		border-color: var(--sg-sys-accent-color-light);
+		:global(.theme-dark) & {
+			background-color: var(--sg-sys-background-light);
+			border-color: var(--sg-sys-accent-color);
+		}
 	}
 
 	.token-card-horizontal {
@@ -717,18 +800,19 @@
 		width: 50%;
 		text-align: left;
 		margin-bottom: 0;
-		padding-right: 1rem;
+		padding-right: var(--sg-space-500);
 	}
 
 	.token-name {
 		font-family: var(--sg-sys-font-family-sans);
-		font-size: 0.875rem;
+		font-size: var(--sg-font-size-400);
 		word-break: break-all;
 		width: 100%;
 		flex-shrink: 0;
-		margin-bottom: 0.5rem;
+		margin-bottom: var(--sg-space-400);
 		text-align: center;
-		font-weight: 400;
+		font-weight: 500;
+		letter-spacing: 0.01em;
 	}
 
 	.token-example {
@@ -744,7 +828,7 @@
 		width: 100%;
 		height: 100px;
 		border-radius: var(--sg-sys-border-radius);
-		margin-bottom: 0.5rem;
+		margin-bottom: var(--sg-space-300);
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -754,28 +838,29 @@
 	}
 	
 	.color-info {
-		font-size: 0.75rem;
+		font-size: var(--sg-font-size-300);
 		text-align: center;
-		line-height: 1.5;
+		line-height: 1.6;
+		font-family: var(--sg-sys-font-family-monospace);
 	}
 
 	.radius-box {
-		width: 6rem;
-		height: 2.5rem;
+		width: var(--sg-space-800);
+		height: var(--sg-space-600);
 		background-color: var(--sg-sys-accent-color);
 	}
 
 	.border-box {
-		width: 6rem;
-		height: 2.5rem;
+		width: var(--sg-space-800);
+		height: var(--sg-space-600);
 		border: 2px solid;
 		border-radius: var(--sg-sys-border-radius);
 	}
 
 	.shadow-box {
-		width: 6rem;
-		height: 2.5rem;
-		background-color: white;
+		width: var(--sg-space-800);
+		height: var(--sg-space-600);
+		background-color: var(--sg-sys-background-light);
 		border-radius: var(--sg-sys-border-radius);
 	}
 
@@ -785,69 +870,131 @@
 	}
 
 	.focus-demo {
-		padding: 0.5rem 1rem;
-		background-color: white;
+		padding: var(--sg-space-200) var(--sg-space-400);
+		background-color: var(--sg-sys-background);
+		color: var(--sg-sys-text-color);
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-sys-border-radius);
 		cursor: pointer;
 	}
 
 	.token-navigation {
-		margin-bottom: 1rem;
+		margin: var(--sg-space-400) 0 var(--sg-space-500);
 		display: flex;
-		gap: 1rem;
+		gap: var(--sg-space-400);
 		flex-wrap: wrap;
+		background-color: transparent;
+		padding: var(--sg-space-300);
+		border-radius: var(--sg-border-radius-200);
 	}
 
 	.token-category {
 		background-color: var(--sg-sys-background-light);
-		padding: 0.5rem 1rem;
+		padding: var(--sg-space-300) var(--sg-space-500);
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-sys-border-radius);
 		cursor: pointer;
+		transition: background-color 0.2s ease, color 0.2s ease;
+		font-weight: 500;
+		
+		:global(.theme-dark) & {
+			background-color: var(--sg-ref-gray-800);
+			border-color: var(--sg-ref-gray-700);
+			color: var(--sg-ref-gray-100);
+		}
+	}
+
+	.token-category:hover {
+		background-color: var(--sg-sys-accent-color-light);
+		color: white;
+		
+		:global(.theme-dark) & {
+			background-color: var(--sg-sys-accent-color);
+			border-color: var(--sg-sys-accent-color);
+		}
 	}
 
 	.token-category.active {
 		background-color: var(--sg-sys-accent-color);
 		color: white;
+		
+		:global(.theme-dark) & {
+			border-color: var(--sg-sys-accent-color-light);
+			box-shadow: 0 0 0 1px var(--sg-sys-accent-color-light);
+		}
 	}
 
 	.token-search {
-		margin-bottom: 1rem;
+		margin-bottom: var(--sg-space-500);
 	}
 
 	.token-search input[type="search"] {
 		width: 100%;
-		padding: 0.5rem;
+		padding: var(--sg-space-400);
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-sys-border-radius);
+		font-size: var(--sg-font-size-400);
+		background-color: var(--sg-sys-background-light);
+		color: var(--sg-sys-text-color);
+	}
+
+	.token-search input[type="search"]:focus {
+		outline: none;
+		border-color: var(--sg-sys-accent-color);
+		box-shadow: var(--sg-sys-focus-shadow);
 	}
 
 	.page-controls {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 1rem;
+		margin: var(--sg-space-400) 0 var(--sg-space-500);
 	}
 
 	.theme-toggle {
 		background-color: var(--sg-sys-background-light);
-		padding: 0.5rem 1rem;
+		padding: var(--sg-space-300) var(--sg-space-500);
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-sys-border-radius);
 		cursor: pointer;
+		transition: all 0.2s ease;
+		font-weight: 500;
+		color: var(--sg-sys-text-color);
+	}
+
+	.theme-toggle:hover {
+		background-color: var(--sg-sys-accent-color);
+		color: white;
+		border-color: var(--sg-sys-accent-color);
 	}
 
 	.notification {
 		background-color: var(--sg-sys-background-light);
-		padding: 0.5rem 1rem;
+		padding: var(--sg-space-300) var(--sg-space-500);
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-sys-border-radius);
-		margin-bottom: 1rem;
+		margin-bottom: var(--sg-space-400);
+		font-weight: 500;
 	}
 
 	.token-value {
-		font-size: 0.75rem;
-		margin-top: 0.5rem;
+		font-size: var(--sg-font-size-300);
+		margin-top: var(--sg-space-400);
+		font-family: var(--sg-sys-font-family-monospace);
+	}
+
+	.intro-text {
+		font-size: var(--sg-font-size-500);
+		max-width: 40em;
+		line-height: 1.6;
+		margin-bottom: var(--sg-space-400);
+	}
+	
+	.section-description {
+		font-size: var(--sg-font-size-500);
+		max-width: 40em;
+		line-height: 1.6;
+		margin-bottom: var(--sg-space-400);
+		color: var(--sg-sys-muted-text-color);
 	}
 </style>

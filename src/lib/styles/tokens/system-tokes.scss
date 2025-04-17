@@ -24,8 +24,8 @@
 
     // Backgrounds
     --sg-sys-background-light: var(--sg-ref-gray-100);
-    --sg-sys-backgound: white;
-    --sg-sys-backgound-dark: var(--sg-ref-gray-400);
+    --sg-sys-background: white;
+    --sg-sys-background-dark: var(--sg-ref-gray-400);
 
     // Shadow color
     --sg-sys-shadow-color: var(--sg-ref-gray-400);
@@ -38,8 +38,36 @@
 }
 
 // Standard dark system theme
-.theme-dark {
-    // TODO [VK]: Define dark theme color theme
+.theme-dark, [data-theme="dark"] {
+    // Accent color - keeping the same since it's brand identity
+    --sg-sys-accent-text-color: white;
+    --sg-sys-accent-color: var(--sg-ref-blue-500);
+    --sg-sys-accent-color-light: var(--sg-ref-blue-400);
+    --sg-sys-accent-color-dark: var(--sg-ref-blue-600);
+    --sg-sys-secondary-color: var(--sg-ref-gray-400);
+    --sg-sys-secondary-color-light: var(--sg-ref-gray-300);
+    --sg-sys-secondary-color-dark: var(--sg-ref-gray-500);
+
+    // Typography
+    --sg-sys-text-color: var(--sg-ref-gray-100);
+    --sg-sys-font-size: 1rem;
+    --sg-sys-muted-text-color: var(--sg-ref-gray-400);
+    --sg-sys-font-family: var(--sg-ref-font-family-sans);
+    --sg-sys-font-family-code: var(--sg-ref-font-family-monospace);
+
+    // Backgrounds
+    --sg-sys-background-light: var(--sg-ref-gray-800);
+    --sg-sys-background: var(--sg-ref-gray-900);
+    --sg-sys-background-dark: #0a0a0a;
+
+    // Shadow color
+    --sg-sys-shadow-color: rgba(0, 0, 0, 0.5);
+    --sg-sys-shadow-color-light: rgba(0, 0, 0, 0.3);
+
+    // Borders
+    --sg-sys-border-color: var(--sg-ref-gray-600);
+    --sg-sys-border-color-hover: var(--sg-ref-gray-500);
+    --sg-sys-border-radius: 4px;
 }
 
 // Theme agnostic (calculated by system tokens and reference tokens) token layer
