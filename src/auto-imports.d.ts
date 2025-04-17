@@ -7,6 +7,12 @@
 export {}
 declare global {
   const ILucideArrowRight: typeof import('~icons/lucide/arrow-right')['default']
+  const ILucideCheck: typeof import('~icons/lucide/check')['default']
+  const ILucideChevronDown: typeof import('~icons/lucide/chevron-down')['default']
+  const ILucideChevronsDown: typeof import('~icons/lucide/chevrons-down')['default']
+  const ILucideChevronsUp: typeof import('~icons/lucide/chevrons-up')['default']
+  const ILucideChevronsUpDown: typeof import('~icons/lucide/chevrons-up-down')['default']
   const ILucideHeart: typeof import('~icons/lucide/heart')['default']
+  const ILucideSearch: typeof import('~icons/lucide/search')['default']
   const ISgMark: typeof import('~icons/sg/mark')['default']
 }

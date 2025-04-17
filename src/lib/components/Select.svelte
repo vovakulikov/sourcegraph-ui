@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { FormEventHandler, HTMLSelectAttributes } from 'svelte/elements';
-	import ChevronDown from 'phosphor-svelte/lib/CaretDown';
+	import Icon from '$lib/components/Icon.svelte';
 
 	let {
 		value = $bindable(''),
@@ -31,7 +31,7 @@
 	</select>
 
 	<div class="select-icon">
-		<ChevronDown size={18} />
+		<Icon icon={ILucideChevronDown} />
 	</div>
 
 	{#if error}
