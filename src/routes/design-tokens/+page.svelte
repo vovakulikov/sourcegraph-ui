@@ -258,10 +258,7 @@
 
 	onMount(() => {
 		updateTokenValues();
-		document.documentElement.setAttribute('data-theme', currentTheme);
-		if (currentTheme === 'dark') {
-			document.documentElement.classList.add('theme-dark');
-		}
+		setTheme(currentTheme);
 	});
 
 	const updateTokenValues = () => {
@@ -289,20 +286,29 @@
 		colorValues = { ...colorValues };
 	};
 
-	// Toggle between different theme modes for testing
-	let currentTheme = 'light';
-	const toggleTheme = () => {
-		currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+	// Theme selection functionality
+	type ThemeType = 'light' | 'dark' | 'high-contrast';
+	let currentTheme: ThemeType = 'light';
+	const setTheme = (theme: ThemeType) => {
+		currentTheme = theme;
+		
+		// Remove all theme classes
+		document.documentElement.classList.remove('theme-dark');
+		document.documentElement.classList.remove('theme-high-contrast');
+		
+		// Set appropriate theme
 		document.documentElement.setAttribute('data-theme', currentTheme);
 		if (currentTheme === 'dark') {
 			document.documentElement.classList.add('theme-dark');
-		} else {
-			document.documentElement.classList.remove('theme-dark');
+		} else if (currentTheme === 'high-contrast') {
+			document.documentElement.classList.add('theme-high-contrast');
 		}
 		
 		// Update values after theme change
 		setTimeout(updateTokenValues, 100);
 	};
+	
+// Theme selection will be handled by the dropdown
 
 	// Copy token value to clipboard
 	const copyToClipboard = (text: string) => {
@@ -362,12 +368,17 @@
 </script>
 
 <div class="token-documentation">
-	<!-- Theme toggle and header controls -->
+	<!-- Theme selection and header controls -->
 	<div class="page-controls">
 		<h1>Design Tokens</h1>
-		<button class="theme-toggle" on:click={toggleTheme}>
-			{currentTheme === 'light' ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
-		</button>
+		<div class="theme-selector">
+			<label for="theme-select">Theme:</label>
+			<select id="theme-select" bind:value={currentTheme} on:change={() => setTheme(currentTheme)}>
+				<option value="light">Light Theme</option>
+				<option value="dark">Dark Theme</option>
+				<option value="high-contrast">High Contrast Theme</option>
+			</select>
+		</div>
 	</div>
 	<p class="intro-text">
 		This page displays all available CSS tokens in the Sourcegraph UI design system. Each token is shown with its name and a visual example of how it appears when applied.
@@ -951,21 +962,36 @@
 		margin: var(--sg-space-400) 0 var(--sg-space-500);
 	}
 
-	.theme-toggle {
+	.theme-selector {
+		display: flex;
+		align-items: center;
+		gap: var(--sg-space-200);
+	}
+
+	.theme-selector label {
+		font-weight: 500;
+		color: var(--sg-sys-text-color);
+	}
+
+	.theme-selector select {
 		background-color: var(--sg-sys-background-light);
-		padding: var(--sg-space-300) var(--sg-space-500);
+		padding: var(--sg-space-200) var(--sg-space-400);
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-sys-border-radius);
 		cursor: pointer;
 		transition: all 0.2s ease;
 		font-weight: 500;
 		color: var(--sg-sys-text-color);
+		outline: none;
 	}
 
-	.theme-toggle:hover {
-		background-color: var(--sg-sys-accent-color);
-		color: white;
+	.theme-selector select:hover {
 		border-color: var(--sg-sys-accent-color);
+	}
+
+	.theme-selector select:focus {
+		border-color: var(--sg-sys-accent-color);
+		box-shadow: var(--sg-sys-focus-shadow);
 	}
 
 	.notification {
