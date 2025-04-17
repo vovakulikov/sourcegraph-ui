@@ -16,13 +16,14 @@
 	
 	// Default code if no code parameter is provided
 	let defaultCode = `<\script>
-  // Svelte 5 syntax with runes for reactive state management
-  let count = $state(0);
-  import { Button } from 'sourcegraph-ui'
-  
-  function increment() {
-    count += 1;
-  }
+	// Svelte 5 syntax with runes for reactive state management
+	let count = $state(0);
+	// Import components from the library
+	import { Button } from 'sourcegraph-ui'
+	
+	function increment() {
+	  count += 1;
+	}
 </\script>
 
 <div>
@@ -132,13 +133,13 @@
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Preview</title>
           <style>
+            /* Basic styles for the preview */
             body { 
-              font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
               margin: 0; 
               padding: 1rem; 
-              color: #333; 
               line-height: 1.5;
             }
+            
             .error { 
               color: #b91c1c; 
               padding: 1rem; 
