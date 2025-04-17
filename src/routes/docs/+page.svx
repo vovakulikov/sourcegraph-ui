@@ -151,6 +151,36 @@ doesn't have to be imported manually.
 When the development server is running, the icon will be automatically added to
 `auto-imports.d.ts` so TypeScript knows about it.
 
+### Combobox
+
+The Combobox component combines a text input with a dropdown selection menu, allowing users to either type to search or select from a list of options. It's useful for selecting from large lists of items where filtering is helpful.
+
+```svelte
+<script lang="ts">
+  import { Combobox } from '$lib'
+  
+  const options = [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+    { value: 'cherry', label: 'Cherry' }
+  ];
+</script>
+
+<!-- Basic usage -->
+<Combobox options={options} placeholder="Search fruits..." />
+
+<!-- Multiple selection -->
+<Combobox options={options} type="multiple" />
+
+<!-- Custom styling -->
+<Combobox 
+  options={options} 
+  width="400px"
+/>
+```
+
+The Combobox supports both single and multiple selection modes and includes built-in search functionality. For detailed documentation and examples, visit the [Combobox component page](/components/combobox).
+
 ## Data fetching
 ### GraphQL
 

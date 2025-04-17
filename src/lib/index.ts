@@ -12,3 +12,4 @@ export { default as FlexTextarea } from './components/FlexTextarea.svelte';
 export { default as Checkbox } from './components/Checkbox.svelte'
 export { default as LoadingSpinner } from './components/LoadingSpinner.svelte'
 export { default as Select } from './components/Select.svelte'
+export { default as Combobox } from './components/Combobox.svelte'

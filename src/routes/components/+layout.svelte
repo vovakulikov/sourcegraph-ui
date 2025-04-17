@@ -8,10 +8,10 @@
 		{ name: 'Alert', url: '/alert' },
 		{ name: 'ErrorAlert', url: '/error-alert' },
 		{ name: 'Textarea', url: '/textarea' },
-		{ name: 'ErrorAlert', url: '/errorAlert' },
 		{ name: 'Checkbox', url: '/checkbox' },
 		{ name: 'LoadingSpinner', url: '/loadingSpinner' },
-		{ name: 'Select', url: '/select' }
+		{ name: 'Select', url: '/select' },
+		{ name: 'Combobox', url: '/combobox' }
 	];
 
 	let { children } = $props();
