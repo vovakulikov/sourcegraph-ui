@@ -6,10 +6,10 @@
 		{ name: 'Badge', url: '/badge' },
 		{ name: 'Button', url: '/button' },
 		{ name: 'Alert', url: '/alert' },
-		{ name: 'ErrorAlert', url: '/error-alert' },
+		{ name: 'Error Alert', url: '/error-alert' },
 		{ name: 'Textarea', url: '/textarea' },
 		{ name: 'Checkbox', url: '/checkbox' },
-		{ name: 'LoadingSpinner', url: '/loadingSpinner' },
+		{ name: 'Loading Spinner', url: '/loading-spinner' },
 		{ name: 'Select', url: '/select' },
 		{ name: 'Combobox', url: '/combobox' }
 	];

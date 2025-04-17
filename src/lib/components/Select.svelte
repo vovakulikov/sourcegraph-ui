@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { FormEventHandler, HTMLSelectAttributes } from 'svelte/elements';
-	import Icon from '$lib/components/Icon.svelte';
 
 	let {
 		value = $bindable(''),
@@ -21,7 +20,7 @@
 <div data-select-container>
 	<select
 		bind:value
-		class={{ 'form-control': true, 'is-invalid': error, 'is-valid': valid && !error }}
+		class={{ 'custom-select': true, 'is-invalid': error, 'is-valid': valid && !error }}
 		oninput={onInput}
 		{...props}
 	>
@@ -29,10 +28,6 @@
 			<option value={option.value}>{option.label ?? option.value}</option>
 		{/each}
 	</select>
-
-	<div class="select-icon">
-		<Icon icon={ILucideChevronDown} />
-	</div>
 
 	{#if error}
 		<small class="error">{error}</small>
@@ -46,50 +41,56 @@
 		position: relative;
 	}
 
-	.select-icon {
-		position: absolute;
-		height: 40px; /* Match the select height */
-		top: 0;
-		right: 0.75rem;
-		pointer-events: none;
-		color: var(--sg-sys-text-color);
-		display: flex;
-		align-items: center;
-		justify-content: center;
+	:root {
+    --input-line-height: calc(20 / 14);
+    --input-padding-y: 0.375rem;
+    --input-padding-x: 0.75rem;
+    --input-height-border: 1px;
+
+    --sg-comp-select-component: var(--sg-sys-background);
+
+    --custom-select-height: calc(
+            var(--input-line-height) * 1em + var(--input-padding-y) * 2 + var(--input-height-border)
+    );
+
+    --custom-select-background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23798baf' viewBox='0 0 24 24'%3e%3cpath d='M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z'/%3e%3c/svg%3e")
+    no-repeat right var(--input-padding-x) center/1rem 1rem;
 	}
 
 	select {
-		display: block;
+		display: inline-block;
 		width: 100%;
-		height: 40px; /* Explicit height for consistency */
-		padding: 0.375rem 3rem 0.375rem 0.75rem; /* Increased right padding for chevron */
+    height: var(--custom-select-height);
+    padding: var(--input-padding-y) calc(var(--input-padding-x) + 1rem) var(--input-padding-y) var(--input-padding-x);
 		font-size: 1rem;
 		font-weight: 400;
-		line-height: 1.5;
+    line-height: var(--input-line-height);
 		color: var(--sg-sys-text-color);
-		background-color: white; /* Solid white background */
+		background-color: var(--sg-sys-backgound);
 		background-clip: padding-box;
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-border-radius-100);
-		transition:
-			border-color 0.15s ease-in-out,
-			box-shadow 0.15s ease-in-out;
-		appearance: none; /* Remove default browser styling */
+		transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    vertical-align: middle;
+    background: var(--sg-comp-select-component) var(--custom-select-background);
+    appearance: none;
+		background-clip: padding-box;
+    background-position: right 0.75rem center;
 
-		&:focus {
+    &:focus {
 			border-color: var(--sg-sys-accent-color-light);
 			outline: 0;
 			box-shadow: var(--sg-sys-focus-shadow);
 		}
-
+		
 		&.is-invalid {
 			border-color: var(--sg-ref-red-600);
 		}
-
+		
 		&.is-valid {
 			border-color: var(--sg-ref-green-600);
 		}
-
+		
 		&:disabled {
 			background-color: var(--sg-sys-background-light);
 			opacity: 0.65;
@@ -109,4 +110,20 @@
 			text-transform: uppercase;
 		}
 	}
+
+  .custom-select-sm {
+    height: var(--input-height-sm);
+    padding-top: var(--custom-select-padding-y-sm);
+    padding-bottom: var(--custom-select-padding-y-sm);
+    padding-left: var(--custom-select-padding-x-sm);
+    font-size: 0.765625rem;
+  }
+
+  .custom-select-lg {
+    height: var(--custom-select-height-lg);
+    padding-top: var(--custom-select-padding-y-lg);
+    padding-bottom: var(--custom-select-padding-y-lg);
+    padding-left: var(--custom-select-padding-x-lg);
+    font-size: 1.25rem;
+  }
 </style>

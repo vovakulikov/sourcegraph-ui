@@ -6,8 +6,51 @@
 
 	import { Icon } from '$lib'
 	import { page } from '$app/stores'
+	import { onMount } from 'svelte';
+
+	import { Select } from '$lib'
 
 	let { children } = $props()
+
+	// Theme selection functionality
+	type ThemeType = 'light' | 'dark' | 'high-contrast';
+	let currentTheme: ThemeType = 'light';
+	
+	const setTheme = (theme: ThemeType) => {
+		currentTheme = theme;
+		
+		// Remove all theme classes
+		document.documentElement.classList.remove('theme-dark');
+		document.documentElement.classList.remove('theme-high-contrast');
+		
+		// Set appropriate theme
+		document.documentElement.setAttribute('data-theme', currentTheme);
+		if (currentTheme === 'dark') {
+			document.documentElement.classList.add('theme-dark');
+		} else if (currentTheme === 'high-contrast') {
+			document.documentElement.classList.add('theme-high-contrast');
+		}
+	};
+
+	onMount(() => {
+		// Check for saved theme preference
+		const savedTheme = localStorage.getItem('theme') as ThemeType | null;
+		if (savedTheme) {
+			currentTheme = savedTheme;
+			setTheme(currentTheme);
+		}
+	});
+
+	// Watch for theme changes to save preference
+	$effect(() => {
+		localStorage.setItem('theme', currentTheme);
+	})
+
+	const themeOptions = [
+		{ value: 'light', label: 'Light Theme' },
+		{ value: 'dark', label: 'Dark Theme' },
+		{ value: 'high-contrast', label: 'High Contrast Theme' },
+	];
 </script>
 
 <main>
@@ -18,10 +61,17 @@
 		<nav>
 			<a href="/components/icon">Components</a>
 			<a href="/docs">Docs</a>
-			<a href="/guides">Guidelines</a>
 			<a href="/design-tokens">Design Tokens</a>
 			<a href="/playground">Playground</a>
 		</nav>
+		<div class="theme-selector">
+			<Select
+				options={themeOptions}
+				id="theme-select"
+				bind:value={currentTheme}
+				onchange={() => setTheme(currentTheme)}
+			/>
+		</div>
 	</header>
 	<div class={{ 'content': true, 'content--home': $page.route.id === '/' }}>
 		{@render children()}
@@ -47,6 +97,7 @@
 			z-index: 2;
       box-shadow: var(--sg-shadow-100);
       background-color: var(--sg-ref-gray-1200);
+			justify-content: space-between;
 
 			&--transparent {
         box-shadow: none;
@@ -58,6 +109,7 @@
 		nav {
 			display: flex;
 			gap: 1rem;
+			flex: 1;
 
 			a {
 				color: inherit;
@@ -70,6 +122,22 @@
 			a:hover {
 				background-color: var(--sg-ref-gray-1000);
 			}
+		}
+
+		.theme-selector {
+			display: flex;
+			align-items: center;
+			margin-left: auto;
+		}
+
+		:global(.theme-selector select) {
+      --sg-comp-select-component: var(--sg-ref-gray-1000);
+			cursor: pointer;
+			transition: all 0.2s ease;
+			font-weight: 500;
+			color: var(--sg-ref-gray-100);
+			outline: none;
+			border:none;
 		}
 
 		.content {
