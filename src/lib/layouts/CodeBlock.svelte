@@ -38,7 +38,6 @@
 <style lang="scss">
 	.code-block-container {
 		position: relative;
-		margin: 0.5rem 0;
 		overflow: hidden;
 		border: none;
 	}
@@ -48,7 +47,7 @@
 		justify-content: space-between;
 		align-items: center;
 		padding: 0.4rem 1rem;
-		background-color: var(--sg-sys-background-darker, #2d2d2d);
+		background-color: #2d2d2d;
 		border-bottom: 1px solid var(--sg-sys-border-dark, #444444);
 		color: var(--sg-sys-text-color-inverted, #f9fafb);
 	}
@@ -81,7 +80,7 @@
 		padding: 0.75rem 1rem;
 		line-height: 1.4;
 		tab-size: 2;
-		background-color: var(--sg-sys-background-dark, #1e1e1e);
+		background-color: #1e1e1e;
 		color: var(--sg-sys-text-color-inverted, #f9fafb);
 		font-family: var(--sg-sys-font-family-code, monospace);
 		font-size: 0.9rem;
