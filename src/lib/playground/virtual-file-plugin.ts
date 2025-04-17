@@ -12,7 +12,6 @@ export interface FileEntry {
 }
 
 export interface ComponentRegistry {
-  components: Record<string, FileEntry>;
   filesByPath: Record<string, FileEntry>;
 }
 
@@ -73,8 +72,8 @@ export function unifiedVirtualFilePlugin(
         return id;
       }
       
-      // Handle sourcegraph-ui for backward compatibility
-      if (id === 'sourcegraph-ui') return 'virtual:file/sourcegraph-ui';
+      // Handle sourcegraph-ui by mapping to components/index.ts
+      if (id === 'sourcegraph-ui') return 'virtual:file/lib/components/index.ts';
       
       // Skip unpkg imports
       if (importer?.startsWith('https://unpkg.com/')) return null;
@@ -115,21 +114,7 @@ export function unifiedVirtualFilePlugin(
         if (file) return file.source;
       }
 
-      // Handle sourcegraph-ui special case
-      if (id === 'virtual:file/sourcegraph-ui') {
-        const componentNames = Object.keys(registry.components);
-        
-        // Create a single module that exports all components
-        // Each component is exported directly with its full path
-        const exports = componentNames
-          .map((name) => {
-            const component = registry.components[name];
-            return `export { default as ${name} } from 'virtual:file/${component.fullPath}';`;
-          })
-          .join('\n');
-        
-        return exports;
-      }
+
       
       // 3. Handle all virtual file loads from registry
       if (id.startsWith('virtual:file/')) {
@@ -138,16 +123,7 @@ export function unifiedVirtualFilePlugin(
         // Try to find the file by full path
         let file = registry.filesByPath[filePath];
         
-        // If not found and it's a Svelte file, try component lookup for backward compatibility
-        if (!file && filePath.endsWith('.svelte')) {
-          // Try to extract component name from the path
-          const pathParts = filePath.split('/');
-          const fileName = pathParts[pathParts.length - 1];
-          const componentName = fileName.replace('.svelte', '');
-          
-          // Look up in component registry
-          file = registry.components[componentName];
-        }
+
         
         // If still not found and path contains directories, try path without leading components
         if (!file && filePath.includes('/')) {

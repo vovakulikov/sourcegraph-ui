@@ -33,10 +33,9 @@ async function compileCode(code: string): Promise<CompilationResult> {
     const isSvelteComponent = code.trim().startsWith('<');
     
     // Create a temporary registry that extends the main registry
-    const tempRegistry = { ...registry };
+    const tempRegistry = { filesByPath: { ...registry.filesByPath } };
     
     // We'll use a virtual namespace for our runtime files to avoid collisions
-    if (!tempRegistry.filesByPath) tempRegistry.filesByPath = {};
     
     if (isSvelteComponent) {
       // Preprocess the component code before compiling

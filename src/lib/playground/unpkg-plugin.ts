@@ -19,7 +19,7 @@ export function unpkgResolverPlugin(sourceCode: string) {
       
       // Handle sourcegraph-ui module imports
       if (importee === 'sourcegraph-ui') {
-        return 'virtual:file/sourcegraph-ui';
+        return 'virtual:file/lib/components/index.ts';
       }
 
       // Handle relative imports

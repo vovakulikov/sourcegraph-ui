@@ -14,9 +14,7 @@ export interface FileEntry {
 }
 
 export interface ComponentRegistry {
-  // Main component registry (by name, primarily for components)
-  components: Record<string, FileEntry>
-  // Path-based registry for resolving relative imports
+  // Path-based registry for resolving all imports
   filesByPath: Record<string, FileEntry>
 }
 
@@ -38,7 +36,7 @@ export function componentRegistryPlugin(): Plugin {
   
   // Function to build the component registry
   function buildRegistry() {
-    registry = { components: {}, filesByPath: {} }
+    registry = { filesByPath: {} }
     
     try {
       // Function to recursively scan directories for all files in src/lib
@@ -86,21 +84,15 @@ export function componentRegistryPlugin(): Plugin {
                 directory
               }
               
-              // Store in path-based registry for relative imports
+              // Store in path-based registry for all imports
               registry.filesByPath[relativeToLib] = fileEntry
-              
-              // Also store components in the main component registry
-              if (isComponent) {
-                registry.components[name] = fileEntry
-              }
             }
           }
         }
       }
       
       scanDirectory(libDir)
-      console.log(`Component registry built with ${Object.keys(registry.components).length} components and ${Object.keys(registry.filesByPath).length} total files`)
-      console.log('Components registered:', Object.keys(registry.components))
+      console.log(`Component registry built with ${Object.keys(registry.filesByPath).length} total files`)
       
       // Log all SVG files specifically for debugging
       const svgFiles = Object.keys(registry.filesByPath).filter(path => path.endsWith('.svg'))
