@@ -21,7 +21,6 @@
 
 	let isHomePage = $derived(page.route.id === '/')
 	let currentPath = $derived(page.url.pathname);
-
 	let themeOptions = $derived(THEME_STATE.MODES.map(mode => ({
 		value: mode,
 		label: mode.toWellFormed()
@@ -82,23 +81,9 @@
       justify-content: space-between;
 			gap: 1rem;
 			padding: 0.75rem 1rem;
-			border-bottom: 1px solid var(--sg-sys-border-color);
       color: var(--sg-sys-card-foreground);
       background-color: var(--sg-sys-card-background);
-
-			&--transparent {
-        box-shadow: none;
-        backdrop-filter: blur(12px);
-				color: var(--sg-sys-primary-foreground);
-				border-color: color-mix(in oklch, var(--sg-sys-border-color) 30%, transparent);
-        background-color: color-mix(in oklch, var(--sg-ref-gray-700) 40%, transparent);
-
-				:global(.theme-selector select) {
-          --sg-comp-select-component: var(--sg-ref-gray-1000);
-          color: var(--sg-sys-primary-foreground);
-          border: none;
-				}
-			}
+      border-bottom: 1px solid var(--sg-sys-border-color);
 		}
 
 		nav {
@@ -115,8 +100,8 @@
 			}
 
 			a:hover, a.active {
-        color: var(--sg-sys-accent-foreground);
-				background-color: var(--sg-sys-accent);
+        color: var(--sg-sys-primary-foreground);
+				background-color: var(--sg-sys-primary);
 			}
 		}
 

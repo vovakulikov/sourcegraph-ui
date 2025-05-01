@@ -19,7 +19,7 @@ body {
 // for which we don't have any custom abstraction and use as plain
 // HTML elements
 a {
-  color: var(--sg-sys-primary);
+  color: var(--sg-sys-accent);
 
   &:focus-visible {
     // Inset is required here since we have a lot of links

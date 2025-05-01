@@ -5,11 +5,11 @@
 
 <div class='content'>
 	<div class='background'>
-		<SimplexNoise/>
+<!--		<SimplexNoise/>-->
 	</div>
 
 	<SourcegraphLogo width="500" height="72" variant="dark" />
-	<h1>Welcome to the tech docs and  components <br/> library hub</h1>
+	<h1>Components, Guidelines and Design tokens</h1>
 
 	<footer>
 		<a href="/components/icon">Components</a>
@@ -25,6 +25,10 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
+
+    background-size: cover;
+		filter: brightness(0.5);
+    background-image: url('/old-keyboard.gif');
 	}
 
 	.content {

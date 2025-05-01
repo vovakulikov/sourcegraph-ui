@@ -4,7 +4,6 @@
   Includes a link to open the code in the playground.
 -->
 <script lang="ts">
-
 	interface CodeBlockProps {
 		code: string
 		language?: string

@@ -5,10 +5,8 @@
 
 	interface SelectProps extends HTMLSelectAttributes {
 		value?: string;
-		options: { value: string; label: string }[];
 		status?: Status
-		valid?: boolean;
-		error?: string | string[] | null;
+		options: { value: string; label: string }[];
 	}
 
 	let {
@@ -79,15 +77,6 @@
       box-shadow: 0 0 0 3px color-mix(in oklch, var(--sg-comp-select-focus-shadow-color) 65%, transparent);
 		}
 
-
-		&.is-invalid {
-			border-color: var(--sg-ref-red-600);
-		}
-		
-		&.is-valid {
-			border-color: var(--sg-ref-green-600);
-		}
-		
 		&:disabled {
 			opacity: 0.65;
 			cursor: not-allowed;

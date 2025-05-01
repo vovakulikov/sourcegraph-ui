@@ -1,0 +1,59 @@
+---
+    layout: article
+    title: Development environment
+---
+
+The web app uses external dependencies and generated files that need to be
+installed/generated first. To do this run the following commands from the repo root:
+
+```sh
+pnpm install && sg generate
+```
+
+After this we can start the development server for a great development experience.
+The development server provides [hot module reloading](https://stackoverflow.com/questions/24581873/what-exactly-is-hot-module-replacement-in-webpack)
+ for short feedback loops.
+
+There are multiple ways to start the development server depending on your needs.
+
+### Running a local SG instance
+
+If you also plan to make backend changes then you'll have to run a Sourcegraph
+instance locally.
+
+You can start a full Sourcegraph instance locally with `sg start`.
+
+If you do not need access to every feature/service that Souregraph has to offer
+(e.g. precise code navigation) then running `sg start minimal-sveltekit` will start
+ a reduced instance that is faster to (re)start.
+
+In both cases the web app can be accessed via https://sourcegraph.test:3443 in the
+browser.
+
+### Proxying to a production instance
+
+If you only need to make client side (frontend) changes then it's usually not necessary
+to start a local Sourcegraph instance. Often it's even useful to be able to use S2 or
+ dotcom as a backend, to get access to the very same data and configuration.
+
+For this we have two commands that need to be run in `client/web-sveltekit`:
+
+```sh
+cd client/web-sveltekit
+pnpm dev
+```
+
+This starts the development server and proxies any API requests to
+https://sourcegraph.sourcegraph.com.
+
+> [!NOTE]
+> To make it easier to login you should add password authentication to your SAMS account.
+
+Similarly the following command will proxy to https://sourcegraph.com:
+
+```sh
+cd client/web-svelkite
+pnpm dev:dotcom
+```
+
+In both cases the web app can be accessed via `https://localhost:5173`

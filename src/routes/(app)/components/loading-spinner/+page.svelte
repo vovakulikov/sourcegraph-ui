@@ -4,7 +4,7 @@
 	import ComponentSandbox from '$layouts/ComponentSandbox.svelte';
 </script>
 
-<h2>LoadingSpinner</h2>
+<h2>Loading Spinner</h2>
 
 <p>
 	The LoadingSpinner component provides a circular loading indicator to communicate that content is being loaded or processed.
