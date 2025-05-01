@@ -226,31 +226,3 @@
 	<code>disabled</code>, <code>name</code>, <code>id</code>, etc.
 </p>
 
-<style lang="scss">
-	/* Table styles for API documentation */
-	table {
-		width: 100%;
-		border-collapse: collapse;
-		margin: 1rem 0;
-	}
-
-	th,
-	td {
-		padding: 0.75rem;
-		text-align: left;
-		border-bottom: 1px solid var(--sg-sys-border-color);
-	}
-
-	th {
-		background-color: var(--sg-sys-card-background);
-		font-weight: 600;
-	}
-
-	code {
-		background-color: var(--sg-sys-card-background);
-		padding: 0.2rem 0.4rem;
-		border-radius: var(--sg-sys-border-radius);
-		font-family: var(--sg-sys-font-family-code);
-		font-size: 0.875em;
-	}
-</style>
