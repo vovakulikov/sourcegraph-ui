@@ -1,17 +1,21 @@
-import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
-import type { Connect } from 'vite';
+import { sveltekit } from '@sveltejs/kit/vite';
+
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
+
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import UnpluginAutoImport from 'unplugin-auto-import/vite'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
-import IconsResolver from 'unplugin-icons/resolver'
-import Icons from 'unplugin-icons/vite'
-import { componentRegistryPlugin } from './src/lib/plugins'
 
 export default defineConfig({
+	css: {
+		modules: {
+			localsConvention: 'camelCase'
+		}
+	},
 	plugins: [
 		sveltekit(),
-		componentRegistryPlugin(),
 		// Add node polyfills plugin with specific settings
 		nodePolyfills({
 			// Whether to polyfill `node:` protocol imports
@@ -35,19 +39,5 @@ export default defineConfig({
 				symbol: FileSystemIconLoader('./assets/symbol-icons'),
 			},
 		}),
-	],
-	optimizeDeps: {
-		exclude: ['@rollup/browser', 'rollup-plugin-scss']
-	},
-	server: {
-		// @ts-expect-error - middleware exists but is not in the type definitions
-		middleware: () => [
-			(req: Connect.IncomingMessage, res: any, next: Connect.NextFunction) => {
-				if (req.url?.endsWith('.wasm')) {
-					res.setHeader('Content-Type', 'application/wasm');
-				}
-				next();
-			}
-		]
-	}
+	]
 });

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Select } from '$lib';
-	import CodeBlock from '$lib/layouts/CodeBlock.svelte';
-	import ComponentSandbox from '$lib/layouts/ComponentSandbox.svelte';
+	import CodeBlock from '$layouts/CodeBlock.svelte';
+	import ComponentSandbox from '$layouts/ComponentSandbox.svelte';
 
 	const exampleOptions = [
 		{ value: '', label: 'Select an option' },
@@ -30,6 +30,9 @@
 <ComponentSandbox title="Basic Usage" description="Default select dropdown with options.">
 	{#snippet preview()}
 		<Select options={exampleOptions} />
+		<Select options={exampleOptions} status="valid" />
+		<Select options={exampleOptions} status="invalid" />
+		<Select options={exampleOptions} disabled />
 	{/snippet}
 	{#snippet code()}
 		<CodeBlock
@@ -239,14 +242,14 @@
 	}
 
 	th {
-		background-color: var(--sg-sys-background-light);
+		background-color: var(--sg-sys-card-background);
 		font-weight: 600;
 	}
 
 	code {
-		background-color: var(--sg-sys-background-light);
+		background-color: var(--sg-sys-card-background);
 		padding: 0.2rem 0.4rem;
-		border-radius: var(--sg-border-radius-100);
+		border-radius: var(--sg-sys-border-radius);
 		font-family: var(--sg-sys-font-family-code);
 		font-size: 0.875em;
 	}

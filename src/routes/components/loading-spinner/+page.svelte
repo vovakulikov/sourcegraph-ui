@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { LoadingSpinner } from '$lib';
-	import CodeBlock from '$lib/layouts/CodeBlock.svelte';
-	import ComponentSandbox from '$lib/layouts/ComponentSandbox.svelte';
+	import CodeBlock from '$layouts/CodeBlock.svelte';
+	import ComponentSandbox from '$layouts/ComponentSandbox.svelte';
 </script>
 
 <h2>LoadingSpinner</h2>
@@ -20,7 +20,7 @@
 		<CodeBlock
 			code={`<script>
   import { LoadingSpinner } from 'sourcegraph-ui';
-</script>
+<\/script>
 
 <LoadingSpinner />`}
 		/>
@@ -39,7 +39,7 @@
 		<CodeBlock
 			code={`<script>
   import { LoadingSpinner } from 'sourcegraph-ui';
-</script>
+<\/script>
 
 <span>Loading data </span>
 <LoadingSpinner inline />
@@ -61,7 +61,7 @@
 		<CodeBlock
 			code={`<script>
   import { LoadingSpinner } from 'sourcegraph-ui';
-</script>
+<\/script>
 
 <div style="height: 80px;">
   <LoadingSpinner center={false} />
@@ -76,14 +76,14 @@
 >
 	{#snippet preview()}
 		<div style="height: 100px;">
-			<LoadingSpinner style="--size: 2.5rem;" />
+			<LoadingSpinner />
 		</div>
 	{/snippet}
 	{#snippet code()}
 		<CodeBlock
 			code={`<script>
   import { LoadingSpinner } from 'sourcegraph-ui';
-</script>
+<\/script>
 
 <LoadingSpinner style="--size: 2.5rem;" />`}
 		/>
@@ -170,7 +170,7 @@
 	}
 
 	th {
-		background-color: var(--sg-sys-background-light);
+		background-color: var(--sg-sys-card-background);
 		font-weight: 600;
 	}
 </style>

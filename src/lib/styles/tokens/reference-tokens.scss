@@ -2,64 +2,61 @@
 // For more details see our RFC about CSS design tokens system
 // https://docs.google.com/document/d/17zJHqSYj-epOMP0vcC-vPTA57O1ZxJqW6QVo5lKBl_Q/edit?usp=sharing
 
+// Variable font implementation for PolySans
+@font-face {
+  font-family: 'PolySans';
+  src: url('../../fonts/PolySans-variable.woff2') format('woff2 supports variations'),
+       url('../../fonts/PolySans-variable.woff2') format('woff2-variations');
+  font-weight: 100 900; /* Full range for variable font */
+  font-stretch: 75% 125%; /* Using standard range */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PolySans';
+  src: url('../../fonts/PolySansItalic-variable.woff2') format('woff2 supports variations'),
+       url('../../fonts/PolySansItalic-variable.woff2') format('woff2-variations');
+  font-weight: 100 900; /* Full range for variable font */
+  font-stretch: 75% 125%; /* Using standard range */
+  font-style: italic;
+  font-display: swap;
+}
+
+//@font-face {
+//  font-family: 'PolySans-NeutralMono';
+//  src: url('/src/lib/fonts/PolySans-NeutralMono.woff') format('woff');
+//  font-weight: normal;
+//  font-style: normal;
+//  font-display: swap;
+//}
+//
+//@font-face {
+//  font-family: 'PolySans-SlimMono';
+//  src: url('/src/lib/fonts/PolySans-SlimMono.woff') format('woff');
+//  font-weight: normal;
+//  font-style: normal;
+//  font-display: swap;
+//}
+
+@font-face {
+  font-family: 'PerfectlyNineties';
+  src: url('../../fonts/PerfectlyNineties-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PerfectlyNineties';
+  src: url('../../fonts/PerfectlyNineties-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
 // Color values are based on Harmony palette
 // see https://www.figma.com/community/file/1287828769207775946/harmony-accessible-ui-color-palette
-
-/* Variable font implementation for PolySans */
-@font-face {
-  font-family: 'PolySans';
-  src: url('/src/lib/fonts/PolySans-variable.woff2') format('woff2 supports variations'),
-       url('/src/lib/fonts/PolySans-variable.woff2') format('woff2-variations'),
-       url('/src/lib/fonts/PolySans-Neutral.woff') format('woff'); /* Fallback for older browsers */
-  font-weight: 100 900; /* Full range for variable font */
-  font-stretch: 75% 125%; /* Using standard range */
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'PolySans';
-  src: url('/src/lib/fonts/PolySansItalic-variable.woff2') format('woff2 supports variations'),
-       url('/src/lib/fonts/PolySansItalic-variable.woff2') format('woff2-variations'),
-       url('/src/lib/fonts/PolySans-NeutralItalic.woff') format('woff'); /* Fallback for older browsers */
-  font-weight: 100 900; /* Full range for variable font */
-  font-stretch: 75% 125%; /* Using standard range */
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'PolySans-NeutralMono';
-  src: url('/src/lib/fonts/PolySans-NeutralMono.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'PolySans-SlimMono';
-  src: url('/src/lib/fonts/PolySans-SlimMono.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'PerfectlyNineties';
-  src: url('/src/lib/fonts/PerfectlyNineties-Light.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'PerfectlyNineties';
-  src: url('/src/lib/fonts/PerfectlyNineties-LightItalic.woff') format('woff');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-
 :root {
   // ------- Typography -------
   --sg-ref-font-family-sans: 'Inter Variable', sans-serif;
@@ -107,7 +104,7 @@
   --sg-ref-gray-500: oklch(0.653 0 0);
   --sg-ref-gray-400: oklch(0.735 0 0);
   --sg-ref-gray-300: oklch(0.817 0 0);
-  --sg-ref-gray-200: oklch(0.898 0 0);
+  --sg-ref-gray-200: oklch(0.930 0 0);
   --sg-ref-gray-100: oklch(0.979 0 0);
 
   // -------- PINK --------
@@ -194,7 +191,4 @@
   --sg-ref-orange-200: oklch(0.889 0.059 31);
   --sg-ref-orange-100: oklch(0.973 0.014 34);
 }
-
-// All colors are now defined using OKLCH directly in the root CSS variables
-// No need for media query and @supports anymore
 

@@ -1,57 +1,41 @@
 <script lang="ts" module>
 	import clsx from 'clsx'
-
 	import styles from './Button.module.scss'
 
 	const BUTTON_VARIANTS = [
 		'primary',
 		'secondary',
-		'success',
-		'danger',
-		'warning',
-		'info',
-		'merged',
-		'link',
-		'icon',
 		'text',
 	] as const
 
-	const BUTTON_SIZES = ['small', 'large']
+	const BUTTON_SIZES = ['small', 'normal', 'large']
 
 	interface GetButtonStyleParameters {
 		variant: (typeof BUTTON_VARIANTS)[number]
-		outline?: boolean
 	}
 
 	interface GetButtonSizeParameters {
 		size: (typeof BUTTON_SIZES)[number]
 	}
 
-	interface GetButtonDotParameters {
-		dot: boolean
-	}
-
-	console.log(styles)
-
-	const getButtonStyle = ({ variant, outline }: GetButtonStyleParameters): string =>
-		clsx(styles[`btn-${variant}` as keyof typeof styles], outline && styles.btnOutline)
+	const getButtonStyle = ({ variant }: GetButtonStyleParameters): string =>
+		clsx(styles[`btn--${variant}` as keyof typeof styles])
 
 	const getButtonSize = ({ size }: GetButtonSizeParameters): string =>
-		styles[`btn-${size}` as keyof typeof styles]
+		styles[`btn--${size}` as keyof typeof styles]
 
 	/**
 	 * Returns the class name to style a button with the given options. This can be
 	 * used to for generating the right CSS class combination for plain DOM buttons,
 	 * but it should be used sparingly.
 	 */
-	export function getButtonClassName({ variant, size, outline, dot, }: Partial<
-		GetButtonStyleParameters & GetButtonSizeParameters & GetButtonDotParameters
+	export function getButtonClassName({ variant, size}: Partial<
+		GetButtonStyleParameters & GetButtonSizeParameters
 	> = {}): string {
 		return clsx(
 			styles.btn,
-			variant && getButtonStyle({ variant, outline }),
+			variant && getButtonStyle({ variant }),
 			size && getButtonSize({ size }),
-			dot && styles.btnWithDot
 		)
 	}
 
@@ -61,18 +45,12 @@
 	// accepts any HTMLButton attributes. Note that those will only be used when
 	// the default implementation is used.
 
-	import type { HTMLButtonAttributes, MouseEventHandler } from 'svelte/elements'
 	import type { Snippet } from 'svelte'
+	import type { HTMLButtonAttributes, MouseEventHandler } from 'svelte/elements'
 
 	interface ButtonProps extends HTMLButtonAttributes {
 		variant?: (typeof BUTTON_VARIANTS)[number]
 		size?: (typeof BUTTON_SIZES)[number]
-		outline?: boolean
-
-		/**
-		 * Add notification dot in the top right corner.
-		 */
-		dot?: boolean
 
 		/**
 		 * The content of the button. Only used if a custom button is not provided.
@@ -89,8 +67,6 @@
 	let {
 		variant = 'primary',
 		size,
-		outline,
-		dot,
 		children,
 		custom,
 		disabled,
@@ -107,16 +83,39 @@
 			return
 		}
 
+		// Start ripple effect
+		const button = event.currentTarget;
+		const rect = button.getBoundingClientRect()
+		const circle = document.createElement("span");
+		const diameter = Math.max(rect.width, rect.height);
+		const radius = diameter / 2;
+
+		circle.style.width = `${diameter}px`;
+		circle.style.height = `${diameter}px`;
+		circle.style.left = `${event.clientX - rect.left - radius}px`;
+		circle.style.top = `${event.clientY - rect.top - radius}px`;
+		circle.classList.add(styles.btnRipple);
+
+		// Remove ripple element after animation is finished
+		circle.addEventListener("animationend", (event) => circle.remove());
+		button.appendChild(circle);
+
 		onclick?.(event)
 	}
 
-	let buttonClass = $derived(getButtonClassName({ variant, outline, size, dot }))
+	let buttonClass = $derived(getButtonClassName({ variant, size }))
 </script>
 
 {#if custom}
 	{@render custom(buttonClass)}
 {:else}
-	<button class={buttonClass} type="button" onclick={handleClick} aria-disabled={disabled} {...restProps}>
+	<button
+		type="button"
+		class={buttonClass}
+		aria-disabled={disabled}
+		onclick={handleClick}
+		{...restProps}
+	>
 		{@render children?.()}
 	</button>
 {/if}

@@ -1,78 +1,89 @@
 <script lang="ts">
 	import type { HTMLInputAttributes } from 'svelte/elements';
 
-	let props: HTMLInputAttributes = $props();
+	interface Props extends HTMLInputAttributes<HTMLInputElement> {
+		elementRef: HTMLInputElement;
+	}
+
+	let { elementRef = $bindable(), ...attributes }: Props = $props();
 </script>
 
-<input {...props} type="checkbox" />
+<input bind:this={elementRef} {...attributes} type="checkbox" />
 
 <style lang="scss">
+	:root {
+		--sg-comp-checkbox-size: 1.5em;
+		--sg-comp-checkbox-color: var(--sg-sys-accent-foreground);
+		--sg-comp-checkbox-border: var(--sg-sys-border-color);
+    --sg-comp-checkbox-background: var(--sg-sys-background);
+		--sg-comp-checkbox-box-shadow: var(--sg-shadow-100);
+	}
+
+  input::before {
+    content: '';
+    width: 0.65em;
+    height: 0.65em;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0);
+    box-shadow: inset 1em 1em currentColor;
+
+    /* Windows High Contrast Mode */
+    background-color: CanvasText;
+  }
+
 	input {
-		/* Add if not using autoprefixer */
+    margin: 0;
 		-webkit-appearance: none;
-		/* Remove most all native input styles */
 		appearance: none;
-		/* For iOS < 15 */
-		background-color: var(--sg-sys-backgound);
-		/* Not removed via appearance */
-		margin: 0;
-
+    display: grid;
+    place-content: center;
 		font: inherit;
-		color: currentColor;
-		width: 1.5em;
-		height: 1.5em;
-		border: 0.15em solid var(--sg-sys-muted-text-color);
-		box-shadow: var(--sg-shadow-100);
-		cursor: pointer;
-		border-radius: var(--sg-border-radius-100);
-		transform: translateY(-0.075em);
+    cursor: pointer;
+    color: var(--sg-comp-checkbox-color);
+    transform: translateY(-0.075em);
+		width: var(--sg-comp-checkbox-size);
+		height: var(--sg-comp-checkbox-size);
+		border: 0.15em solid var(--sg-comp-checkbox-border);
+		box-shadow: var(--sg-comp-checkbox-box-shadow);
+		border-radius: var(--sg-sys-border-radius);
+    background-color: var(--sg-comp-checkbox-background);
 
-		display: grid;
-		place-content: center;
+    &:focus-visible {
+      --sg-comp-checkbox-border: var(--sg-sys-border-active-color);
+      --sg-comp-checkbox-box-shadow: var(--sg-sys-focus-shadow);
+    }
 
-		&:hover {
-			filter: brightness(1.3);
+		&:checked, &:indeterminate {
+      --sg-comp-checkbox-border: var(--sg-sys-accent);
+      --sg-comp-checkbox-background: var(--sg-sys-accent);
+
+      &::before {
+        transform: scale(1);
+      }
+
+      &:hover {
+        filter: brightness(1.2);
+      }
 		}
-	}
 
-	input[type='checkbox']::before {
-		content: '';
-		width: 0.65em;
-		height: 0.65em;
-		clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-		transform: scale(0);
-		box-shadow: inset 1em 1em currentColor;
-
-		/* Windows High Contrast Mode */
-		background-color: CanvasText;
-	}
-
-	input[type='checkbox']:checked {
-		color: var(--sg-sys-accent-text-color);
-		border-color: var(--sg-sys-accent-color);
-		background-color: var(--sg-sys-accent-color);
-
-		&::before {
-			transform: scale(1);
+    &:indeterminate::before {
+			width: 0.85rem;
+      clip-path: polygon(0% 40%, 100% 40%, 100% 65%, 0% 65%);
 		}
-	}
 
-	input[type='checkbox']:disabled {
-		cursor: not-allowed;
-		color: var(--sg-sys-muted-text-color);
-		background-color: var(--sg-sys-background-light);
+    &:disabled {
+      opacity: 0.75;
+      cursor: not-allowed;
 
-		&:checked {
-			border-color: var(--sg-sys-accent-color-light);
-			background-color: var(--sg-sys-accent-color-light);
-		}
-	}
+      &:checked, &:indeterminate {
+        --sg-comp-checkbox-color: var(--sg-sys-foreground);
+        --sg-comp-checkbox-border: var(--sg-sys-muted-foreground);
+        --sg-comp-checkbox-background: color-mix(in oklch, var(--sg-sys-muted-foreground) 50%, transparent);
 
-	input[type='checkbox']:focus-visible {
-		outline-offset: 0.15rem;
-		outline: max(2px, 0.15em) solid var(--sg-sys-accent-color);
-
-		// Turn off global input:focus-visible focus ring style
-		box-shadow: none;
+        &:hover {
+          filter: unset;
+        }
+      }
+    }
 	}
 </style>

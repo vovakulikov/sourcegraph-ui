@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { ErrorAlert } from '$lib';
-	import CodeBlock from '$lib/layouts/CodeBlock.svelte';
-	import ComponentSandbox from '$lib/layouts/ComponentSandbox.svelte';
+	import CodeBlock from '$layouts/CodeBlock.svelte';
+	import ComponentSandbox from '$layouts/ComponentSandbox.svelte';
 
 	// Mock implementation of GraphQL errors for examples
 	class MockGraphQLError {
@@ -194,7 +194,7 @@
 	}
 
 	th {
-		background-color: var(--sg-sys-background-light);
+		background-color: var(--sg-sys-card-background);
 		font-weight: 600;
 	}
 </style>

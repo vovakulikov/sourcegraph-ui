@@ -1,88 +1,85 @@
 <script lang="ts">
-	import type { FormEventHandler, HTMLSelectAttributes } from 'svelte/elements';
+	import type { HTMLSelectAttributes } from 'svelte/elements';
+
+	type Status = 'normal' | 'valid' | 'invalid'
+
+	interface SelectProps extends HTMLSelectAttributes {
+		value?: string;
+		options: { value: string; label: string }[];
+		status?: Status
+		valid?: boolean;
+		error?: string | string[] | null;
+	}
 
 	let {
 		value = $bindable(''),
 		options,
-		onInput = undefined,
-		valid = undefined,
-		error = undefined,
-		...props
-	}: {
-		value?: string;
-		options?: { value: string; label?: string }[];
-		onInput?: FormEventHandler<HTMLSelectElement>;
-		valid?: boolean;
-		error?: string | string[] | null;
-	} & HTMLSelectAttributes = $props();
+		status,
+		...attributes
+	}: SelectProps = $props();
 </script>
 
-<div data-select-container>
-	<select
-		bind:value
-		class={{ 'custom-select': true, 'is-invalid': error, 'is-valid': valid && !error }}
-		oninput={onInput}
-		{...props}
-	>
-		{#each options ?? [] as option (option.value)}
-			<option value={option.value}>{option.label ?? option.value}</option>
-		{/each}
-	</select>
-
-	{#if error}
-		<small class="error">{error}</small>
-	{/if}
-</div>
+<select bind:value class='{status}' {...attributes}>
+	{#each options ?? [] as option (option.value)}
+		<option value={option.value}>{option.label ?? option.value}</option>
+	{/each}
+</select>
 
 <style lang="scss">
-	[data-select-container] {
-		width: 100%;
-		display: block;
-		position: relative;
-	}
-
 	:root {
-    --input-line-height: calc(20 / 14);
-    --input-padding-y: 0.375rem;
-    --input-padding-x: 0.75rem;
-    --input-height-border: 1px;
+		--sg-comp-select-padding-y: 0.375rem;
+		--sg-comp-select-padding-x: 0.75rem;
+		--sg-comp-select-input-border: 1px;
+    --sg-comp-select-line-height: calc(20 / 14);
+    --sg-comp-select-background: var(--sg-sys-background);
+		--sg-comp-select-font-size: 1rem;
+		--sg-comp-select-color: var(--sg-sys-text-color);
+		--sg-comp-select-border-color: var(--sg-sys-border-color);
+    --sg-comp-select-border-active: var(--sg-sys-border-active-color);
+    --sg-comp-select-focus-shadow-color: var(--sg-sys-accent);
 
-    --sg-comp-select-component: var(--sg-sys-background);
-
-    --custom-select-height: calc(
-            var(--input-line-height) * 1em + var(--input-padding-y) * 2 + var(--input-height-border)
+		--sg-comp-select-height: calc(
+            var(--sg-comp-select-line-height) * 1em
+						+ var(--sg-comp-select-padding-y) * 2
+						+ var(--sg-comp-select-input-border)
     );
-
-    --custom-select-background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23798baf' viewBox='0 0 24 24'%3e%3cpath d='M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z'/%3e%3c/svg%3e")
-    no-repeat right var(--input-padding-x) center/1rem 1rem;
+		--sg-comp-select-background-image:
+						url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23798baf' viewBox='0 0 24 24'%3e%3cpath d='M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z'/%3e%3c/svg%3e")
+						no-repeat right var(--sg-comp-select-padding-x) center/1rem 1rem;;
 	}
 
 	select {
 		display: inline-block;
 		width: 100%;
-    height: var(--custom-select-height);
-    padding: var(--input-padding-y) calc(var(--input-padding-x) + 1rem) var(--input-padding-y) var(--input-padding-x);
-		font-size: 1rem;
+    height: var(--sg-comp-select-height);
+    padding:
+						var(--sg-comp-select-padding-y)
+						calc(var(--sg-comp-select-padding-x) + 1.5rem)
+						var(--sg-comp-select-padding-y)
+						var(--sg-comp-select-padding-x);
+
 		font-weight: 400;
-    line-height: var(--input-line-height);
-		color: var(--sg-sys-text-color);
-		background-color: var(--sg-sys-backgound);
-		background-clip: padding-box;
-		border: 1px solid var(--sg-sys-border-color);
-		border-radius: var(--sg-border-radius-100);
-		transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    vertical-align: middle;
-    background: var(--sg-comp-select-component) var(--custom-select-background);
     appearance: none;
-		background-clip: padding-box;
+    vertical-align: middle;
+    background-clip: padding-box;
+    text-transform: capitalize;
+
+    font-size: var(--sg-comp-select-font-size);
+    line-height: var(--sg-comp-select-line-height);
+		color: var(--sg-comp-select-color);
+
+		border: 1px solid var(--sg-comp-select-border-color);
+		border-radius: var(--sg-sys-border-radius);
+
+    background: var(--sg-comp-select-background) var(--sg-comp-select-background-image);
     background-position: right 0.75rem center;
 
-    &:focus {
-			border-color: var(--sg-sys-accent-color-light);
-			outline: 0;
-			box-shadow: var(--sg-sys-focus-shadow);
+    &:focus-visible {
+      border-color: var(--sg-comp-select-border-active);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--sg-comp-select-focus-shadow-color) 65%, transparent);
 		}
-		
+
+
 		&.is-invalid {
 			border-color: var(--sg-ref-red-600);
 		}
@@ -92,24 +89,24 @@
 		}
 		
 		&:disabled {
-			background-color: var(--sg-sys-background-light);
 			opacity: 0.65;
 			cursor: not-allowed;
+			pointer-events: none;
+      background-color: var(--sg-sys-secondary);
 		}
 	}
 
-	.error {
-		font-weight: normal;
-		display: block;
-		line-height: 1.3;
-		margin-top: 0.5rem;
-		color: var(--sg-ref-red-600);
-		font-size: 0.875rem;
-
-		&::first-letter {
-			text-transform: uppercase;
-		}
+	.invalid {
+    --sg-comp-select-focus-shadow-color: var(--sg-sys-destructive);
+    --sg-comp-select-border-color: var(--sg-sys-destructive);
+    --sg-comp-select-border-active: var(--sg-sys-destructive);
 	}
+
+  .valid {
+    --sg-comp-select-focus-shadow-color: var(--sg-ref-green-500);
+    --sg-comp-select-border-color: var(--sg-ref-green-500);
+    --sg-comp-select-border-active: var(--sg-ref-green-500);
+  }
 
   .custom-select-sm {
     height: var(--input-height-sm);

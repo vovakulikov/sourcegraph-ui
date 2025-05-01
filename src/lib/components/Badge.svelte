@@ -1,9 +1,7 @@
 <!--
    @component
-
    The root element of this component can be target via the [data-badge] selector.
 -->
-
 <script lang="ts" module>
 	export const BADGE_VARIANTS = [
 		'primary',
@@ -13,8 +11,6 @@
 		'warning',
 		'info',
 		'merged',
-		'outlineSecondary',
-		'link'
 	] as const;
 
 	export type BadgeVariantType = (typeof BADGE_VARIANTS)[number];
@@ -29,108 +25,99 @@
 		small?: boolean;
 		/** Render the badge as a rounded pill. */
 		pill?: boolean;
-		/** Custom inline styles for the badge */
-		style?: string;
-		/** Additional custom class names to apply */
-		class?: string;
 		children?: Snippet;
 		custom?: Snippet<[{ className: string }]>;
 	}
 
-	let { variant, small, pill, style, class: customClass, children, custom }: Props = $props();
-	
-	// Convert outlineSecondary to outline-secondary for CSS class compatibility
-	let variantClass = $derived(variant === 'outlineSecondary' ? 'outline-secondary' : variant);
+	let { variant, small, pill, children, custom }: Props = $props();
 	
 	// Build classes list and filter out falsy values
 	let cls = $derived([
 		'badge',
-		variantClass, 
+		variant,
 		small ? 'small' : '',
 		pill ? 'pill' : '',
-		customClass || ''
 	].filter(Boolean).join(' '));
 </script>
 
 {#if custom}
 	{@render custom({ className: cls })}
 {:else}
-	<span class={cls} data-badge {style}>
+	<span class={cls} data-badge>
 		{@render children?.()}
 	</span>
 {/if}
 
 <style lang="scss">
-  /* Sourcegraph's color system for badges - direct hex values */
+
+	:root {
+		--sg-comp-badge-padding-x: 0.375rem;
+		--sg-comp-badge-padding-y: 0.125rem;
+		--sg-comp-badge-font-size: 0.75rem;
+    --sg-comp-badge-border-radius: 0.25rem;
+		--sg-comp-badge-color: var(--sg-sys-secondary-foreground);
+		--sg-comp-badge-background: var(--sg-sys-secondary);
+	}
+
   .badge {
     display: inline-block;
-    padding: 0.125rem 0.375rem;
-    font-size: 0.75rem;
+    padding: var(--sg-comp-badge-padding-y) var(--sg-comp-badge-padding-x);
+    font-size: var(--sg-comp-badge-font-size);
+    border-radius: var(--sg-comp-badge-border-radius);
+		color: var(--sg-comp-badge-color);
+		background-color: var(--sg-comp-badge-background);
     font-weight: 500;
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    border-radius: 4px;
     line-height: 1rem;
   }
   
   .primary {
-    background-color: #0b70db !important;
-    color: white !important;
+    --sg-comp-badge-color: var(--sg-sys-primary-foreground);
+    --sg-comp-badge-background: var(--sg-sys-primary);
   }
   
   .secondary {
-    background-color: #e6ebf2 !important;
-    color: #343a4d !important;
+    --sg-comp-badge-color: var(--sg-sys-secondary-foreground);
+    --sg-comp-badge-background: var(--sg-sys-secondary);
   }
   
   .success {
-    background-color: #2ea043 !important;
-    color: white !important;
+    --sg-comp-badge-color: var(--sg-sys-accent-foreground);
+    --sg-comp-badge-background: var(--sg-ref-green-500);
   }
   
   .danger {
-    background-color: #dc3545 !important;
-    color: white !important;
+    --sg-comp-badge-color: var(--sg-sys-accent-foreground);
+    --sg-comp-badge-background: var(--sg-sys-destructive);
   }
   
   .warning {
-    background-color: #ffc107 !important;
-    color: black !important;
+    --sg-comp-badge-color: var(--sg-sys-accent-foreground);
+    --sg-comp-badge-background: var(--sg-ref-orange-500);
   }
   
   .info {
-    background-color: #72dbe8 !important;
-    color: black !important;
+    --sg-comp-badge-color: var(--sg-sys-accent-foreground);
+    --sg-comp-badge-background: var(--sg-ref-teal-500);
   }
   
   .merged {
-    background-color: #a305e1 !important;
-    color: white !important;
-  }
-  
-  .outline-secondary {
-    background-color: transparent !important;
-    color: #5e6e8c !important;
-    border: 1px solid #e6ebf2 !important;
-  }
-  
-  .link {
-    background-color: #f9fafb !important;
-    color: #0b70db !important;
-    font-family: monospace !important;
-    font-weight: normal !important;
+    --sg-comp-badge-color: var(--sg-sys-accent-foreground);
+    --sg-comp-badge-background: var(--sg-ref-violet-600);
   }
   
   .small {
-    font-size: 0.75rem !important;
-    padding: 0 0.25rem !important;
-    border-radius: 2px !important;
+    --sg-comp-badge-font-size: 0.75rem;
+		--sg-comp-badge-padding-x: 0.25rem;
+		--sg-comp-badge-padding-y: 0;
+    --sg-comp-badge-border-radius: 2px;
   }
   
   .pill {
-    padding-right: 0.6em !important;
-    padding-left: 0.6em !important;
-    border-radius: 10rem !important;
+    --sg-comp-badge-padding-y: 0;
+    --sg-comp-badge-padding-x: 0.6em;
+    --sg-comp-badge-border-radius: 1rem;
   }
 </style>

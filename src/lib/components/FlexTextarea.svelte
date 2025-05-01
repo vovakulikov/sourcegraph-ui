@@ -36,24 +36,31 @@ props (see min/max rows props).
 			if (!elementRef) {
 				return
 			}
+
 			const previousRows = elementRef.rows
 			const textareaLineHeight =
 				parseFloat(getComputedStyle(elementRef).lineHeight) || DEFAULT_TEXTAREA_LINE_HEIGHT
-			// reset number of rows in textarea
+
+			// Reset number of rows in textarea
 			elementRef.rows = minRows
+
 			const currentRows = Math.max(Math.floor(elementRef.scrollHeight / textareaLineHeight), minRows)
+
 			if (currentRows === previousRows) {
 				elementRef.rows = currentRows
 				return
 			}
+
 			if (currentRows > previousRows) {
 				elementRef.scrollTop = elementRef.scrollHeight
 			}
+
 			elementRef.rows = Math.min(currentRows, maxRows)
 		}
 
 		// Align rows on initial render
 		recalculateRows()
+
 		elementRef.addEventListener('input', recalculateRows)
 
 		return () => {

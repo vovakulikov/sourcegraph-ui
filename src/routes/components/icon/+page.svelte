@@ -1,14 +1,14 @@
 <script lang="ts">
-    import { Icon } from '$lib';
-    import CodeBlock from '$lib/layouts/CodeBlock.svelte'
-    import ComponentSandbox from '$lib/layouts/ComponentSandbox.svelte';
+    import { Icon } from '@sourcegraph/ui';
+		import { CodeBlock, ComponentSandbox } from '$layouts'
 </script>
 
 <h2>Icon</h2>
 
 <p>
 	The Icon component provides a convenient way to display SVG icons, particularly Lucide icons.
-	It includes styling and proper accessibility support.
+	It includes styling and proper accessibility support. We also support our own collection of
+	icons (for instance, see assets/symbol-icons set for symbols icons)
 </p>
 
 <ComponentSandbox title="Basic Usage" description="Basic usage of the Icon component with a Lucide icon.">
@@ -26,8 +26,8 @@
 </ComponentSandbox>
 
 <p>
-	The Icon component provides a convenient way to display SVG icons, particularly Lucide icons.
-	It includes styling and proper accessibility support.
+	For using custom collection see documentation on setup your vite configuration with
+	"UnpluginAutoImport" plugin.
 </p>
 
 <ComponentSandbox
@@ -36,6 +36,10 @@
 >
 	{#snippet preview()}
 		<Icon icon={ISgMark} />
+		<Icon icon={ISymbolArray} />
+		<Icon icon={ISymbolBoolean} />
+		<Icon icon={ISymbolClass} />
+		<Icon icon={ISymbolConstant} />
 	{/snippet}
 	{#snippet code()}
 		<CodeBlock code={`

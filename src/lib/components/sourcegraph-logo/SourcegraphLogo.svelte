@@ -4,7 +4,8 @@
     When neither `width` nor `height` is provided the logo will be rendered at its default size.
     If either is provided the other will be left undefined so that the aspect ratio is preserved.
 
-    If the logo is used in a context where layout shift is a concern it is recommended to specify both `width` and `height` or neither.
+    If the logo is used in a context where layout shift is a concern it is recommended to specify
+    both `width` and `height` or neither.
 
     The logo will automatically scale-down to fit into its container.
 -->

@@ -201,7 +201,7 @@
 				'--sg-sys-font-size',
 				'--sg-sys-font-size-small',
 				'--sg-sys-font-size-large',
-				'--sg-sys-muted-text-color',
+				'--sg-sys-muted-foreground',
 				'--sg-sys-font-family',
 				'--sg-sys-font-family-code',
 			],
@@ -209,12 +209,12 @@
 		},
 		{
 			title: 'Font Sizes',
-			tokens: Array.from({ length: 10 }, (_, i) => `--sg-font-size-${(i + 1) * 100}`),
+			tokens: Array.from({ length: 10 }, (_, i) => `--sg-sys-font-size-${(i + 1) * 100}`),
 			type: 'typography'
 		},
 		{
 			title: 'Spacing',
-			tokens: Array.from({ length: 10 }, (_, i) => `--sg-space-${(i + 1) * 100}`),
+			tokens: Array.from({ length: 10 }, (_, i) => `--sg-sys-space-${(i + 1) * 100}`),
 			type: 'spacing'
 		},
 		{
@@ -651,7 +651,7 @@
 	}
 
 	.token-documentation {
-		padding: var(--sg-space-600);
+		padding: var(--sg-sys-space-600);
 		width: 100%;
 		max-width: 1200px;
 		margin: 0 auto;
@@ -661,42 +661,42 @@
 	}
 
 	h1 {
-		font-size: var(--sg-font-size-1000);
-		margin-bottom: var(--sg-space-500);
+		font-size: var(--sg-sys-font-size-1000);
+		margin-bottom: var(--sg-sys-space-500);
 		font-weight: 600;
 		letter-spacing: -0.02em;
 	}
 
 	h2 {
-		font-size: var(--sg-font-size-800);
-		margin: var(--sg-space-600) 0 var(--sg-space-500);
-		padding-bottom: var(--sg-space-300);
+		font-size: var(--sg-sys-font-size-800);
+		margin: var(--sg-sys-space-600) 0 var(--sg-sys-space-500);
+		padding-bottom: var(--sg-sys-space-300);
 		border-bottom: 1px solid var(--sg-sys-border-color);
 		letter-spacing: -0.01em;
 		font-weight: 500;
 	}
 
 	h3 {
-		font-size: var(--sg-font-size-700);
-		margin: var(--sg-space-600) 0 var(--sg-space-400);
+		font-size: var(--sg-sys-font-size-700);
+		margin: var(--sg-sys-space-600) 0 var(--sg-sys-space-400);
 		font-weight: 500;
 	}
 
 	h4 {
-		font-size: var(--sg-font-size-600);
-		margin: var(--sg-space-500) 0 var(--sg-space-300);
+		font-size: var(--sg-sys-font-size-600);
+		margin: var(--sg-sys-space-500) 0 var(--sg-sys-space-300);
 		font-weight: 500;
 	}
 
 	.font-showcase {
 		display: flex;
 		flex-direction: column;
-		gap: var(--sg-space-500);
-		margin-top: var(--sg-space-400);
+		gap: var(--sg-sys-space-500);
+		margin-top: var(--sg-sys-space-400);
 	}
 
 	.font-section {
-		padding: var(--sg-space-500);
+		padding: var(--sg-sys-space-500);
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-sys-border-radius);
 		background-color: var(--sg-sys-background);
@@ -708,19 +708,19 @@
 	}
 
 	.font-example {
-		margin: var(--sg-space-300) 0;
+		margin: var(--sg-sys-space-300) 0;
 		line-height: 1.5;
 	}
 
 	.weight-examples {
-		margin-top: var(--sg-space-500);
-		padding-top: var(--sg-space-400);
+		margin-top: var(--sg-sys-space-500);
+		padding-top: var(--sg-sys-space-400);
 		border-top: 1px solid var(--sg-sys-border-color);
 	}
 
 	.token-group {
-		margin-bottom: var(--sg-space-600);
-		padding-bottom: var(--sg-space-400);
+		margin-bottom: var(--sg-sys-space-600);
+		padding-bottom: var(--sg-sys-space-400);
 		border-bottom: 1px dashed var(--sg-sys-border-color);
 	}
 
@@ -731,21 +731,21 @@
 	.token-list {
 		display: flex;
 		flex-direction: column;
-		gap: var(--sg-space-400);
-		margin-top: var(--sg-space-400);
+		gap: var(--sg-sys-space-400);
+		margin-top: var(--sg-sys-space-400);
 	}
 
 	.color-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-		gap: var(--sg-space-400);
-		margin-top: var(--sg-space-400);
+		gap: var(--sg-sys-space-400);
+		margin-top: var(--sg-sys-space-400);
 	}
 
 	.token-card {
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-sys-border-radius);
-		padding: var(--sg-space-500);
+		padding: var(--sg-sys-space-500);
 		background-color: var(--sg-sys-background-light);
 		color: var(--sg-sys-text-color);
 		box-shadow: var(--sg-shadow-100);
@@ -783,16 +783,16 @@
 		width: 50%;
 		text-align: left;
 		margin-bottom: 0;
-		padding-right: var(--sg-space-500);
+		padding-right: var(--sg-sys-space-500);
 	}
 
 	.token-name {
 		font-family: var(--sg-sys-font-family-sans);
-		font-size: var(--sg-font-size-400);
+		font-size: var(--sg-sys-font-size-400);
 		word-break: break-all;
 		width: 100%;
 		flex-shrink: 0;
-		margin-bottom: var(--sg-space-400);
+		margin-bottom: var(--sg-sys-space-400);
 		text-align: center;
 		font-weight: 500;
 		letter-spacing: 0.01em;
@@ -811,7 +811,7 @@
 		width: 100%;
 		height: 100px;
 		border-radius: var(--sg-sys-border-radius);
-		margin-bottom: var(--sg-space-300);
+		margin-bottom: var(--sg-sys-space-300);
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -821,28 +821,28 @@
 	}
 	
 	.color-info {
-		font-size: var(--sg-font-size-300);
+		font-size: var(--sg-sys-font-size-300);
 		text-align: center;
 		line-height: 1.6;
 		font-family: var(--sg-sys-font-family-monospace);
 	}
 
 	.radius-box {
-		width: var(--sg-space-800);
-		height: var(--sg-space-600);
+		width: var(--sg-sys-space-800);
+		height: var(--sg-sys-space-600);
 		background-color: var(--sg-sys-accent-color);
 	}
 
 	.border-box {
-		width: var(--sg-space-800);
-		height: var(--sg-space-600);
+		width: var(--sg-sys-space-800);
+		height: var(--sg-sys-space-600);
 		border: 2px solid;
 		border-radius: var(--sg-sys-border-radius);
 	}
 
 	.shadow-box {
-		width: var(--sg-space-800);
-		height: var(--sg-space-600);
+		width: var(--sg-sys-space-800);
+		height: var(--sg-sys-space-600);
 		background-color: var(--sg-sys-background-light);
 		border-radius: var(--sg-sys-border-radius);
 	}
@@ -853,7 +853,7 @@
 	}
 
 	.focus-demo {
-		padding: var(--sg-space-200) var(--sg-space-400);
+		padding: var(--sg-sys-space-200) var(--sg-sys-space-400);
 		background-color: var(--sg-sys-background);
 		color: var(--sg-sys-text-color);
 		border: 1px solid var(--sg-sys-border-color);
@@ -862,18 +862,18 @@
 	}
 
 	.token-navigation {
-		margin: var(--sg-space-400) 0 var(--sg-space-500);
+		margin: var(--sg-sys-space-400) 0 var(--sg-sys-space-500);
 		display: flex;
-		gap: var(--sg-space-400);
+		gap: var(--sg-sys-space-400);
 		flex-wrap: wrap;
 		background-color: transparent;
-		padding: var(--sg-space-300);
-		border-radius: var(--sg-border-radius-200);
+		padding: var(--sg-sys-space-300);
+		border-radius: var(--sg-sys-border-radius-200);
 	}
 
 	.token-category {
 		background-color: var(--sg-sys-background-light);
-		padding: var(--sg-space-300) var(--sg-space-500);
+		padding: var(--sg-sys-space-300) var(--sg-sys-space-500);
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-sys-border-radius);
 		cursor: pointer;
@@ -908,15 +908,15 @@
 	}
 
 	.token-search {
-		margin-bottom: var(--sg-space-500);
+		margin-bottom: var(--sg-sys-space-500);
 	}
 
 	.token-search input[type="search"] {
 		width: 100%;
-		padding: var(--sg-space-400);
+		padding: var(--sg-sys-space-400);
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-sys-border-radius);
-		font-size: var(--sg-font-size-400);
+		font-size: var(--sg-sys-font-size-400);
 		background-color: var(--sg-sys-background-light);
 		color: var(--sg-sys-text-color);
 	}
@@ -931,38 +931,38 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin: var(--sg-space-400) 0 var(--sg-space-500);
+		margin: var(--sg-sys-space-400) 0 var(--sg-sys-space-500);
 	}
 
 
 
 	.notification {
 		background-color: var(--sg-sys-background-light);
-		padding: var(--sg-space-300) var(--sg-space-500);
+		padding: var(--sg-sys-space-300) var(--sg-sys-space-500);
 		border: 1px solid var(--sg-sys-border-color);
 		border-radius: var(--sg-sys-border-radius);
-		margin-bottom: var(--sg-space-400);
+		margin-bottom: var(--sg-sys-space-400);
 		font-weight: 500;
 	}
 
 	.token-value {
-		font-size: var(--sg-font-size-300);
-		margin-top: var(--sg-space-400);
+		font-size: var(--sg-sys-font-size-300);
+		margin-top: var(--sg-sys-space-400);
 		font-family: var(--sg-sys-font-family-monospace);
 	}
 
 	.intro-text {
-		font-size: var(--sg-font-size-500);
+		font-size: var(--sg-sys-font-size-500);
 		max-width: 40em;
 		line-height: 1.6;
-		margin-bottom: var(--sg-space-400);
+		margin-bottom: var(--sg-sys-space-400);
 	}
 	
 	.section-description {
-		font-size: var(--sg-font-size-500);
+		font-size: var(--sg-sys-font-size-500);
 		max-width: 40em;
 		line-height: 1.6;
-		margin-bottom: var(--sg-space-400);
-		color: var(--sg-sys-muted-text-color);
+		margin-bottom: var(--sg-sys-space-400);
+		color: var(--sg-sys-muted-foreground);
 	}
 </style>

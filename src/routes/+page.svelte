@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { SourcegraphLogo } from '$lib'
-	import SimplexNoise from '$lib/layouts/simplex-noise-wave.svelte';
+	import { SourcegraphLogo } from '@sourcegraph/ui'
+	import { SimplexNoise } from '$layouts';
 </script>
-
 
 <div class='content'>
 	<div class='background'>
@@ -20,16 +19,15 @@
 
 <style lang="scss">
 	.background {
+    z-index: -1;
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		z-index: -1;
 	}
 
 	.content {
-		//position: relative;
 		z-index: 1;
 		flex-grow: 1;
 		display: flex;
@@ -42,9 +40,9 @@
 
 	h1 {
 		text-align: center;
-		color: var(--sg-sys-accent-text-color);
-		font-family: var(--sg-ref-font-family-serif);
-		font-size: calc(var(--sg-sys-font-size) * 2.625); /* Custom 42px size */
+		color: var(--sg-sys-primary-foreground);
+    font-size: var(--sg-sys-font-size-1200);
+		font-family: var(--sg-ref-font-family-serif), sans-serif;
 	}
 
 	footer {
@@ -53,7 +51,9 @@
 		gap: 1rem;
 
 		a {
-			color: var(--sg-sys-accent-text-color);
+			// Links are on the animation background (we treat it as primary variation)
+			// So text of these should has primary-foreground
+			color: var(--sg-sys-primary-foreground);
 		}
 	}
 </style>

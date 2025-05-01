@@ -2,13 +2,10 @@
 // on the page. Make sure that these styles are generic enough to not break
 // any web app page.
 
-@import './tokens/reference-tokens';
-@import './tokens/system-tokes';
-
 body {
-  font-family: var(--sg-sys-font-family), serif;
   font-size: var(--sg-sys-font-size);
-  background-color: var(--sg-sys-backgound-dark);
+  font-family: var(--sg-sys-font-family), serif;
+  background-color: var(--sg-sys-background);
 }
 
 // 1. Turn off standard focus ring style for all element
@@ -22,7 +19,7 @@ body {
 // for which we don't have any custom abstraction and use as plain
 // HTML elements
 a {
-  color: var(--sg-sys-accent-color);
+  color: var(--sg-sys-primary);
 
   &:focus-visible {
     // Inset is required here since we have a lot of links
@@ -30,7 +27,7 @@ a {
     // overflowed parent visible border (so any outside shadow
     // is visually cut/cropped)
     outline: none;
-    box-shadow: var(--sg-sys-focus-shadow);
+    box-shadow: var(--sg-sys-focus-shadow-inset);
     border-radius: var(--sg-sys-border-radius);
   }
 }

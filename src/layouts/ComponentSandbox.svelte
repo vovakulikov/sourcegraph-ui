@@ -12,7 +12,7 @@
 		code: Snippet
 	}
 
-	let { title, description, preview, code } = $props()
+	let { title, description, preview, code }: Props = $props()
 </script>
 
 <div class="root">
@@ -45,7 +45,7 @@
 		gap: 0.25rem;
 		padding: 1rem;
     border-bottom: 1px solid var(--sg-sys-border-color);
-		background-color: var(--sg-sys-background-light);
+		background-color: var(--sg-sys-card-background);
 	}
 
 	.header h3 {
@@ -56,21 +56,23 @@
 
 	.description {
 		font-size: var(--sg-sys-font-size-small);
-		color: var(--sg-sys-muted-text-color);
+		color: var(--sg-sys-muted-foreground);
 		line-height: 1.4;
 	}
 
 	.preview {
 		padding: 2.5rem;
 		display: flex;
+		gap: 0.5rem;
 		align-items: center;
 		justify-content: center;
-		background-color: var(--sg-sys-background);
 		border-bottom: 1px solid var(--sg-sys-border-color);
-		background-image: linear-gradient(45deg, var(--sg-sys-background-light) 25%, transparent 25%),
-			linear-gradient(-45deg, var(--sg-sys-background-light) 25%, transparent 25%),
-			linear-gradient(45deg, transparent 75%, var(--sg-sys-background-light) 75%),
-			linear-gradient(-45deg, transparent 75%, var(--sg-sys-background-light) 75%);
+
+		// Testing grid pattern background
+		background-image: linear-gradient(45deg, var(--sg-sys-card-background) 25%, transparent 25%),
+			linear-gradient(-45deg, var(--sg-sys-card-background) 25%, transparent 25%),
+			linear-gradient(45deg, transparent 75%, var(--sg-sys-card-background) 75%),
+			linear-gradient(-45deg, transparent 75%, var(--sg-sys-card-background) 75%);
 		background-size: 20px 20px;
 		background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
 	}
@@ -78,6 +80,6 @@
 	.code {
 		overflow: auto;
     background-color: var(--sg-sys-background-dark, #1e1e1e);
-		font-family: var(--sg-sys-font-family-code);
+		font-family: var(--sg-sys-font-family-code), sans-serif;
 	}
 </style>

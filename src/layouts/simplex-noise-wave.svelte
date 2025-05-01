@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { THEME_STATE } from '@sourcegraph/ui'
+
 	let canvas: HTMLCanvasElement | null = $state(null);
 
 	$effect(() => {
@@ -80,16 +82,7 @@
 		let start = Date.now();
 		// Function to check if dark mode is active
 		function isDarkThemeActive() {
-			if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-				return true;
-			}
-			// Check for theme class or data attribute if your app uses those
-			const htmlElement = document.documentElement;
-			if (htmlElement.getAttribute('data-theme') === 'dark' || 
-				htmlElement.classList.contains('dark')) {
-				return true;
-			}
-			return false;
+			return THEME_STATE.currentMode === 'dark';
 		}
 
 		// Set up theme change listener
@@ -104,7 +97,7 @@
 		});
 		observer.observe(document.documentElement, { 
 			attributes: true, 
-			attributeFilter: ['data-theme', 'class'] 
+			attributeFilter: ['data-sg-theme', 'data-sg-theme-mode']
 		});
 
 		function render() {

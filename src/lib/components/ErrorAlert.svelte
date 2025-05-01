@@ -1,10 +1,12 @@
 <!--
   @component
-  This component renders an <Alert variant="danger"> with an error message. If the component is
-  passed a CombinedError object from a GraphQL query, it will display all unique error messages.
+  This component renders an <Alert variant="danger"> with an error message.
+  If the component is passed a CombinedError object from a GraphQL query,
+  it will display all unique error messages.
 -->
-<script lang="ts">
-	// We create our own simplified CombinedError type to avoid direct dependency on @urql/core
+<script lang="ts" module>
+	// We create our own simplified CombinedError type to avoid direct
+	// dependency on @urql/core
 	interface GraphQLError {
 		message?: string;
 	}
@@ -34,13 +36,6 @@
 			Array.isArray((error as any).graphQLErrors)
 		);
 	}
-
-	import Alert from './Alert.svelte';
-
-	export let title: string | undefined = undefined;
-	export let error: ErrorLike | SimplifiedCombinedError | unknown;
-
-	$: messages = getErrorMessage(error);
 
 	function getErrorMessage(error: ErrorLike | SimplifiedCombinedError | unknown): string[] {
 		if (isCombinedError(error)) {
@@ -73,10 +68,23 @@
 	}
 </script>
 
-<Alert variant="danger">
-	{#if title}
-		<h4>{title}</h4>
-	{/if}
+<script lang="ts">
+	import Alert from './Alert.svelte';
+
+	interface Props {
+		title?: string
+		error: ErrorLike | SimplifiedCombinedError | unknown
+	}
+
+	let { title: errorTitle, error }: Props = $props()
+	let messages = $derived(getErrorMessage(error));
+</script>
+
+{#snippet title()}
+	<h4>{errorTitle}</h4>
+{/snippet}
+
+<Alert variant="danger" title={errorTitle ? title : undefined}>
 	{#if messages.length > 1}
 		<ul>
 			{#each messages as message}
@@ -90,7 +98,7 @@
 
 <style lang="scss">
 	ul {
-		padding-inline-start: 3rem;
+		padding-inline-start: 1rem;
 		list-style: disc;
 	}
 

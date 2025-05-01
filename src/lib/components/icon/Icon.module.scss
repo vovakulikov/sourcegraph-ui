@@ -1,0 +1,27 @@
+// We use CSS module file here because Icon component renders
+// generic defined in props svelte component and we can't rely
+// on Svelte built-in scoped styles.
+
+:root {
+  --sg-comp-icon-size: 1.5rem;
+  --sg-comp-icon-stroke-width: 2;
+  --sg-comp-icon-inline-size: calc((16 / 14) * 1em);
+  --sg-comp-icon-color: var(--sg-sys-muted-foreground);
+}
+
+.icon {
+  // Icon should never shrink when it's in a flex container
+  flex: none;
+  width: var(--sg-comp-icon-size);
+  height: var(--sg-comp-icon-size);
+  color: var(--sg-comp-icon-color);
+  stroke-width: var(--sg-comp-icon-stroke-width);
+
+  &--inline {
+    display: inline-block;
+    flex: none;
+    width: var(--sg-comp-icon-inline-size);
+    height:  var(--sg-comp-icon-inline-size);
+    vertical-align: text-bottom;
+  }
+}

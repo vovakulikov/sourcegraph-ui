@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 
 	const COMPONENTS_PAGES = [
 		{ name: 'Icon', url: '/icon' },
@@ -11,16 +11,12 @@
 		{ name: 'Checkbox', url: '/checkbox' },
 		{ name: 'Loading Spinner', url: '/loading-spinner' },
 		{ name: 'Select', url: '/select' },
-		{ name: 'Combobox', url: '/combobox' }
 	];
 
 	let { children } = $props();
+	let currentPath = $derived(page.url.pathname);
 
-	let currentPath = $derived($page.url.pathname);
-
-	/**
-	 * Check if the given component URL matches the current path
-	 */
+	/** Check if the given component URL matches the current path */
 	function isActive(componentUrl: string): boolean {
 		return currentPath === `/components${componentUrl}` || 
 			(componentUrl === '/alert' && currentPath === '/components') || // Special case for default route
@@ -30,19 +26,19 @@
 
 <div class="root">
 	<aside>
-	<ul>
-		{#each COMPONENTS_PAGES as item (item.url)}
-			<li>
-				<a 
-					href="/components{item.url}" 
-					class:active={isActive(item.url)}
-					aria-current={isActive(item.url) ? 'page' : undefined}
-				>
-					{item.name}
-				</a>
-			</li>
-		{/each}
-	</ul>
+		<ul>
+			{#each COMPONENTS_PAGES as item (item.url)}
+				<li>
+					<a
+						href="/components{item.url}"
+						class:active={isActive(item.url)}
+						aria-current={isActive(item.url) ? 'page' : undefined}
+					>
+						{item.name}
+					</a>
+				</li>
+			{/each}
+		</ul>
 </aside>
 
 	<div class="content">
@@ -61,12 +57,11 @@
 	}
 
 	aside {
-		width: 240px;
+		width: 300px;
 		height: 100%;
 		overflow: auto;
-		background-color: var(--sg-sys-background-light);
+		background-color: var(--sg-sys-card-background);
 		border-right: 1px solid var(--sg-sys-border-color);
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 	}
 
 	ul {
@@ -75,31 +70,20 @@
 		margin: 0;
 	}
 
-	li {
-		border-bottom: 1px solid var(--sg-sys-border-subtle);
-		&:last-child {
-			border-bottom: none;
-		}
-	}
-
 	a {
 		padding: 0.75rem 1.25rem;
 		display: block;
-		color: var(--sg-sys-text-color);
+		color: var(--sg-sys-foreground);
 		text-decoration: none;
-		transition: background-color 0.2s ease;
-		font-size: 0.95rem;
-		border-left: 3px solid transparent;
 
 		&:hover {
-			background-color: var(--sg-sys-background-hover);
+			color: var(--sg-sys-accent-foreground);
+			background-color: var(--sg-sys-accent);
 		}
 
 		&:global(.active), &[aria-current="page"] {
-			color: var(--sg-sys-primary-color);
-			border-left-color: var(--sg-sys-primary-color);
-			font-weight: 500;
-			background-color: var(--sg-sys-background);
+			color: var(--sg-sys-primary-foreground);
+      background-color: var(--sg-sys-primary);
 		}
 	}
 
@@ -126,21 +110,14 @@
 			margin-bottom: 1rem;
 		}
 
-		:global(h4) {
-			font-size: 1.25rem;
-			margin-top: 1.5rem;
-			margin-bottom: 0.75rem;
-			color: var(--sg-sys-text-color-muted);
-		}
-
 		:global(p) {
+      line-height: 1.6;
 			margin-bottom: 1.5rem;
-			line-height: 1.6;
 		}
 
 		.inner-wrapper {
+      margin: 0 auto;
 			max-width: 800px;
-			margin: 0 auto;
 		}
 	}
 </style>

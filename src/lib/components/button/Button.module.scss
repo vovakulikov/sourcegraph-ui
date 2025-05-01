@@ -1,17 +1,9 @@
 :root {
-    --btn-padding-y-sm: 0.375rem;
-    --icon-inline-md-size: #{(20 / 14)}em;
-    --icon-inline-size: #{(16 / 14)}em;
-    --btn-padding-y-lg: 0.5rem;
-    --btn-padding-x-lg: 1rem;
-    --font-size-lg: 1.09375rem;
-    --btn-line-height-lg: 1.5;
-    --btn-border-width: 1px;
-    --btn-active-box-shadow: inset 0 3px 5px rgba(var(--black), 0.125);
-    --btn-icon-disabled-light-color: #797d8a;
-    --btn-icon-disabled-dark-color: #959ba7;
-
-    --sg-comp-button-text-color: var(--sg-sys-accent-text-color);
+    --sg-comp-button-font-size: 0.875rem;
+    --sg-comp-button-line-height: 1.4285714286;
+    --sg-comp-button-padding-x: 0.75rem;
+    --sg-comp-button-padding-y: 0.375rem;
+    --sg-comp-button-text-color: var(--sg-sys-foreground);
     --sg-comp-button-border-color: var(--sg-sys-border-color);
     --sg-comp-button-border-radius: var(--sg-sys-border-radius);
     --sg-comp-button-border-width: 1px;
@@ -20,27 +12,28 @@
     --sg-comp-button-pressed-background: transparent;
 }
 
-// Basic styles for all button variations
 .btn {
+    // By default all icons within button should match with color text
+    --sg-comp-icon-color: var(--sg-comp-button-text-color);
+
     display: inline-block;
     text-align: center;
-    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
     user-select: none;
-    font-size: 0.875rem;
-    line-height: 1.4285714286;
-    padding: 0.375rem 0.75rem;
+    vertical-align: middle;
+    cursor: pointer;
     font-weight: 500;
-    letter-spacing: -(0.1/14) + em;
-
+    letter-spacing: calc((0.1/14) * -1em);
+    font-size: var(--sg-comp-button-font-size);
+    line-height: var(--sg-comp-button-line-height);
+    padding: var(--sg-comp-button-padding-y) var(--sg-comp-button-padding-x);
     color: var(--sg-comp-button-text-color);
     border: var(--sg-comp-button-border-width) solid transparent;
     border-radius: var(--sg-comp-button-border-radius);
     background-color: var(--sg-comp-button-background);
 
-    // By default all icons within button should match with color text
-    --sg-comp-icon-color: var(--sg-comp-button-text-color);
-
-    &:hover{
+    &:hover {
         background-color: var(--sg-comp-button-active-background);
     }
 
@@ -52,335 +45,77 @@
         background-color: var(--sg-comp-button-pressed-background);
     }
 
+    &__ripple {
+        position: absolute;
+        pointer-events: none;
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 600ms linear;
+        background-color: color-mix(in srgb, var(--sg-comp-button-active-background) 50%, white);
+    }
+
+    // Variations
+    &--primary {
+        --sg-comp-button-border-width: 0;
+        --sg-comp-button-border-color: transparent;
+        --sg-comp-button-text-color: var(--sg-sys-primary-foreground);
+        --sg-comp-button-background: var(--sg-sys-primary);
+        --sg-comp-button-active-background: color-mix(in srgb, var(--sg-sys-primary) 87%, transparent);
+        --sg-comp-button-pressed-background: color-mix(in srgb, var(--sg-sys-primary) 80%, transparent);
+    }
+
+    &--secondary {
+        --sg-comp-button-border-width: 0;
+        --sg-comp-button-border-color: transparent;
+        --sg-comp-button-text-color: var(--sg-sys-secondary-foreground);
+        --sg-comp-button-background: var(--sg-sys-secondary);
+        --sg-comp-button-active-background: color-mix(in srgb, var(--sg-sys-secondary) 87%, transparent);
+        --sg-comp-button-pressed-background: color-mix(in srgb, var(--sg-sys-secondary) 80%, transparent);
+    }
+
+    &--text {
+        --sg-comp-button-border-width: 0;
+        --sg-comp-button-border-color: transparent;
+        --sg-comp-button-text-color: var(--sg-sys-foreground);
+        --sg-comp-button-background: transparent;
+        --sg-comp-button-active-background: color-mix(in srgb, var(--sg-sys-secondary) 50%, transparent);
+        --sg-comp-button-pressed-background: color-mix(in srgb, var(--sg-sys-secondary) 60%, transparent);
+    }
+
+    // Sizes
+    &--large {
+        --sg-comp-button-padding-x: 1rem;
+        --sg-comp-button-padding-y: 0.5rem;
+        --sg-comp-button-font-size: var(--sg-sys-font-size-700);
+    }
+
+    &--small {
+        --sg-comp-button-padding-x: 0.4rem;
+        --sg-comp-button-padding-y: 0.15rem;
+        --sg-comp-button-font-size: var(--sg-sys-font-size-400);
+    }
+
+    // Aria-disabled is needed because we do not disable button with disabled
+    // attribute since we want to listen events from button anyway, it's
+    // important for showing interactive elements like tooltip over disabled
+    // button.
     &:disabled,
     &[aria-disabled='true'] {
+        // Important that these variable overrides come last in the file so
+        // they will override the set variables from variations above.
+        --sg-comp-icon-color: color-mix(in srgb, var(--sg-comp-button-text-color) 50%, transparent);;
+        --sg-comp-button-active-background: var(--sg-comp-button-background);
+        --sg-comp-button-pressed-background: var(--sg-comp-button-background);
+
         cursor: not-allowed;
+        color: color-mix(in srgb, var(--sg-comp-button-text-color) 50%, transparent);
+        background-color: color-mix(in srgb, var(--sg-comp-button-background) 50%, transparent);
     }
 }
 
-.btn-primary {
-    --sg-comp-button-text-color: var(--sg-sys-accent-text-color);
-    --sg-comp-button-border-color: transparent;
-    --sg-comp-button-border-width: 0;
-    --sg-comp-button-background: var(--sg-sys-accent-color);
-    --sg-comp-button-active-background: var(--sg-sys-accent-color-light);
-    --sg-comp-button-pressed-background: var(--sg-sys-accent-color-dark);
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
 }
-
-.btn-secondary {
-    //    --btn-base-color: var(--secondary-2);
-    //    --btn-light-color-variant: var(--secondary-3);
-    //    --btn-dark-color-variant: var(--secondary-4);
-    //    // Use darker text colors for contrast
-    //    --btn-text-color: var(--body-color);
-    //    --btn-light-disabled-text-color: var(--text-disabled);
-    //    --btn-dark-disabled-text-color: var(--text-muted);
-
-    --sg-comp-button-text-color: var(--sg-sys-accent-text-color);
-    --sg-comp-button-border-color: transparent;
-    --sg-comp-button-border-width: 0;
-    --sg-comp-button-background: var(--sg-sys-secondary-color);
-    --sg-comp-button-active-background: var(--sg-sys-secondary-color-light);
-    --sg-comp-button-pressed-background: var(--sg-sys-secondary-color-dark);
-}
-//
-//.btn-link {
-//    --icon-color: currentColor;
-//
-//    color: var(--link-color);
-//    background-color: var(--link-1);
-//
-//    &:not(:disabled):not(:global(.disabled)):not([aria-disabled='true']) {
-//        &:hover:not(:global(.focus)):not(:focus-visible),
-//        &:active,
-//        &:global(.active) {
-//            text-decoration: underline;
-//            color: var(--link-hover-color);
-//        }
-//
-//        &:focus-visible,
-//        &:global(.focus) {
-//            text-decoration: underline;
-//
-//            :global(.theme-light) & {
-//                box-shadow: 0 0 0 2px var(--primary-2);
-//            }
-//
-//            :global(.theme-dark) & {
-//                box-shadow: 0 0 0 2px var(--primary-3);
-//            }
-//        }
-//    }
-//}
-//
-//.btn-text {
-//    --icon-color: currentColor;
-//
-//    &:not(:disabled):not(:global(.disabled)):not([aria-disabled='true']) {
-//        &:hover:not(:global(.focus)):not(:focus-visible),
-//        &:active,
-//        &:global(.active) {
-//            background-color: var(--secondary-2);
-//        }
-//
-//        &:focus-visible,
-//        &:global(.focus) {
-//            text-decoration: underline;
-//
-//            :global(.theme-light) & {
-//                box-shadow: 0 0 0 2px var(--primary-2);
-//            }
-//
-//            :global(.theme-dark) & {
-//                box-shadow: 0 0 0 2px var(--primary-3);
-//            }
-//        }
-//    }
-//}
-//
-//.btn-sm {
-//    // Use string interpolation and calc() to avoid using Sass own max() function.
-//    // See: https://github.com/sass/node-sass/issues/2815#issuecomment-575926329
-//    font-size: calc(min(0.75rem, #{(11/12)}em));
-//    line-height: 1rem;
-//    letter-spacing: -(0.25/12) + em;
-//    padding: var(--btn-padding-y-sm) 0.5rem;
-//}
-//
-//.btn.btn-lg {
-//    padding: var(--btn-padding-y-lg) var(--btn-padding-x-lg);
-//    font-size: var(--font-size-lg);
-//    line-height: var(--btn-line-height-lg);
-//}
-//
-//// This class is meant for clickable icons. It is NOT meant for buttons with icons in it or for nav
-//// items.
-//.btn-icon {
-//    margin: 0;
-//    padding: 0;
-//    background: transparent;
-//    color: inherit;
-//    display: inline-flex;
-//    align-items: center;
-//    border: none;
-//    cursor: pointer;
-//
-//    &.btn.btn-block {
-//        display: flex;
-//    }
-//
-//    &.focus:not(:disabled):not(:global(.disabled)):not([aria-disabled='true']) {
-//        box-shadow: 0 0 0 2px var(--primary-2);
-//    }
-//
-//    &:hover:not(:disabled):not(:global(.disabled)):not([aria-disabled='true']) {
-//        color: var(--body-color);
-//    }
-//
-//    // Add color for disabled state of button icon
-//    &:disabled,
-//    &[aria-disabled='true'] {
-//        :global(.theme-light) & {
-//            color: var(--btn-icon-disabled-light-color);
-//        }
-//
-//        :global(.theme-dark) & {
-//            color: var(--btn-icon-disabled-dark-color);
-//        }
-//    }
-//}
-//
-//.btn-primary,
-//.btn-secondary,
-//.btn-success,
-//.btn-danger,
-//.btn-warning,
-//.btn-info,
-//.btn-merged {
-//    --btn-text-color: var(--light-text);
-//    --btn-base-color: var(--primary);
-//    --btn-light-color-variant: var(--primary-2);
-//    --btn-dark-color-variant: var(--primary-3);
-//    --btn-light-disabled-text-color: var(--light-text);
-//    --btn-dark-disabled-text-color: var(--text-disabled);
-//    --icon-color: currentColor;
-//
-//    color: var(--btn-text-color);
-//    border-color: var(--btn-base-color);
-//    background-color: var(--btn-base-color);
-//
-//    &:global(.disabled),
-//    &:disabled,
-//    &[aria-disabled='true'] {
-//        opacity: 1;
-//        background-color: var(--btn-light-color-variant);
-//        border-color: var(--btn-light-color-variant);
-//    }
-//
-//    &:not(:disabled):not(:global(.disabled)):not([aria-disabled='true']) {
-//        &:hover:not(:global(.focus)):not(:focus-visible),
-//        &:active,
-//        &:global(.active) {
-//            color: var(--btn-text-color);
-//            background-color: var(--btn-dark-color-variant);
-//            // Bring the button to the top so in button groups, its outline is
-//            // visible on all sides
-//            z-index: 1;
-//        }
-//    }
-//}
-//
-//.btn-outline {
-//    color: var(--body-color);
-//    background-color: transparent;
-//
-//    &:global(.disabled),
-//    &:disabled,
-//    &[aria-disabled='true'] {
-//        --btn-light-disabled-text-color: var(--text-disabled);
-//        --btn-dark-disabled-text-color: var(--text-disabled);
-//
-//        background-color: transparent;
-//    }
-//
-//    &:not(:disabled):not(:global(.disabled)):not([aria-disabled='true']) {
-//        // Set inlined icons to match outline border
-//        // except [data-caret] attribute (which can be used for button carret
-//        svg:not([data-caret]) {
-//            fill: var(--btn-base-color);
-//        }
-//
-//        &:hover:not(:global(.focus)):not(:focus-visible),
-//        &:active,
-//        &:global(.active) {
-//            background-color: var(--color-bg-1);
-//
-//            :global(.theme-light) & {
-//                color: var(--btn-dark-color-variant);
-//                border-color: var(--btn-dark-color-variant);
-//
-//                svg {
-//                    fill: var(--btn-dark-color-variant);
-//                }
-//            }
-//
-//            :global(.theme-dark) & {
-//                color: var(--btn-base-color);
-//                border-color: var(--btn-base-color);
-//            }
-//        }
-//
-//        &:focus-visible,
-//        &:global(.focus) {
-//            color: var(--body-color);
-//            background-color: var(--body-bg);
-//            border-color: var(--body-bg);
-//            outline: none;
-//        }
-//    }
-//
-//    :global(.show) > &:global(.dropdown-toggle) {
-//        border-color: var(--body-bg);
-//        background-color: var(--body-bg);
-//
-//        :global(.theme-light) & {
-//            box-shadow: 0 0 0 2px var(--btn-light-color-variant);
-//        }
-//        :global(.theme-dark) & {
-//            box-shadow: 0 0 0 2px var(--btn-dark-color-variant);
-//        }
-//    }
-//}
-//
-//.btn-primary {
-//    --btn-text-color: var(--light-text);
-//    --btn-base-color: var(--primary);
-//    --btn-light-color-variant: var(--primary-2);
-//    --btn-dark-color-variant: var(--primary-3);
-//    --btn-light-disabled-text-color: var(--light-text);
-//    --btn-dark-disabled-text-color: var(--light-text-disabled);
-//}
-//
-//.btn-secondary {
-//    --btn-base-color: var(--secondary-2);
-//    --btn-light-color-variant: var(--secondary-3);
-//    --btn-dark-color-variant: var(--secondary-4);
-//    // Use darker text colors for contrast
-//    --btn-text-color: var(--body-color);
-//    --btn-light-disabled-text-color: var(--text-disabled);
-//    --btn-dark-disabled-text-color: var(--text-muted);
-//}
-//
-//.btn-success {
-//    --btn-base-color: var(--success);
-//    --btn-light-color-variant: var(--success-2);
-//    --btn-dark-color-variant: var(--success-3);
-//}
-//
-//.btn-danger {
-//    --btn-base-color: var(--danger);
-//    --btn-light-color-variant: var(--danger-2);
-//    --btn-dark-color-variant: var(--danger-3);
-//}
-//
-//.btn-warning {
-//    --btn-base-color: var(--warning);
-//    --btn-light-color-variant: var(--warning-2);
-//    --btn-dark-color-variant: var(--warning-3);
-//    // Use darker text colors for contrast
-//    --btn-text-color: var(--dark-text);
-//    --btn-light-disabled-text-color: var(--text-muted);
-//    --btn-dark-disabled-text-color: var(--text-muted);
-//}
-//
-//.btn-info {
-//    --btn-base-color: var(--info);
-//    --btn-light-color-variant: var(--info-2);
-//    --btn-dark-color-variant: var(--info-3);
-//    // Use darker text colors for contrast
-//    --btn-text-color: var(--dark-text);
-//    --btn-light-disabled-text-color: var(--text-muted);
-//    --btn-dark-disabled-text-color: var(--text-muted);
-//}
-//
-//.btn-merged {
-//    --btn-base-color: var(--merged);
-//    --btn-light-color-variant: var(--merged-2);
-//    --btn-dark-color-variant: var(--merged-3);
-//    --btn-dark-disabled-text-color: var(--light-text);
-//}
-//
-//:global(.theme-dark),
-//:global(.theme-light) {
-//    // btn-secondary needs specific styles to ensure good contrast
-//    .btn-secondary {
-//        &:global(.disabled),
-//        &:disabled,
-//        &[aria-disabled='true'] {
-//            border-color: var(--input-disabled-bg);
-//        }
-//
-//        &:not(:disabled):not(:global(.disabled)):not([aria-disabled='true']) {
-//            &:hover:not(:global(.focus)):not(:focus-visible),
-//            &:active,
-//            &:global(.active) {
-//                text-decoration: none;
-//                color: var(--body-color);
-//                border-color: var(--secondary);
-//
-//                svg {
-//                    fill: var(--icon-color);
-//                }
-//            }
-//
-//            &:focus-visible,
-//            &:global(.focus) {
-//                box-shadow: 0 0 0 2px var(--primary-2);
-//            }
-//
-//            svg {
-//                fill: var(--icon-color);
-//            }
-//        }
-//    }
-//}

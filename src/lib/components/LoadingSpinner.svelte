@@ -1,21 +1,28 @@
 <script lang="ts">
 	interface LoadingSpinnerProps {
+
 		/** Display spinner inline (as an inline element) */
 		inline?: boolean;
+
 		/** Center spinner within its container */
 		center?: boolean;
-		/** Custom inline styles for the spinner */
-		style?: string;
 	}
 
-	const { inline = false, center = true, style = '' }: LoadingSpinnerProps = $props();
+	const { inline = false, center = true }: LoadingSpinnerProps = $props();
 </script>
 
-<div class:center class:inline data-loading-spinner {style}>
+<div class:center class:inline data-loading-spinner>
 	<div class="loading-spinner" aria-label="loading" aria-live="polite"></div>
 </div>
 
 <style lang="scss">
+	:root {
+		--sg-comp-spinner-size: 1rem;
+		--sg-comp-spinner-inline-size: 1em;
+		--sg-comp-spinner-outer-color: var(--sg-sys-border-color);
+    --sg-comp-spinner-inner-color: var(--sg-sys-foreground);
+	}
+
 	.center {
 		display: flex;
 		flex-direction: column;
@@ -24,42 +31,23 @@
 		height: 100%;
 	}
 
-	.inline {
-		display: contents;
-	}
-
 	.loading-spinner {
-		width: var(--size, 1rem);
-		height: var(--size, 1rem);
+		width: var(--sg-comp-spinner-size, 1rem);
+		height: var(--sg-comp-spinner-size, 1rem);
 		flex-shrink: 0;
 		flex-grow: 0;
-
-		// Default colors from the design system
-		--loading-spinner-outer-color: var(--sg-sys-border-color);
-		--loading-spinner-inner-color: var(--sg-sys-accent-color);
-
-		:global(.theme-light) & {
-			--loading-spinner-outer-color: var(--sg-ref-gray-300);
-			--loading-spinner-inner-color: var(--sg-ref-gray-800);
-		}
-		:global(.theme-dark) & {
-			--loading-spinner-outer-color: var(--sg-ref-gray-700);
-			--loading-spinner-inner-color: var(--sg-ref-gray-100);
-		}
-
-		.inline & {
-			width: var(--icon-inline-size, 1em);
-			height: var(--icon-inline-size, 1em);
-
-			vertical-align: middle;
-			display: inline-block;
-		}
-
 		border-radius: 50%;
 		animation: loading-spinner-spin 1s linear infinite;
-		border: 2px solid var(--loading-spinner-outer-color, rgba(0, 0, 0, 0.3));
-		border-top: 2px solid var(--loading-spinner-inner-color, rgba(0, 0, 0, 1));
+		border: 2px solid var(--sg-comp-spinner-outer-color);
+		border-top: 2px solid var(--sg-comp-spinner-inner-color);
 	}
+
+  .inline {
+    display: inline-block;
+    vertical-align: middle;
+    width: var(--sg-comp-spinner-inline-size);
+    height: var(--sg-comp-spinner-inline-size);
+  }
 
 	@keyframes loading-spinner-spin {
 		0% {

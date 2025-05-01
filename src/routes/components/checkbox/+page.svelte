@@ -1,7 +1,18 @@
 <script lang="ts">
 	import { Checkbox } from '$lib';
-	import CodeBlock from '$lib/layouts/CodeBlock.svelte';
-	import ComponentSandbox from '$lib/layouts/ComponentSandbox.svelte';
+	import CodeBlock from '$layouts/CodeBlock.svelte';
+	import ComponentSandbox from '$layouts/ComponentSandbox.svelte';
+
+	let input: HTMLInputElement | null = $state(null)
+
+	$inspect(input)
+	$effect.pre(() => {
+		if (!input) {
+			return
+		}
+
+		input.indeterminate = true
+	})
 </script>
 
 <h2>Checkbox</h2>
@@ -61,6 +72,10 @@
 			<div style="display: flex; align-items: center; gap: 0.5rem;">
 				<Checkbox />
 				<span>Unchecked</span>
+			</div>
+			<div style="display: flex; align-items: center; gap: 0.5rem;">
+				<Checkbox bind:elementRef={input} disabled/>
+				<span>Intermediate</span>
 			</div>
 		</div>
 	{/snippet}
@@ -157,24 +172,3 @@
 	Additionally, the component accepts any HTML input attributes that can be used with a standard checkbox
 	input.
 </p>
-
-<style lang="scss">
-	/* Table styles for API documentation */
-	table {
-		width: 100%;
-		border-collapse: collapse;
-		margin: 1rem 0;
-	}
-
-	th,
-	td {
-		padding: 0.75rem;
-		text-align: left;
-		border-bottom: 1px solid var(--sg-sys-border-color);
-	}
-
-	th {
-		background-color: var(--sg-sys-background-light);
-		font-weight: 600;
-	}
-</style>

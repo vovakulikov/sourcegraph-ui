@@ -1,0 +1,33 @@
+
+// High contrast accessibility theme
+[data-sg-theme="high-contrast"] {
+  // Accent color - high contrast version
+  --sg-sys-accent-text-color: white;
+  --sg-sys-accent-color: #0052cc; // Higher contrast blue
+  --sg-sys-accent-color-light: #0066ff;
+  --sg-sys-accent-color-dark: #003d99;
+  --sg-sys-secondary-color: #595959;
+  --sg-sys-secondary-color-light: #737373;
+  --sg-sys-secondary-color-dark: #333333;
+
+  // Typography - larger and higher contrast
+  --sg-sys-text-color: black;
+  --sg-sys-font-size: 1.1rem; // 10% larger base font size
+  --sg-sys-muted-foreground: #333333; // Darker muted text for better contrast
+  --sg-sys-font-family: var(--sg-ref-font-family-sans);
+  --sg-sys-font-family-code: var(--sg-ref-font-family-monospace);
+
+  // High contrast backgrounds
+  --sg-sys-background-light: white;
+  --sg-sys-background: #fafafa;
+  --sg-sys-background-dark: #f0f0f0;
+
+  // Shadow color - more pronounced
+  --sg-sys-shadow-color: rgba(0, 0, 0, 0.7);
+  --sg-sys-shadow-color-light: rgba(0, 0, 0, 0.5);
+
+  // Borders - thicker and more visible
+  --sg-sys-border-color: #000000;
+  --sg-sys-border-color-hover: #333333;
+  --sg-sys-border-radius: 4px;
+}

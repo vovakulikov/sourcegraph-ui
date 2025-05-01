@@ -1,0 +1,43 @@
+// This file contains system design tokens, this layer change from theme to
+// theme and actually defines the theme itself. It contains a short set of
+// design tokens that are Sourcegraph related. By default we don't provide
+// light or dark theme, you should import a proper theme from themes directory
+// directly into your bundle.
+
+// These a standard fallback values for system tokens, each theme overrides it
+// appropriate its visual styles.
+:root {
+    --sg-sys-primary: var(--sg-ref-blue-700);
+    --sg-sys-primary-foreground: var(--sg-ref-gray-100);
+    --sg-sys-secondary: var(--sg-ref-gray-400);
+    --sg-sys-secondary-foreground: var(--sg-ref-gray-100);
+    --sg-sys-destructive: var(--sg-ref-red-600);
+
+    --sg-sys-background: white;
+    --sg-sys-foreground: var(--sg-ref-gray-1200);
+    --sg-sys-card-background: var(--sg-ref-gray-100);
+    --sg-sys-card-foreground: var(--sg-ref-gray-1000);
+    --sg-sys-popover-background: var(--sg-ref-gray-100);
+    --sg-sys-popover-foreground: var(--sg-ref-gray-700);
+
+    --sg-sys-muted-foreground: var(--sg-ref-gray-400);
+    --sg-sys-accent: var(--sg-ref-blue-500);
+    --sg-sys-accent-foreground: var(--sg-ref-gray-100);
+    --sg-sys-border-color: var(--sg-ref-gray-300);
+    --sg-sys-border-subtle: var(--sg-ref-gray-200);
+    --sg-sys-input-background: white;
+
+    // Typography
+    --sg-sys-font-size: 1rem;
+    --sg-sys-font-family: var(--sg-ref-font-family-sans);
+    --sg-sys-font-family-code: var(--sg-ref-font-family-monospace);
+
+    // Shadow color
+    --sg-sys-shadow-color: var(--sg-ref-gray-400);
+
+    // Borders
+    --sg-sys-border-radius: 4px;
+
+    // Spacing
+    --sg-sys-space: 1rem;
+}

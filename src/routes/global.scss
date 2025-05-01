@@ -5,6 +5,28 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  color: var(--sg-sys-foreground);
   background-color: var(--sg-sys-background);
-  color: var(--sg-sys-text-color);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  border: 1px solid var(--sg-sys-border-color);
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--sg-sys-border-color);
+
+  & + & {
+    border-left: 1px solid var(--sg-sys-border-color);
+  }
+}
+
+th {
+  font-weight: 600;
+  background-color: var(--sg-sys-card-background);
 }

@@ -1,9 +1,6 @@
 <script lang="ts">
 	// Default layout for MDX files
 	import type { Snippet } from 'svelte';
-	import { onMount } from 'svelte';
-	// Import theme store
-	import { getTheme } from '$lib/stores/theme.svelte';
 	// Import Prism for syntax highlighting
 	import './prism-syntax.css';
 
@@ -157,7 +154,7 @@
 		height: max-content;
 		padding: 1rem;
 		border-radius: var(--sg-sys-border-radius, 6px);
-		background-color: var(--sg-sys-background-light, #f8f9fa);
+		background-color: var(--sg-sys-card-background, #f8f9fa);
 		border: 1px solid var(--sg-sys-border-color, #e1e4e8);
 		font-size: 0.9rem;
 		margin-top: 1rem; /* Align with first heading */
@@ -183,7 +180,7 @@
 	}
 
 	.toc nav a {
-		color: var(--sg-sys-accent-color, #0366d6);
+		color: var(--sg-sys-primary-foreground, #0366d6);
 		text-decoration: none;
 		display: block;
 		padding: 0.2rem 0.5rem;
@@ -193,14 +190,14 @@
 	}
 
 	.toc nav a:hover {
-		background-color: var(--sg-sys-background-light, #f1f1f1);
+		background-color: var(--sg-sys-card-background, #f1f1f1);
 	}
 
 	.toc nav a.active {
-		background-color: var(--sg-sys-accent-color-light, #e6f1ff);
-		color: var(--sg-sys-accent-text-color, #0366d6);
+		background-color: var(--sg-sys-primary, #e6f1ff);
+		color: var(--sg-sys-primary-foreground, #0366d6);
 		font-weight: 500;
-		border-left: 2px solid var(--sg-sys-accent-color, #0366d6);
+		border-left: 2px solid var(--sg-sys-accent-foreground, #0366d6);
 	}
 
 	/* Dark theme specific TOC adjustments */
@@ -219,8 +216,8 @@
 
 	:global(.theme-dark) .toc nav a.active {
 		background-color: rgba(55, 120, 255, 0.2);
-		color: var(--sg-sys-accent-text-color, #58a6ff);
-		border-left-color: var(--sg-sys-accent-color, #58a6ff);
+		color: var(--sg-sys-primary-foreground, #58a6ff);
+		border-left-color: var(--sg-sys-primary, #58a6ff);
 	}
 
 	/* TOC indent levels */
@@ -317,7 +314,7 @@
 	}
 
 	.content :global(a) {
-		color: var(--sg-sys-accent-color, #0366d6);
+		color: var(--sg-sys-primary-foreground, #0366d6);
 		text-decoration: none;
 	}
 
@@ -337,7 +334,7 @@
 
 	.content :global(blockquote) {
 		border-left: 4px solid var(--sg-sys-border-color, #dfe2e5);
-		color: var(--sg-sys-muted-text-color, #6a737d);
+		color: var(--sg-sys-muted-foreground);
 		padding-left: 1rem;
 		margin: 1.5rem 0;
 	}
@@ -356,7 +353,7 @@
 	}
 
 	.content :global(th) {
-		background-color: var(--sg-sys-background-light, #f6f8fa);
+		background-color: var(--sg-sys-card-background, #f6f8fa);
 	}
 
 	.content :global(img) {
