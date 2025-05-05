@@ -30,7 +30,7 @@
 		</ul>
 	</aside>
 
-	<div class="page__content">
+	<div class="page__content" data-page-content>
 		{@render children()}
 	</div>
 </div>

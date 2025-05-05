@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { Badge } from '@sourcegraph/ui'
 
 	// Token categories
 	const REFERENCE_PREFIX = '--sg-ref-';
@@ -505,7 +506,11 @@
 								tabindex="0"
 								aria-label={`Copy ${token} to clipboard`}
 							>
-								<div class="token-name">{formatColorName(token)}</div>
+
+								<Badge variant="secondary">
+									<div class="token-name">{formatColorName(token)}</div>
+								</Badge>
+
 								
 								<!-- Color swatch for color tokens -->
 								<div class="token-example">

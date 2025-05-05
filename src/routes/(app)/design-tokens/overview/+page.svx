@@ -1,0 +1,130 @@
+---
+    layout: article
+    title: Design System Overview
+---
+
+Out design system is a set of different level of CSS tokens
+which could be split into several layer types
+
+- **Reference tokens** → Something that has unchanged value,
+like green color or names of fonts we support.
+
+- **System tokens** → These set of tokens is changing from theme
+to theme. You're supposed to define these layer every time you
+create new theme)
+
+- **Components tokens** → the lowest type of tokens, they live
+only on the component level and presents some sort of CSS API
+(extension styling point) for components.
+
+Between **System** and **Components** tokens layer there is an
+additional **Calculated tokens** layers. This layer exists only
+to simplify system layer, it tries to calculate all tokens we
+need internally from the System layer, so you don't need to define
+a bunch of low level tokens every time you create a new theme.
+But in reality, sometimes you need to have access to this layer
+to tune your theme a bit more, in this case you can override these
+calculated tokens in theme file.
+
+
+## Reference tokens
+
+This level contains mostly font family sets for different font glyphs
+and color pallet. All reference token starts with `sg` and `ref`
+prefixes.
+
+You can find all reference token in `./lib/styles/tokens/reference-tokens.scss`
+file.
+
+> Note that this level shouldn't be override in any circumstances, any
+customization should be happening in system or calculated levels.
+
+With reference token you're supposed to build a system token layer, it
+should be no reason to use reference token directly on the page or
+any lower layers than system (like calculated or component layers).
+
+```scss
+:root {
+    --sg-ref-font-family-sans: 'Inter Variable', sans-serif;
+    --sg-ref-font-family-serif: 'PerfectlyNineties', serif;
+    --sg-ref-font-family-monospace: 'PolySans-SlimMono', monospace;
+
+    --sg-ref-blue-1200: oklch(0.084 0.037 275);
+    --sg-ref-blue-1100: oklch(0.162 0.07 271);
+    --sg-ref-blue-1000: oklch(0.242 0.115 271);
+    /* More tokens ... */
+}
+```
+
+## System tokens
+
+This level contains all theme-specific tokens that you're supposed to
+provide to define your theme. In other words it's our semantic tokens
+level. Through this you can define primary and secondary colors,
+accent colors, standard font sizes, ...etc.
+
+All tokens in this layer starts with `sg` and `sys` prefixes. <br/>
+`--sg-sys-<token-name>:`
+
+You can find all standard system token in `./lib/styles/tokens/system-tokens.scss`
+file.
+
+```scss
+:root {
+    --sg-sys-primary: var(--sg-ref-blue-700);
+    --sg-sys-primary-foreground: var(--sg-ref-gray-100);
+    --sg-sys-secondary: var(--sg-ref-gray-400);
+    --sg-sys-secondary-foreground: var(--sg-ref-gray-100);
+    --sg-sys-destructive: var(--sg-ref-red-600);
+}
+```
+
+## Calculated tokens
+
+It's kind of synthetic layer, you can think about it as an extension
+to system token layer since all token in calculated layers take
+system layer tokens and tries to calculate the rest of the token set.
+
+You can find all standard system token in `./lib/styles/tokens/calculated-tokens.scss`
+file.
+
+```scss
+:root {
+    // Font scale (with base font-size of 16px)
+    --sg-sys-font-size-100: calc(var(--sg-sys-font-size) * 0.625);  /* 10px */
+    --sg-sys-font-size-200: calc(var(--sg-sys-font-size) * 0.6875); /* 11px */
+    --sg-sys-font-size-300: calc(var(--sg-sys-font-size) * 0.8125); /* 13px */
+    --sg-sys-font-size-400: calc(var(--sg-sys-font-size) * 0.875);  /* 14px */
+    --sg-sys-font-size-500: calc(var(--sg-sys-font-size) * 1);      /* 16px */
+
+    // Space Scale
+    --sg-sys-space-100: calc(var(--sg-sys-space) * 0.25); /* 4px */
+    --sg-sys-space-200: calc(var(--sg-sys-space) * 0.5);  /* 8px */
+    --sg-sys-space-300: calc(var(--sg-sys-space) * 0.75); /* 12px */
+    --sg-sys-space-400: var(--sg-sys-space);              /* 16px */
+
+    // Borders
+    --sg-sys-border-active-color: var(--sg-sys-accent);
+    --sg-sys-border-color-hover: color-mix(in oklch, var(--sg-sys-border-color), white 50%);
+
+    // More tokens ...
+}
+```
+
+## Component tokens
+
+If you're just a consumer you shouldn't be needed to touch this layer,
+but components tokens exist on the component level only and serve as
+a CSS styling API for the components.
+
+For example, let's say you have an icon component and want to increase
+this icon size, if we take a look at Icon component API we will see
+that this exposes `--sg-comp-icon-size` css variable. We can use it
+and define our own icon size
+
+```svelte
+<Icon --sg-comp-icon-size="1.5rem">
+```
+
+All component token have `sg` and `comp` prefixes <br/>
+`--sg-comp-<component-name>-<token-name>:`

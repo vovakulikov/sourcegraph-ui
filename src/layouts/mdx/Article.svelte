@@ -7,9 +7,10 @@
 	interface Props {
 		title: string;
 		children: Snippet;
+		maxWidth: string
 	}
 
-	let { title, children }: Props = $props()
+	let { title, maxWidth = '800px', children }: Props = $props()
 
 	let activeHeadingId = $state<string>('');
 	let contentElement: HTMLElement | null = $state(null)
@@ -46,22 +47,26 @@
 
 </script>
 
-<div class="layout">
+<div class="layout" style:max-width={maxWidth}>
 	<h1 class="layout__title">{title}</h1>
-	<div class="layout__navigation navigation">
-		<span class="navigation__title">On this page</span>
-		<nav>
-			<ul class="navigation__list">
-				{#each tocItems as item}
-					<li>
-						<a href={`#${item.id}`} class={item.id === activeHeadingId ? 'active' : ''}>
-							{item.text}
-						</a>
-					</li>
-				{/each}
-			</ul>
-		</nav>
-	</div>
+
+	{#if tocItems.length > 0}
+		<div class="layout__navigation navigation">
+			<span class="navigation__title">On this page</span>
+			<nav>
+				<ul class="navigation__list">
+					{#each tocItems as item}
+						<li>
+							<a href={`#${item.id}`} class={item.id === activeHeadingId ? 'active' : ''}>
+								{item.text}
+							</a>
+						</li>
+					{/each}
+				</ul>
+			</nav>
+		</div>
+	{/if}
+
 	<div
 		bind:this={contentElement}
 		class="layout__content {styles.content}"
@@ -102,8 +107,7 @@
 
 		&__title {
 			grid-area: title;
-			padding: 0.5rem 0;
-			margin-bottom: 1.5rem;
+			margin-bottom: 2rem;
 		}
 
 		&__navigation {
